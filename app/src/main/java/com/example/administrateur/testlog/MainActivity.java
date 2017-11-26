@@ -32,31 +32,6 @@ public class MainActivity extends AppCompatActivity {
         n = 1;
         updateValue(recentView);
 
-        final RelativeLayout relativeLayout = new RelativeLayout(this);
-        Button btn = new Button(this);
-        btn.setId((int)System.currentTimeMillis());
-        recentView=btn;
-        btn.setText("click");
-        relativeLayout.addView(btn);
-
-        //setContentView(relativeLayout);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                for(int i = 0; i<userlist.size(); i++) {
-                    Log.d("DEBUG", ""+i);
-                    TextView textview = new TextView(MainActivity.this);
-                    textview.setId((int)System.currentTimeMillis());
-                    RelativeLayout.LayoutParams lparams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-                    lparams.addRule(RelativeLayout.BELOW, recentView.getId());
-                    textview.setText(userlist.get(i));
-                    relativeLayout.addView(textview, lparams);
-                    recentView = textview;
-                }
-            }
-        });
-
     }
     public void updateValue (View view){
 
@@ -106,15 +81,6 @@ public class MainActivity extends AppCompatActivity {
         scroll.addView(linearLayout);
         setContentView(scroll);
         for(int i = 0; i<userlist.size(); i++) {
-            /*TextView textview = new TextView(this);
-            textview.setId((int)System.currentTimeMillis()+i);
-            RelativeLayout.LayoutParams lparams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-            lparams.addRule(RelativeLayout.BELOW, recentView.getId());
-            Log.d("DEBUG", ""+recentView.getId());
-            textview.setText(userlist.get(i));
-            rel.addView(textview, lparams);
-            recentView = textview;
-            */
             TextView textView = new TextView(this);
             textView.setText(userlist.get(i));
             linearLayout.addView(textView);

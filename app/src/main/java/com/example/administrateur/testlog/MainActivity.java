@@ -30,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         n = 1;
-        updateValue(recentView);
 
     }
     public void updateValue (View view){
@@ -56,43 +55,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    /**public void updateText (int n){
-         for(int i = n; i<n+10;i++ ) {
-            String textid = "textView"+(i-(n-1));
-            Log.d("DEBUG", ""+(i));
-            int resID = getResources().getIdentifier(textid, "id", getPackageName());
-            TextView text = (TextView) findViewById(resID);
-            text.setText(userlist.get(i-1));
-        }
-    }
-    public void shownext (View view){
-        if (n<(userlist.size()-20)) {
-            n += 10;
-        } else {
-            n = userlist.size()-9;
-        }
-        updateText(n);
-    }*/
     public void display (){
-        //View recentView = findViewById(R.id.button2);
         LinearLayout linearLayout = new LinearLayout(this);
         linearLayout.setOrientation(LinearLayout.VERTICAL);
         ScrollView scroll = new ScrollView(this);
         scroll.addView(linearLayout);
         setContentView(scroll);
+
         for(int i = 0; i<userlist.size(); i++) {
             TextView textView = new TextView(this);
             textView.setText(userlist.get(i));
             linearLayout.addView(textView);
         }
     }
-    public void disp(){
-        RelativeLayout relativeLayout = new RelativeLayout(this);
-        TextView textView = new TextView(this);
-        textView.setId((int)System.currentTimeMillis());
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        params.addRule(RelativeLayout.BELOW, findViewById(R.id.button2).getId());
-        textView.setText("hey");
-        relativeLayout.addView(textView);
-    }
+
 }

@@ -1,13 +1,11 @@
 package com.example.administrateur.testlog;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -55,7 +53,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
     public void display (){
+
+    }
+
+    public void display3 (View view){
+        Intent intent = new Intent(this, listTest.class);
+        startActivity(intent);
+    }
+    public void display2 (){
         LinearLayout linearLayout = new LinearLayout(this);
         linearLayout.setOrientation(LinearLayout.VERTICAL);
         ScrollView scroll = new ScrollView(this);

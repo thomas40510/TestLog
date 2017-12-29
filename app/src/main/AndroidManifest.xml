@@ -19,7 +19,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".listTest" />
-        <activity android:name=".Profile"></activity>
+        <activity android:name=".Profile" />
+        <activity android:name=".editDB"></activity>
     </application>
 
 </manifest>

@@ -55,7 +55,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void display (){
-
+        Intent intent = new Intent(this, editDB.class);
+        startActivity(intent);
     }
 
     public void display3 (View view){

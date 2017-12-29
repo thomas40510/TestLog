@@ -21,7 +21,8 @@
         <activity android:name=".listTest" />
         <activity android:name=".Profile" />
         <activity android:name=".editDB" />
-        <activity android:name=".EditProfile"></activity>
+        <activity android:name=".EditProfile" />
+        <activity android:name=".CreateProfile"></activity>
     </application>
 
 </manifest>

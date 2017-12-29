@@ -35,6 +35,8 @@ public class listTest extends AppCompatActivity {
         btn = (Button) findViewById(R.id.button5);
         list = (ListView) findViewById(R.id.listView);
         arrayList = new ArrayList<String>();
+        arrayList = updateValue(arrayList);
+
 
         // Adapter: You need three parameters 'the context, id of the layout (it will be where the data is shown),
         // and the array that contains the data

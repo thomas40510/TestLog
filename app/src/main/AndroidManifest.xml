@@ -20,7 +20,8 @@
         </activity>
         <activity android:name=".listTest" />
         <activity android:name=".Profile" />
-        <activity android:name=".editDB"></activity>
+        <activity android:name=".editDB" />
+        <activity android:name=".EditProfile"></activity>
     </application>
 
 </manifest>

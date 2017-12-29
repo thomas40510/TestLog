@@ -26,7 +26,7 @@ public class editDB extends AppCompatActivity {
     }
     public void onClick(View view){
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myref = database.getReference("users");
         myref.addValueEventListener(new ValueEventListener() {
             @Override
@@ -37,7 +37,12 @@ public class editDB extends AppCompatActivity {
                     userlist.add(user);
                 }
                 Log.d("INFO", userlist.toString()+userlist.size());
-                //edit(userlist);
+
+                for (String s : userlist){
+                    DatabaseReference reference = database.getReference("users");
+                    DatabaseReference mref = reference.child(s);
+                    mref.child("remainH").setValue("42");
+                }
             }
 
             @Override
@@ -46,7 +51,7 @@ public class editDB extends AppCompatActivity {
             }
         });
     }
-    /* /!\ Used for bDates formatting in DB, don't use till needed again (DANGER)/!\
+     /* //!\ Used for bDates formatting in DB, don't use till needed again (DANGER)/!\
 
     public void edit(List<String> userlist){
         for (String s : userlist) {
@@ -84,5 +89,5 @@ public class editDB extends AppCompatActivity {
         }
 
     }
-     */
+    */
 }

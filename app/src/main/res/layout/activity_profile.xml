@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.administrateur.testlog.Profile">
+    tools:context="com.example.administrateur.testlog.Profile"
+    android:layout_margin="@dimen/cardview_default_radius">
 
     <TextView
         android:id="@+id/name"
@@ -21,8 +22,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/name"
-        android:layout_marginTop="24dp"
-        android:text="birthdate :" />
+        android:layout_marginTop="23dp"
+        android:text="birthdate : " />
 
     <TextView
         android:id="@+id/textView3"
@@ -30,7 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textView2"
-        android:text="Adresse :" />
+        android:text="Adresse : " />
 
     <TextView
         android:id="@+id/textView4"
@@ -38,12 +39,13 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textView3"
-        android:text="TextView" />
+        android:text="Forfait : " />
 
     <TextView
         android:id="@+id/bDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView2"
         android:layout_alignBottom="@+id/textView2"
         android:layout_toEndOf="@+id/textView2"
         android:text="TextView" />
@@ -53,7 +55,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView2"
-        android:layout_toEndOf="@+id/textView3"
+        android:layout_toEndOf="@+id/textView2"
         android:text="TextView" />
 
     <TextView
@@ -71,4 +73,38 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/flechage"
         android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView4"
+        android:text="Reste : " />
+
+    <TextView
+        android:id="@+id/forfait"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/remaining"
+        android:layout_alignStart="@+id/address"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/remaining"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/forfait"
+        android:layout_below="@+id/textView4"
+        android:text="TextView" />
+
+    <Button
+        android:id="@+id/button6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:onClick="editProfile"
+        android:text="Button" />
 </RelativeLayout>

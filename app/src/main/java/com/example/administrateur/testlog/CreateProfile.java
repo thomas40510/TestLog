@@ -26,10 +26,9 @@ public class CreateProfile extends AppCompatActivity {
         forfait = (EditText) findViewById(R.id.forfait);
         remain = (EditText) findViewById(R.id.remaining);
 
-
-
-
     }
+
+
 
 
     /**

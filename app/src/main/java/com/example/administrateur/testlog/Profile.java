@@ -1,10 +1,16 @@
 package com.example.administrateur.testlog;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -14,6 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class Profile extends AppCompatActivity {
 
+    public View view, view2;
     public TextView bDate;
     public TextView address;
     public TextView flechage;
@@ -68,6 +75,29 @@ public class Profile extends AppCompatActivity {
         });
     }
 
+    /**
+     * Actions for toolbar menu
+     */
+    @Override
+    //load menu file//
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.profile_menu, menu); //your file name
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    //set on-click actions//
+    public boolean onOptionsItemSelected(final MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.deleteUser:
+                confirmDelete(view);
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
     public void editProfile (View view){
         Intent intent = new Intent(this, EditProfile.class);
         intent.putExtra("bdate", bDateStr)
@@ -77,5 +107,33 @@ public class Profile extends AppCompatActivity {
                 .putExtra("flechage", flechStr)
                 .putExtra("remaining", remainStr);
         startActivity(intent);
+    }
+
+    public void confirmDelete (View view){
+     AlertDialog.Builder builder = new AlertDialog.Builder(this);
+     builder.setTitle("Are you sure ?")
+             .setMessage("rly ??")
+             .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+                 @Override
+                 public void onClick(DialogInterface dialog, int which) {
+                     usrDelete(view2);
+                 }
+             })
+             .setNegativeButton("non", new DialogInterface.OnClickListener() {
+                 @Override
+                 public void onClick(DialogInterface dialog, int which) {
+
+                 }
+             });
+     builder.show();
+    }
+
+    public void usrDelete(View view){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference reference = database.getReference("users");
+        reference.child(nameStr).setValue(null);
+
+        Toast.makeText(this, "Utilisateur Supprimé", Toast.LENGTH_SHORT).show();
+        finish();
     }
 }

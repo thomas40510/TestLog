@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.administrateur.testlog.listTest">
+    tools:context="com.example.administrateur.testlog.userSelect"
+    android:layout_margin="@dimen/cardview_default_radius">
 
     <Button
         android:id="@+id/button5"
@@ -11,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
+        android:onClick="confirm"
         android:text="Button" />
 
     <ListView
@@ -19,5 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/button5" />
+        android:layout_below="@+id/button5"
+        android:fastScrollEnabled="false" />
 </RelativeLayout>
+

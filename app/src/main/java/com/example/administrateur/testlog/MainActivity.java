@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void display3 (View view){
-        Intent intent = new Intent(this, listTest.class);
+        Intent intent = new Intent(this, userList.class);
         startActivity(intent);
     }
     public void display2 (){
@@ -75,6 +75,11 @@ public class MainActivity extends AppCompatActivity {
             textView.setText(userlist.get(i));
             linearLayout.addView(textView);
         }
+    }
+
+    public void gotoSelect(View view){
+        Intent intent = new Intent(this, userSelect.class);
+        startActivity(intent);
     }
 
 }

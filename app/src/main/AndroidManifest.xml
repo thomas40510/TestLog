@@ -18,11 +18,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".listTest" />
+        <activity android:name=".userList" />
         <activity android:name=".Profile" />
         <activity android:name=".editDB" />
         <activity android:name=".EditProfile" />
-        <activity android:name=".CreateProfile"></activity>
+        <activity android:name=".CreateProfile" />
+        <activity android:name=".userSelect"></activity>
     </application>
 
 </manifest>

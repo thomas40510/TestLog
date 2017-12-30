@@ -22,7 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class listTest extends AppCompatActivity {
+public class userList extends AppCompatActivity {
 
     private Button btn;
     private ListView list;
@@ -33,32 +33,48 @@ public class listTest extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_test);
+        setContentView(R.layout.activity_user_list);
 
-        btn = (Button) findViewById(R.id.button5);
         list = (ListView) findViewById(R.id.listView);
-        arrayList = new ArrayList<String>();
-        arrayList = updateValue(arrayList);
+        arrayList = new ArrayList<>();
+        //arrayList = updateValue(arrayList);
+
+
 
 
         // Adapter: You need three parameters 'the context, id of the layout (it will be where the data is shown),
         // and the array that contains the data
         adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, arrayList);
+        //adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.list_item, arrayList);
 
         // Here, you set the data in your ListView
         list.setAdapter(adapter);
 
-        btn.setOnClickListener(new View.OnClickListener() {
+        /*
+        Fetches values from DB to display it in list
+         */
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myref = database.getReference("users");
+        myref.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onClick(View view) {
-
-                // this line adds the data of your EditText and puts in your array
-                //arrayList.add(editTxt.getText().toString());
-                arrayList = updateValue(arrayList);
-                // next thing you have to do is check if your adapter has changed
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                arrayList.clear();
+                for (DataSnapshot postsnapshot: dataSnapshot.getChildren()){
+                    String user = postsnapshot.getKey();
+                    arrayList.add(user);
+                }
+                Log.d("INFO", arrayList.toString());
                 adapter.notifyDataSetChanged();
+                //updateText(1);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
             }
         });
+
+
         list.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
@@ -93,6 +109,9 @@ public class listTest extends AppCompatActivity {
             case R.id.addUser:
                 Intent intent = new Intent(this, CreateProfile.class);
                 startActivity(intent);
+            case R.id.refresh:
+                arrayList = updateValue(arrayList);
+                adapter.notifyDataSetChanged();
             default:
                 return super.onOptionsItemSelected(item);
         }

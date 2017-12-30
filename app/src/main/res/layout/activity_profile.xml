@@ -37,8 +37,9 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/forfait"
+        android:layout_alignBottom="@+id/forfait"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView3"
         android:text="Forfait : " />
 
     <TextView
@@ -54,7 +55,7 @@
         android:id="@+id/address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView2"
+        android:layout_below="@+id/bDate"
         android:layout_toEndOf="@+id/textView2"
         android:text="TextView" />
 
@@ -86,8 +87,8 @@
         android:id="@+id/forfait"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/remaining"
         android:layout_alignStart="@+id/address"
+        android:layout_below="@+id/address"
         android:text="TextView" />
 
     <TextView
@@ -95,7 +96,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/forfait"
-        android:layout_below="@+id/textView4"
+        android:layout_below="@+id/forfait"
         android:text="TextView" />
 
     <Button

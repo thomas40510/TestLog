@@ -81,6 +81,7 @@
         android:layout_centerHorizontal="true"
         android:hint="fléchage"
         android:textAlignment="center"
+        android:textAllCaps="false"
         android:textSize="50sp" />
 
     <TextView

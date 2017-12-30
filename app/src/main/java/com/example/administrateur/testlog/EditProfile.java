@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -54,5 +55,8 @@ public class EditProfile extends AppCompatActivity {
         mref.child("adresse").setValue(address.getText().toString());
         mref.child("ville").setValue(city.getText().toString());
         mref.child("remainH").setValue(remain.getText().toString());
+
+        Toast.makeText(this, "Done !", Toast.LENGTH_SHORT).show();
+        finish();
     }
 }

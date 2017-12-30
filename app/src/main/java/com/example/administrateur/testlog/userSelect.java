@@ -1,6 +1,7 @@
 package com.example.administrateur.testlog;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,12 +11,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -27,14 +27,11 @@ import java.util.ArrayList;
 
 public class userSelect extends AppCompatActivity {
 
-    private Button btn;
     private ListView list;
-    private ArrayAdapter<String> adapter;
     public ArrayList<String> arrayList;
-    private boolean[] checked;
     private ArrayList<InfoRowdata> infodata;
     private ArrayList<String> selected;
-    int size;
+    private int rmain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,7 +140,10 @@ public class userSelect extends AppCompatActivity {
                             System.out.println("Selectes Are == " + arrayList.get(position));
                             selected.add(arrayList.get(position));
                         //}
-                    }
+                        }
+                        else {
+                        selected.remove(arrayList.get(position));
+                        }
                 }
             });
 
@@ -223,7 +223,43 @@ public class userSelect extends AppCompatActivity {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("you selected : ")
-                .setMessage(usrList);
+                .setMessage(usrList)
+                .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        decrement();
+                    }
+                })
+                .setNegativeButton("Nope", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
         builder.show();
+    }
+
+    public void decrement() {
+        final FirebaseDatabase dbase = FirebaseDatabase.getInstance();
+        DatabaseReference mref = dbase.getReference("users");
+        for (String s : selected) {
+            final DatabaseReference myref = mref.child(s);
+            myref.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    rmain = Integer.parseInt(dataSnapshot.child("remainH").getValue().toString());
+                    myref.child("remainH").setValue(String.valueOf(rmain-1));
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+            //ref.setValue(rmain);
+            Log.e("DBG", "" + rmain);
+        }
+        Toast.makeText(this, "done !", Toast.LENGTH_LONG).show();
+        selected.clear();
     }
 }

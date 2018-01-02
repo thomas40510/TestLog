@@ -24,13 +24,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class userSelect extends AppCompatActivity {
 
     private ListView list;
-    public ArrayList<String> arrayList;
-    private ArrayList<InfoRowdata> infodata;
-    private ArrayList<String> selected;
+    public List<String> arrayList;
+    private List<InfoRowdata> infodata;
+    private List<String> selected;
     private int rmain;
 
     @Override
@@ -48,11 +49,14 @@ public class userSelect extends AppCompatActivity {
         myref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                /*
                 arrayList.clear();
                 for (DataSnapshot postsnapshot: dataSnapshot.getChildren()){
                     String user = postsnapshot.getKey();
                     arrayList.add(user);
                 }
+                */
+                arrayList = DBFetch.userlist;
                 Log.d("INFO", arrayList.toString());
                 Log.e("DEBUG", ""+arrayList.size());
 
@@ -178,7 +182,8 @@ public class userSelect extends AppCompatActivity {
                 Intent intent = new Intent(this, CreateProfile.class);
                 startActivity(intent);
             case R.id.refresh:
-                updateValue();
+                //updateValue();
+                arrayList = DBFetch.userlist;
                 //adapter.notifyDataSetChanged();
             default:
                 return super.onOptionsItemSelected(item);

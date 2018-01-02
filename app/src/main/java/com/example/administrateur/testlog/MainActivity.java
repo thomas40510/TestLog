@@ -2,6 +2,7 @@ package com.example.administrateur.testlog;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -23,15 +24,23 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<String> toRenew = new ArrayList<>();
     private String toRenewStr;
     private int nbr;
+    public static SharedPreferences prefs;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        prefs = getSharedPreferences(shPrefs.sharedPrefs, MODE_PRIVATE);
+
         n = 1;
         toRenewStr = "";
 
-        updateValue();
+
+        //updateValue();
+        DBFetch fetch = new DBFetch();
+        fetch.fetchDB();
 
     }
 

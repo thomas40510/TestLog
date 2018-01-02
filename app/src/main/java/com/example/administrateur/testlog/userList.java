@@ -21,13 +21,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class userList extends AppCompatActivity {
 
     private Button btn;
     private ListView list;
     private ArrayAdapter<String> adapter;
-    private ArrayList<String> arrayList;
+    private List<String> arrayList;
 
 
     @Override
@@ -35,29 +36,31 @@ public class userList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_list);
 
+
+
         list = (ListView) findViewById(R.id.listView);
         arrayList = new ArrayList<>();
         //arrayList = updateValue(arrayList);
 
-
+        arrayList = DBFetch.userlist;
 
 
         // Adapter: You need three parameters 'the context, id of the layout (it will be where the data is shown),
         // and the array that contains the data
         adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, arrayList);
-        //adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.list_item, arrayList);
 
         // Here, you set the data in your ListView
         list.setAdapter(adapter);
 
-        /*
-        Fetches values from DB to display it in list
-         */
+
+        // Fetches values from DB to display it in list
+
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myref = database.getReference("users");
         myref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                /*
                 arrayList.clear();
                 for (DataSnapshot postsnapshot: dataSnapshot.getChildren()){
                     String user = postsnapshot.getKey();
@@ -66,6 +69,9 @@ public class userList extends AppCompatActivity {
                 Log.d("INFO", arrayList.toString());
                 adapter.notifyDataSetChanged();
                 //updateText(1);
+                */
+                arrayList = DBFetch.userlist;
+                adapter.notifyDataSetChanged();
             }
 
             @Override
@@ -73,6 +79,7 @@ public class userList extends AppCompatActivity {
 
             }
         });
+
 
 
         list.setOnItemClickListener(new AdapterView.OnItemClickListener()
@@ -110,7 +117,8 @@ public class userList extends AppCompatActivity {
                 Intent intent = new Intent(this, CreateProfile.class);
                 startActivity(intent);
             case R.id.refresh:
-                arrayList = updateValue(arrayList);
+                //arrayList = updateValue(arrayList);
+                arrayList = DBFetch.userlist;
                 adapter.notifyDataSetChanged();
             default:
                 return super.onOptionsItemSelected(item);
@@ -121,7 +129,7 @@ public class userList extends AppCompatActivity {
     /**
      * Fetches users from DB
      */
-    public ArrayList updateValue (final ArrayList userlist){
+    public List<String> updateValue (final List<String> userlist){
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myref = database.getReference("users");

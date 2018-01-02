@@ -13,6 +13,8 @@ public class CreateProfile extends AppCompatActivity {
 
     EditText name, flechage, bDate, address, city, forfait, remain;
 
+    //TODO : ajouter n° licence ds création profile
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,9 +29,6 @@ public class CreateProfile extends AppCompatActivity {
         remain = (EditText) findViewById(R.id.remaining);
 
     }
-
-
-
 
     /**
      * Handle DB-sided update of infos

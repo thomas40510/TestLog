@@ -26,7 +26,8 @@ public class Profile extends AppCompatActivity {
     public TextView flechage;
     public TextView forfait;
     public  TextView remaining;
-    public static String nameStr,bDateStr,addressStr,cityStr,flechStr,forfaitStr,remainStr;
+    public TextView licence;
+    public static String nameStr,bDateStr,addressStr,cityStr,flechStr,forfaitStr,remainStr,licStr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,7 @@ public class Profile extends AppCompatActivity {
         flechage = (TextView) findViewById(R.id.flechage);
         remaining = (TextView) findViewById(R.id.remaining);
         forfait = (TextView) findViewById(R.id.forfait);
+        licence = (TextView) findViewById(R.id.licence);
 
         Bundle extras = getIntent().getExtras();
         nameStr = extras.getString("name");
@@ -58,6 +60,7 @@ public class Profile extends AppCompatActivity {
                 flechStr = dataSnapshot.child("fléchage").getValue(String.class);
                 forfaitStr = dataSnapshot.child("Forfait").getValue(String.class);
                 remainStr = dataSnapshot.child("remainH").getValue(String.class);
+                licStr = dataSnapshot.child("licNbr").getValue(String.class);
 
 
                 bDate.setText(bDateStr);
@@ -65,6 +68,7 @@ public class Profile extends AppCompatActivity {
                 flechage.setText(flechStr);
                 forfait.setText(forfaitStr);
                 remaining.setText(remainStr);
+                licence.setText(licStr);
 
             }
 

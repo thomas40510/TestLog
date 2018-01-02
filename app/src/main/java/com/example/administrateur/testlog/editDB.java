@@ -17,6 +17,7 @@ import java.util.List;
 public class editDB extends AppCompatActivity {
     List<String> userlist = new ArrayList<>();
     public String newDate;
+    List<String> licList = new ArrayList<>();
     List<String> dateArray = new ArrayList<>();
 
     @Override
@@ -25,33 +26,34 @@ public class editDB extends AppCompatActivity {
         setContentView(R.layout.activity_edit_db);
     }
     public void onClick(View view){
+        userlist = DBFetch.userlist;
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference mref = database.getReference("licences");
+        licList.clear();
+        for (int i = 0; i<userlist.size(); i++) {
+            DatabaseReference reference = mref.child(userlist.get(i));
+            reference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        String lNbr = snapshot.getValue().toString();
+                        licList.add(lNbr);
+                    }
+                    Log.e("DBG editDB@ln58", licList.toString());
+                    Log.e("DBG editDB @ln59", "" + userlist.size() + " / " + licList.size());
 
-        final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myref = database.getReference("users");
-        myref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                userlist.clear();
-                for (DataSnapshot postsnapshot: dataSnapshot.getChildren()){
-                    String user = postsnapshot.getKey();
-                    userlist.add(user);
+
                 }
-                Log.d("INFO", userlist.toString()+userlist.size());
 
-                for (String s : userlist){
-                    DatabaseReference reference = database.getReference("users");
-                    DatabaseReference mref = reference.child(s);
-                    mref.child("remainH").setValue("42");
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
                 }
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
+            });
+        }
     }
-     /* //!\ Used for bDates formatting in DB, don't use till needed again (DANGER)/!\
+     /* /!\ Used for bDates formatting in DB, don't use till needed again (DANGER !!)/!\
 
     public void edit(List<String> userlist){
         for (String s : userlist) {

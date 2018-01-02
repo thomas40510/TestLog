@@ -30,6 +30,7 @@ public class EditProfile extends AppCompatActivity {
 
         ((TextView)findViewById(R.id.name)).setText(Profile.nameStr);
         ((TextView)findViewById(R.id.flechage)).setText(Profile.flechStr);
+        ((TextView)findViewById(R.id.licence)).setText(Profile.licStr);
 
 
         // Sets textboxes' text as it appears in DB

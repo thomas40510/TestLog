@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,36 +31,47 @@ public class userList extends AppCompatActivity {
     private ArrayAdapter<String> adapter;
     private List<String> arrayList;
 
+    private FirebaseAuth auth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_list);
 
+        auth = FirebaseAuth.getInstance();
 
 
         list = (ListView) findViewById(R.id.listView);
         arrayList = new ArrayList<>();
         //arrayList = updateValue(arrayList);
 
-        arrayList = DBFetch.userlist;
+        if (auth.getCurrentUser() == null) {
+            arrayList.add("Please login to access database");
+
+            adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, arrayList);
+
+            // Here, you set the data in your ListView
+            list.setAdapter(adapter);
+        } else {
+            arrayList = DBFetch.userlist;
 
 
-        // Adapter: You need three parameters 'the context, id of the layout (it will be where the data is shown),
-        // and the array that contains the data
-        adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, arrayList);
+            // Adapter: You need three parameters 'the context, id of the layout (it will be where the data is shown),
+            // and the array that contains the data
+            adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, arrayList);
 
-        // Here, you set the data in your ListView
-        list.setAdapter(adapter);
+            // Here, you set the data in your ListView
+            list.setAdapter(adapter);
 
 
-        // Fetches values from DB to display it in list
+            // Fetches values from DB to display it in list
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myref = database.getReference("users");
-        myref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            DatabaseReference myref = database.getReference("users");
+            myref.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
                 /*
                 arrayList.clear();
                 for (DataSnapshot postsnapshot: dataSnapshot.getChildren()){
@@ -70,31 +82,30 @@ public class userList extends AppCompatActivity {
                 adapter.notifyDataSetChanged();
                 //updateText(1);
                 */
-                arrayList = DBFetch.userlist;
-                adapter.notifyDataSetChanged();
-            }
+                    arrayList = DBFetch.userlist;
+                    adapter.notifyDataSetChanged();
+                }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
 
-            }
-        });
+                }
+            });
 
 
+            list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view,
+                                        int position, long id) {
+                    // TODO Auto-generated method stub
+                    Toast.makeText(getApplicationContext(), arrayList.get(position), Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getApplicationContext(), Profile.class);
+                    intent.putExtra("name", arrayList.get(position));
+                    startActivity(intent);
 
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener()
-        {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                // TODO Auto-generated method stub
-                Toast.makeText(getApplicationContext(), arrayList.get(position), Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getApplicationContext(), Profile.class);
-                intent.putExtra("name", arrayList.get(position));
-                startActivity(intent);
-
-            }
-        });
+                }
+            });
+        }
     }
 
     /**

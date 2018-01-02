@@ -92,8 +92,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void display (View view){
-        Intent intent = new Intent(this, editDB.class);
-        startActivity(intent);
+        //Intent intent = new Intent(this, editDB.class);
+        //startActivity(intent);
+
     }
 
     public void display3 (View view){
@@ -103,6 +104,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void gotoSelect(View view){
         Intent intent = new Intent(this, userSelect.class);
+        startActivity(intent);
+    }
+    public void gotoAuth (View view){
+        Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
 

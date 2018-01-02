@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.administrateur.testlog.userSelect"
-    android:layout_margin="@dimen/cardview_default_radius">
+    android:layout_margin="@dimen/activity_vertical_margin">
 
     <Button
         android:id="@+id/button5"

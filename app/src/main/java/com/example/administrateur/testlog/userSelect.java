@@ -32,6 +32,7 @@ public class userSelect extends AppCompatActivity {
     public List<String> arrayList;
     private List<InfoRowdata> infodata;
     private List<String> selected;
+    private List<Integer> rmainList;
     private int rmain;
 
     @Override
@@ -43,6 +44,7 @@ public class userSelect extends AppCompatActivity {
         //arrayList = updateValue(arrayList);
         arrayList = new ArrayList<>();
         selected = new ArrayList<>();
+        rmainList = new ArrayList<>();
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myref = database.getReference("users");
@@ -222,6 +224,7 @@ public class userSelect extends AppCompatActivity {
     String usrList;
     public void confirm (View view){
         usrList = "";
+
         for (int i=0; i<selected.size(); i++){
             usrList = usrList.concat(selected.get(i)+"\n");
         }
@@ -244,6 +247,7 @@ public class userSelect extends AppCompatActivity {
         builder.show();
     }
 
+    /**
     public void decrement() {
         final FirebaseDatabase dbase = FirebaseDatabase.getInstance();
         DatabaseReference mref = dbase.getReference("users");
@@ -266,5 +270,46 @@ public class userSelect extends AppCompatActivity {
         }
         Toast.makeText(this, "done !", Toast.LENGTH_LONG).show();
         selected.clear();
+        finish();
+    }
+     */
+    public void decrement() {
+        rmainList.clear();
+
+        FirebaseDatabase dbase = FirebaseDatabase.getInstance();
+        DatabaseReference mref = dbase.getReference("users");
+        mref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (String s : selected) {
+                    Log.e("DBG @ln281", dataSnapshot.child(s).child("remainH").getValue().toString());
+                    rmain = Integer.parseInt(dataSnapshot.child(s).child("remainH").getValue().toString());
+                    rmainList.add(rmain - 1);
+                }
+                writeValues();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        //ref.setValue(rmain);
+        Log.e("DBG", "" + rmain);
+
+
+    }
+
+
+    public void writeValues(){
+        FirebaseDatabase dbase = FirebaseDatabase.getInstance();
+        DatabaseReference mref = dbase.getReference("users");
+        for (int i = 0; i<selected.size();i++){
+            mref.child(selected.get(i)).child("remainH").setValue(rmainList.get(i).toString());
+        }
+
+        Toast.makeText(this, "done !", Toast.LENGTH_LONG).show();
+        selected.clear();
+        finish();
     }
 }

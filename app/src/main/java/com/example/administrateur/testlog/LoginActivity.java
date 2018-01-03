@@ -32,7 +32,7 @@ public class LoginActivity extends AppCompatActivity {
 
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
-        auth.signOut();
+        //auth.signOut();
 
         SharedPreferences preferences = getSharedPreferences(shPrefs.sharedPrefs, MODE_PRIVATE);
         String lastMail = preferences.getString("lastMail", null);

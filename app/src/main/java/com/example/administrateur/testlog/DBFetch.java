@@ -22,10 +22,13 @@ import java.util.List;
 public class DBFetch extends Activity {
 
     public static List<String> userlist = new ArrayList<>();
+    public static String toRenewStr;
     private List<String> fetchedList = new ArrayList<>();
     SharedPreferences prefs = MainActivity.prefs;
+    private int i;
 
     public void fetchDB (){
+        toRenewStr = "";
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myref = database.getReference("users");
         myref.addValueEventListener(new ValueEventListener() {
@@ -46,6 +49,13 @@ public class DBFetch extends Activity {
                     Collections.addAll(userlist, savedArray);
                 }
                 Log.d("INFO", userlist.toString()+userlist.size());
+
+                /*
+                Pour afficher à chaque update de la DB
+                 */
+                i++;
+                fetchRenew();
+
             }
 
             @Override
@@ -54,7 +64,45 @@ public class DBFetch extends Activity {
             }
 
         });
+        /* Pour ne l'afficher qu'au démarrage
+        i++;
+        fetchRenew();
+        */
+
     }
+
+    public void fetchRenew(){
+
+        FirebaseDatabase dbase = FirebaseDatabase.getInstance();
+        DatabaseReference mref = dbase.getReference("users");
+        if (i<2) {
+            mref.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for (String s : userlist) {
+                        DataSnapshot snapshot = dataSnapshot.child(s).child("remainH");
+                        int remains = Integer.parseInt(snapshot.getValue().toString());
+                        if (remains <= 0) {
+                            toRenewStr = toRenewStr.concat(s + " (" + remains + ")" + "\n");
+                        }
+                    }
+                    MainActivity showNew = new MainActivity();
+                    showNew.showRenew();
+                    toRenewStr = "";
+                    i = 0;
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+
+        }
+
+    }
+
     public String[] loadArray(String arrayName) {
 
         int size = prefs.getInt("usrList_size", 0);

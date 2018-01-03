@@ -13,6 +13,8 @@
         android:layout_below="@+id/textView8"
         android:layout_centerHorizontal="true"
         android:hint="NOM Prénom"
+        android:inputType="textNoSuggestions"
+        android:singleLine="true"
         android:textAlignment="center"
         android:textSize="18sp"
         android:textStyle="bold" />
@@ -49,7 +51,7 @@
         android:layout_alignBaseline="@+id/textView2"
         android:layout_toEndOf="@+id/textView2"
         android:hint="dd/mm/aaaa"
-        android:inputType="textNoSuggestions"
+        android:inputType="date"
         android:textSize="14sp" />
 
     <EditText
@@ -79,10 +81,12 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:capitalize="characters"
         android:hint="fléchage"
+        android:singleLine="true"
         android:textAlignment="center"
         android:textAllCaps="false"
-        android:textSize="50sp" />
+        android:textSize="50sp"/>
 
     <TextView
         android:id="@+id/textView8"
@@ -100,25 +104,14 @@
         android:text="Reste : " />
 
     <EditText
-        android:id="@+id/forfait"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView4"
-        android:layout_alignBottom="@+id/textView4"
-        android:layout_alignStart="@+id/address"
-        android:hint="c10/c30/FT/FC"
-        android:inputType="textNoSuggestions"
-        android:textSize="14sp" />
-
-    <EditText
         android:id="@+id/remaining"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/textView"
         android:layout_alignBottom="@+id/textView"
-        android:layout_toEndOf="@+id/textView7"
+        android:layout_alignStart="@+id/forfait"
         android:hint="heures restantes"
-        android:inputType="textNoSuggestions"
+        android:inputType="textNoSuggestions|number"
         android:textSize="14sp" />
 
     <TextView
@@ -173,5 +166,15 @@
         android:layout_toEndOf="@+id/textView11"
         android:onClick="save"
         android:text="Button" />
+
+    <AutoCompleteTextView
+        android:id="@+id/forfait"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView4"
+        android:layout_alignBottom="@+id/textView4"
+        android:layout_alignEnd="@+id/bDate"
+        android:layout_alignStart="@+id/city"
+        android:textSize="14sp" />
 
 </RelativeLayout>

@@ -3,6 +3,8 @@ package com.example.administrateur.testlog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -11,7 +13,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class CreateProfile extends AppCompatActivity {
 
-    EditText name, flechage, bDate, address, city, forfait, remain;
+    EditText name, flechage, bDate, address, city, remain;
+    AutoCompleteTextView forfait;
 
     //TODO : ajouter n° licence ds création profile
 
@@ -25,8 +28,15 @@ public class CreateProfile extends AppCompatActivity {
         bDate = (EditText) findViewById(R.id.bDate);
         address = (EditText) findViewById(R.id.address);
         city = (EditText) findViewById(R.id.city);
-        forfait = (EditText) findViewById(R.id.forfait);
+        forfait = (AutoCompleteTextView) findViewById(R.id.forfait);
         remain = (EditText) findViewById(R.id.remaining);
+
+
+        String[] cardRefs = getResources().getStringArray(R.array.cardRefs);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, cardRefs);
+        forfait.setAdapter(adapter);
+        forfait.setThreshold(1);
+
 
     }
 

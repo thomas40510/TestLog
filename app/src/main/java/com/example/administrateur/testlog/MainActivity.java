@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private String toRenewStr;
     private int nbr;
     public static SharedPreferences prefs;
-
+    private static AlertDialog.Builder builder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,12 +35,13 @@ public class MainActivity extends AppCompatActivity {
         prefs = getSharedPreferences(shPrefs.sharedPrefs, MODE_PRIVATE);
 
         n = 1;
-        toRenewStr = "";
-
+        builder = new AlertDialog.Builder(this);
 
         //updateValue();
         DBFetch fetch = new DBFetch();
         fetch.fetchDB();
+        //showRenew();
+
 
     }
 
@@ -61,7 +62,6 @@ public class MainActivity extends AppCompatActivity {
                 }
                 Log.d("INFO", userlist.toString());
                 //updateText(1);
-                showRenew();
 
             }
 
@@ -75,10 +75,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showRenew(){
-        Log.e("DBG ln67", ""+userlist.size());
+        Log.e("DBG main@ln80", ""+DBFetch.userlist.size());
+        toRenewStr = DBFetch.toRenewStr;
 
         if (!toRenewStr.equals("")) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("to renew : ")
                     .setMessage(toRenewStr)
                     .setPositiveButton("Got it !", new DialogInterface.OnClickListener() {

@@ -34,6 +34,7 @@ public class userSelect extends AppCompatActivity {
     private List<String> selected;
     private List<Integer> rmainList;
     private int rmain;
+    private String toPrintStr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -164,7 +165,7 @@ public class userSelect extends AppCompatActivity {
     }
 
 
-        /**
+    /**
      * Actions for toolbar menu
      */
     @Override
@@ -187,6 +188,32 @@ public class userSelect extends AppCompatActivity {
                 //updateValue();
                 arrayList = DBFetch.userlist;
                 //adapter.notifyDataSetChanged();
+            case R.id.printList:
+
+                toPrintStr = "";
+
+                FirebaseDatabase dbase = FirebaseDatabase.getInstance();
+                DatabaseReference mref = dbase.getReference("users");
+                mref.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (String s : arrayList) {
+                            String rStr = dataSnapshot.child(s).child("remainH").getValue().toString();
+                            toPrintStr = toPrintStr.concat(s+"  :   "+rStr+"\n");
+                        }
+                        generatePdf gen = new generatePdf();
+                        gen.createPdf(toPrintStr, "Séances restantes","cards-"+System.currentTimeMillis()+".pdf",getApplicationContext());
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+                //ref.setValue(rmain);
+                Log.e("DBG", "" + rmain);
+
+
             default:
                 return super.onOptionsItemSelected(item);
         }

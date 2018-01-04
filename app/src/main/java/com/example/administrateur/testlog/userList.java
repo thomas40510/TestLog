@@ -131,6 +131,20 @@ public class userList extends AppCompatActivity {
                 //arrayList = updateValue(arrayList);
                 arrayList = DBFetch.userlist;
                 adapter.notifyDataSetChanged();
+
+            case R.id.printList:
+                String test = "";
+
+                for (int i = 0; i<DBFetch.userlist.size(); i++){
+                    test = test.concat(DBFetch.userlist.get(i)+"\n");
+                }
+
+                generatePdf gen = new generatePdf();
+
+                gen.createPdf(test, "Cavaliers", "userList-"+System.currentTimeMillis()+".pdf", getApplicationContext());
+                //gen.createPdf(test, "Cavaliers", "file.pdf", this);
+
+                //createPdf(test, "Users");
             default:
                 return super.onOptionsItemSelected(item);
         }

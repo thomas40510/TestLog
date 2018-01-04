@@ -51,4 +51,11 @@
         <item>FC</item>
     </string-array>
 
+    <string name="randomText">
+        Ô rage, Ô désespoir, Ô vieillesse ennemie \n
+        N\'ai-je donc tant vécu que pour cette infamie ? \n
+        Et suis-je blanchi dans les travaux guerriers \n
+        Que pour voir en un jour flêtrir tant de lauriers ? \n
+    </string>
+
 </resources>

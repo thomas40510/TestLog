@@ -3,7 +3,6 @@ package com.example.administrateur.testlog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -47,7 +46,7 @@ public class userList extends AppCompatActivity {
         //arrayList = updateValue(arrayList);
 
         if (auth.getCurrentUser() == null) {
-            arrayList.add("Please login to access database");
+            arrayList.add("Please login to access DataBase");
 
             adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, arrayList);
 
@@ -150,32 +149,5 @@ public class userList extends AppCompatActivity {
         }
     }
 
-
-    /**
-     * Fetches users from DB
-     */
-    public List<String> updateValue (final List<String> userlist){
-
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myref = database.getReference("users");
-        myref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                userlist.clear();
-                for (DataSnapshot postsnapshot: dataSnapshot.getChildren()){
-                    String user = postsnapshot.getKey();
-                    userlist.add(user);
-                }
-                Log.d("INFO", userlist.toString());
-                //updateText(1);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-        return userlist;
-    }
 }
 

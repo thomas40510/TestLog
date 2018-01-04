@@ -165,7 +165,7 @@
         android:layout_alignParentEnd="true"
         android:layout_toEndOf="@+id/textView11"
         android:onClick="save"
-        android:text="Button" />
+        android:text="Confirmer" />
 
     <AutoCompleteTextView
         android:id="@+id/forfait"

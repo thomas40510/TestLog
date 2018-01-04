@@ -202,7 +202,7 @@ public class userSelect extends AppCompatActivity {
                             toPrintStr = toPrintStr.concat(s+"  :   "+rStr+"\n");
                         }
                         generatePdf gen = new generatePdf();
-                        gen.createPdf(toPrintStr, "Séances restantes","cards-"+System.currentTimeMillis()+".pdf",getApplicationContext());
+                        gen.createPdf(toPrintStr, "Relevé des séances restantes","cards-"+System.currentTimeMillis()+".pdf",getApplicationContext());
                     }
 
                     @Override
@@ -257,7 +257,7 @@ public class userSelect extends AppCompatActivity {
         }
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("you selected : ")
+        builder.setTitle("Vous avez séléctionné : ")
                 .setMessage(usrList)
                 .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
                     @Override
@@ -265,7 +265,7 @@ public class userSelect extends AppCompatActivity {
                         decrement();
                     }
                 })
-                .setNegativeButton("Nope", new DialogInterface.OnClickListener() {
+                .setNegativeButton("Non", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
@@ -335,7 +335,7 @@ public class userSelect extends AppCompatActivity {
             mref.child(selected.get(i)).child("remainH").setValue(rmainList.get(i).toString());
         }
 
-        Toast.makeText(this, "done !", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Changements enregistrés !", Toast.LENGTH_LONG).show();
         selected.clear();
         finish();
     }

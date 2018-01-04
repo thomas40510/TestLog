@@ -32,7 +32,7 @@ public class LoginActivity extends AppCompatActivity {
 
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
-        //auth.signOut();
+        auth.signOut();
 
         SharedPreferences preferences = getSharedPreferences(shPrefs.sharedPrefs, MODE_PRIVATE);
         String lastMail = preferences.getString("lastMail", null);
@@ -49,7 +49,6 @@ public class LoginActivity extends AppCompatActivity {
         inputEmail = (EditText) findViewById(R.id.email);
         inputPassword = (EditText) findViewById(R.id.password);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        btnSignup = (Button) findViewById(R.id.btn_signup);
         btnLogin = (Button) findViewById(R.id.btn_login);
         btnReset = (Button) findViewById(R.id.btn_reset_password);
 
@@ -58,12 +57,16 @@ public class LoginActivity extends AppCompatActivity {
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
 
+        /*
+        Signup option - to implement if needed
+
         btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //startActivity(new Intent(LoginActivity.this, SignupActivity.class));
             }
         });
+        */
 
         btnReset.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,12 +88,12 @@ public class LoginActivity extends AppCompatActivity {
                 final String password = inputPassword.getText().toString();
 
                 if (TextUtils.isEmpty(email)) {
-                    Toast.makeText(getApplicationContext(), "Enter email address!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Merci d'entrer une adresse mail", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 if (TextUtils.isEmpty(password)) {
-                    Toast.makeText(getApplicationContext(), "Enter password!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Merci de rentrer le mot de passe", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -125,4 +128,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
+
 }

@@ -1,5 +1,7 @@
 package com.example.administrateur.testlog;
 
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -77,6 +79,17 @@ public class Profile extends AppCompatActivity {
 
             }
         });
+
+        findViewById(R.id.cpIcon).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                clipboard.setText(licStr);
+                Toast.makeText(getApplicationContext(), "N° de licence copié dans le presse-papiers", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
     }
 
     /**
@@ -115,15 +128,15 @@ public class Profile extends AppCompatActivity {
 
     public void confirmDelete (View view){
      AlertDialog.Builder builder = new AlertDialog.Builder(this);
-     builder.setTitle("Are you sure ?")
-             .setMessage("rly ??")
+     builder.setTitle("Confirmation...")
+             .setMessage("Êtes-vous sûr de vouloir supprimer ce cavalier ? Il n'y a pas de retour en arrière possible...")
              .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
                  @Override
                  public void onClick(DialogInterface dialog, int which) {
                      usrDelete(view2);
                  }
              })
-             .setNegativeButton("non", new DialogInterface.OnClickListener() {
+             .setNegativeButton("Non", new DialogInterface.OnClickListener() {
                  @Override
                  public void onClick(DialogInterface dialog, int which) {
 

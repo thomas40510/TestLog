@@ -54,9 +54,9 @@ public class MainActivity extends AppCompatActivity {
         toRenewStr = DBFetch.toRenewStr;
 
         if (!toRenewStr.equals("")) {
-            builder.setTitle("to renew : ")
+            builder.setTitle("Cartes à renouveler : ")
                     .setMessage(toRenewStr)
-                    .setPositiveButton("Got it !", new DialogInterface.OnClickListener() {
+                    .setPositiveButton("Compris !", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
 

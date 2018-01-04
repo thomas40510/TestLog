@@ -57,7 +57,7 @@ public class EditProfile extends AppCompatActivity {
         mref.child("ville").setValue(city.getText().toString());
         mref.child("remainH").setValue(remain.getText().toString());
 
-        Toast.makeText(this, "Done !", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Profil modifié !", Toast.LENGTH_SHORT).show();
         finish();
     }
 }

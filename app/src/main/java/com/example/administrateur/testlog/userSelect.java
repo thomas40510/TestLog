@@ -61,7 +61,7 @@ public class userSelect extends AppCompatActivity {
                 */
                 arrayList = DBFetch.userlist;
                 Log.d("INFO", arrayList.toString());
-                Log.e("DEBUG", ""+arrayList.size());
+                Log.e("DEBUG", "" + arrayList.size());
 
                 Log.e("DBG", "reached !");
                 infodata = new ArrayList<InfoRowdata>();
@@ -72,7 +72,6 @@ public class userSelect extends AppCompatActivity {
                 }
                 list.invalidate();
                 list.setAdapter(new MyAdapter());
-
 
 
                 //updateText(1);
@@ -143,14 +142,13 @@ public class userSelect extends AppCompatActivity {
                     }
 
                     //for (int i = 0; i < infodata.size(); i++) {
-                        if (infodata.get(position).isclicked) {
-                            System.out.println("Selectes Are == " + arrayList.get(position));
-                            selected.add(arrayList.get(position));
+                    if (infodata.get(position).isclicked) {
+                        System.out.println("Selectes Are == " + arrayList.get(position));
+                        selected.add(arrayList.get(position));
                         //}
-                        }
-                        else {
+                    } else {
                         selected.remove(arrayList.get(position));
-                        }
+                    }
                 }
             });
 
@@ -184,11 +182,13 @@ public class userSelect extends AppCompatActivity {
             case R.id.addUser:
                 Intent intent = new Intent(this, CreateProfile.class);
                 startActivity(intent);
+                break;
             case R.id.refresh:
                 //updateValue();
                 arrayList = DBFetch.userlist;
-                //adapter.notifyDataSetChanged();
-            case R.id.printList:
+                break;
+            //adapter.notifyDataSetChanged();
+            case R.id.printLs:
 
                 toPrintStr = "";
 
@@ -199,10 +199,10 @@ public class userSelect extends AppCompatActivity {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         for (String s : arrayList) {
                             String rStr = dataSnapshot.child(s).child("remainH").getValue().toString();
-                            toPrintStr = toPrintStr.concat(s+"  :   "+rStr+"\n");
+                            toPrintStr = toPrintStr.concat(s + "  :   " + rStr + "\n");
                         }
                         generatePdf gen = new generatePdf();
-                        gen.createPdf(toPrintStr, "Relevé des séances restantes","cards-"+System.currentTimeMillis()+".pdf",getApplicationContext());
+                        gen.createPdf(toPrintStr, "Relevé des séances restantes", "cards-" + System.currentTimeMillis() + ".pdf", getApplicationContext());
                     }
 
                     @Override
@@ -212,11 +212,12 @@ public class userSelect extends AppCompatActivity {
                 });
                 //ref.setValue(rmain);
                 Log.e("DBG", "" + rmain);
-
+                break;
 
             default:
                 return super.onOptionsItemSelected(item);
         }
+        return true;
     }
 
 

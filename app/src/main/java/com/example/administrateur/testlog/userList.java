@@ -126,27 +126,31 @@ public class userList extends AppCompatActivity {
             case R.id.addUser:
                 Intent intent = new Intent(this, CreateProfile.class);
                 startActivity(intent);
+                break;
             case R.id.refresh:
                 //arrayList = updateValue(arrayList);
                 arrayList = DBFetch.userlist;
                 adapter.notifyDataSetChanged();
-
-            case R.id.printList:
-                String test = "";
-
-                for (int i = 0; i<DBFetch.userlist.size(); i++){
-                    test = test.concat(DBFetch.userlist.get(i)+"\n");
-                }
-
-                generatePdf gen = new generatePdf();
-
-                gen.createPdf(test, "Cavaliers", "userList-"+System.currentTimeMillis()+".pdf", getApplicationContext());
-                //gen.createPdf(test, "Cavaliers", "file.pdf", this);
-
-                //createPdf(test, "Users");
+                break;
+            case R.id.printLs:
+                print();
+                break;
             default:
                 return super.onOptionsItemSelected(item);
         }
+        return true;
+    }
+    public void print(){
+        String test = "";
+        for (int i = 0; i < DBFetch.userlist.size(); i++) {
+            test = test.concat(DBFetch.userlist.get(i) + "\n");
+        }
+        generatePdf gen = new generatePdf();
+        gen.createPdf(test, "Cavaliers", "userList-" + System.currentTimeMillis() + ".pdf", getApplicationContext());
+        //gen.createPdf(test, "Cavaliers", "file.pdf", this);
+
+        //createPdf(test, "Users");
+
     }
 
 }

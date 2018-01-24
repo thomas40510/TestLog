@@ -8,6 +8,6 @@
         android:id="@+id/refresh"
         android:title="refresh" />
     <item
-        android:id="@+id/printList"
-        android:title="imprimer" />
+        android:id="@+id/printLs"
+        android:title="Item" />
 </menu>

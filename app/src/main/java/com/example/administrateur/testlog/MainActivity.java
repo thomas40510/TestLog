@@ -28,12 +28,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
-
         StrictMode.VmPolicy.Builder polBuilder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(polBuilder.build());
-
 
         prefs = getSharedPreferences(shPrefs.sharedPrefs, MODE_PRIVATE);
 
@@ -73,8 +69,6 @@ public class MainActivity extends AppCompatActivity {
     public void display (View view){
         //Intent intent = new Intent(this, editDB.class);
         //startActivity(intent);
-
-
 
         String test = "";
 

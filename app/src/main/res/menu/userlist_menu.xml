@@ -9,5 +9,5 @@
         android:title="refresh" />
     <item
         android:id="@+id/printLs"
-        android:title="Item" />
+        android:title="imprimer" />
 </menu>

@@ -173,8 +173,10 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/textView4"
         android:layout_alignBottom="@+id/textView4"
-        android:layout_alignEnd="@+id/bDate"
         android:layout_alignStart="@+id/city"
+        android:layout_toStartOf="@+id/textView8"
+        android:hint="c10/c30/FT/FC"
+        android:inputType="textNoSuggestions"
         android:textSize="14sp" />
 
 </RelativeLayout>

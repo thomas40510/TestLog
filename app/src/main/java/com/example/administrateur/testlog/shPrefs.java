@@ -8,4 +8,5 @@ import android.app.Activity;
 
 public class shPrefs extends Activity {
     public static final String sharedPrefs = "localDataFile";
+
 }

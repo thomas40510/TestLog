@@ -14,9 +14,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Created by thoma on 26/01/2018.
- */
+
 
 public class DBFetch extends Activity {
     public static List<String> userlist = new ArrayList<>();
@@ -28,7 +26,7 @@ public class DBFetch extends Activity {
     public void fetchDB (){
         toRenewStr = "";
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myref = database.getReference("users");
+        DatabaseReference myref = database.getReference("cavalerie");
         myref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

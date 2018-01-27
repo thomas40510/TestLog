@@ -17,6 +17,10 @@ public class MainActivity extends AppCompatActivity {
 
         prefs = getSharedPreferences(sharedPrefs.sharedPrefs, MODE_PRIVATE);
 
+        //updateValue();
+        DBFetch fetch = new DBFetch();
+        fetch.fetchDB();
+        //showRenew();
 
     }
 

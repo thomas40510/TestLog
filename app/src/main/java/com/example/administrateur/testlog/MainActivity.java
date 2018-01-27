@@ -31,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
         StrictMode.VmPolicy.Builder polBuilder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(polBuilder.build());
 
+
+
         prefs = getSharedPreferences(shPrefs.sharedPrefs, MODE_PRIVATE);
 
         n = 1;

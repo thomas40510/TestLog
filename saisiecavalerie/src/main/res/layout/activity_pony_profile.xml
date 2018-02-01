@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.dev.cyka.saisiecavalerie.PonyProfile"
+    android:layout_margin="@dimen/activity_vertical_margin">
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView8"
+        android:layout_centerHorizontal="true"
+        android:text="NOM"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/sirenbr"
+        android:layout_marginTop="16dp"
+        android:text="birthdate : " />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView2"
+        android:text="Proprio : " />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/limhr"
+        android:layout_alignBottom="@+id/limhr"
+        android:layout_alignParentStart="true"
+        android:text="max hr / sem : " />
+
+    <TextView
+        android:id="@+id/bDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView2"
+        android:layout_alignBottom="@+id/textView2"
+        android:layout_toEndOf="@+id/textView4"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/proprio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView3"
+        android:layout_alignBottom="@+id/textView3"
+        android:layout_alignStart="@+id/bDate"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/flechage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="S"
+        android:textSize="50sp" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/flechage"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:text="Dernier maréchal : " />
+
+    <TextView
+        android:id="@+id/limhr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/proprio"
+        android:layout_toEndOf="@+id/textView4"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/lastnico"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView"
+        android:layout_alignBottom="@+id/textView"
+        android:layout_toEndOf="@+id/textView"
+        android:text="TextView" />
+
+    <Button
+        android:id="@+id/button6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:onClick="editProfile"
+        android:text="Modifier" />
+
+    <TextView
+        android:id="@+id/sirenbr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/name"
+        android:layout_centerHorizontal="true"
+        android:text="[n° SIRE]" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/button6"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView14">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true">
+
+            <!-- Row 1 with single column -->
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal">
+
+
+                <TextView
+                    android:id="@+id/textView13"
+                    android:layout_width="66dp"
+                    android:layout_height="wrap_content"
+                    android:text="Rations :" />
+            </TableRow>
+
+            <!-- Row 2 with 3 columns -->
+
+
+            <TableRow
+                android:id="@+id/tableRow1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/TextView40"
+                    android:layout_weight="1"
+                    android:background="#dcdcdc"
+                    android:gravity="center"
+                    android:padding="20dip"
+                    android:text="Matin"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/TextView50"
+                    android:layout_weight="1"
+                    android:background="#d3d3d3"
+                    android:gravity="center"
+                    android:padding="20dip"
+                    android:text="Midi"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/TextView60"
+                    android:layout_weight="1"
+                    android:background="#cac9c9"
+                    android:gravity="center"
+                    android:padding="20dip"
+                    android:text="Soir"
+                    android:textColor="#000000" />
+
+            </TableRow>
+
+            <!-- Row 3 with 3 columns -->
+
+
+            <TableRow
+                android:id="@+id/tableRow2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/rationMt"
+                    android:layout_weight="1"
+                    android:background="#dcdcdc"
+                    android:gravity="center"
+                    android:padding="20dip"
+                    android:text="N/A"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/rationMd"
+                    android:layout_weight="1"
+                    android:background="#d3d3d3"
+                    android:gravity="center"
+                    android:padding="20dip"
+                    android:text="N/A"
+                    android:textColor="#000000" />
+
+                <TextView
+
+                    android:id="@+id/rationS"
+                    android:layout_weight="1"
+                    android:background="#cac9c9"
+                    android:gravity="center"
+                    android:padding="20dip"
+                    android:text="N/A"
+                    android:textColor="#000000" />
+
+            </TableRow>
+        </TableLayout>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView" />
+
+</RelativeLayout>

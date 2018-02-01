@@ -2,7 +2,6 @@ package com.dev.cyka.saisiecavalerie;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -77,7 +76,7 @@ public class ponyList extends AppCompatActivity {
                                     int position, long id) {
                 // TODO Auto-generated method stub
                 Toast.makeText(getApplicationContext(), arrayList.get(position), Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getApplicationContext(), ContactsContract.Profile.class);
+                Intent intent = new Intent(getApplicationContext(), PonyProfile.class);
                 intent.putExtra("name", arrayList.get(position));
                 startActivity(intent);
 

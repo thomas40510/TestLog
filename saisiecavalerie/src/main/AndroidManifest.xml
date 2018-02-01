@@ -28,8 +28,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".ponyList" />
-        <activity android:name=".DBFetch"/>
-        <activity android:name=".NewPony"></activity>
+        <activity android:name=".DBFetch" />
+        <activity android:name=".NewPony" />
+        <activity android:name=".PonyProfile"></activity>
     </application>
 
 </manifest>

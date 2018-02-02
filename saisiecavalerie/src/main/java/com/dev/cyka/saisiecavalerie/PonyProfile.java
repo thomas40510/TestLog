@@ -1,9 +1,16 @@
 package com.dev.cyka.saisiecavalerie;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -33,7 +40,7 @@ public class PonyProfile extends AppCompatActivity {
 
         bDate = (TextView) findViewById(R.id.bDate);
         proprio = (TextView) findViewById(R.id.proprio);
-        sexe = (TextView) findViewById(R.id.flechage);
+        sexe = (TextView) findViewById(R.id.sexe);
         lastNico = (TextView) findViewById(R.id.lastnico);
         rationMt = (TextView) findViewById(R.id.rationMt);
         rationMd = (TextView) findViewById(R.id.rationMd);
@@ -87,12 +94,12 @@ public class PonyProfile extends AppCompatActivity {
 
     /**
      * Actions for toolbar menu
-     *
+     */
     @Override
     //load menu file//
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.profile_menu, menu); //your file name
+        inflater.inflate(R.menu.ponyprofile_menu, menu); //your file name
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -108,21 +115,23 @@ public class PonyProfile extends AppCompatActivity {
         }
     }
 
+
     public void editProfile (View view){
-        Intent intent = new Intent(this, EditProfile.class);
+        Intent intent = new Intent(this, editProfile.class);
         intent.putExtra("bdate", bDateStr)
-                .putExtra("address", addressStr)
-                .putExtra("city", cityStr)
-                .putExtra("forfait", forfaitStr)
-                .putExtra("flechage", flechStr)
-                .putExtra("remaining", remainStr);
+                .putExtra("proprio", proprioStr)
+                .putExtra("sex", sexeStr)
+                .putExtra("limhr", limhrStr)
+                .putExtra("lastnico", nicoStr)
+                .putExtra("ration", rationStr);
         startActivity(intent);
     }
+
 
     public void confirmDelete (View view){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Confirmation...")
-                .setMessage("Êtes-vous sûr de vouloir supprimer ce cavalier ? Il n'y a pas de retour en arrière possible...")
+                .setMessage("Êtes-vous sûr de vouloir supprimer cet équidé ? Il n'y a pas de retour en arrière possible...")
                 .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -140,11 +149,10 @@ public class PonyProfile extends AppCompatActivity {
 
     public void usrDelete(View view){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference reference = database.getReference("users");
+        DatabaseReference reference = database.getReference("cavalerie");
         reference.child(nameStr).setValue(null);
 
         Toast.makeText(this, "Utilisateur Supprimé", Toast.LENGTH_SHORT).show();
         finish();
     }
-    */
 }

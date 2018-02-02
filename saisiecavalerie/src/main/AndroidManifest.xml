@@ -30,7 +30,8 @@
         <activity android:name=".ponyList" />
         <activity android:name=".DBFetch" />
         <activity android:name=".NewPony" />
-        <activity android:name=".PonyProfile"></activity>
+        <activity android:name=".PonyProfile" />
+        <activity android:name=".editProfile"></activity>
     </application>
 
 </manifest>

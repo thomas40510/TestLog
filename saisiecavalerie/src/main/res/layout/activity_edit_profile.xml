@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.dev.cyka.saisiecavalerie.PonyProfile"
+    tools:context="com.dev.cyka.saisiecavalerie.editProfile"
     android:layout_margin="@dimen/activity_vertical_margin">
 
     <TextView
@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView8"
         android:layout_centerHorizontal="true"
-        android:text="NOM"
+        android:text="John SMITH"
         android:textSize="18sp"
         android:textStyle="bold" />
 
@@ -21,44 +21,58 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/sirenbr"
-        android:layout_marginTop="16dp"
-        android:text="birthdate : " />
+        android:layout_below="@+id/sireNbr"
+        android:layout_marginTop="17dp"
+        android:text="Birthdate : " />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/proprio"
+        android:layout_alignBottom="@+id/proprio"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView2"
         android:text="Proprio : " />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/limhr"
-        android:layout_alignBottom="@+id/limhr"
+        android:layout_alignBaseline="@+id/lastnico"
+        android:layout_alignBottom="@+id/lastnico"
         android:layout_alignParentStart="true"
-        android:text="max hr / sem : " />
+        android:text="Dernier maréchal :" />
 
-    <TextView
+    <EditText
         android:id="@+id/bDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/textView2"
         android:layout_alignBottom="@+id/textView2"
-        android:layout_toEndOf="@+id/textView4"
-        android:text="TextView" />
+        android:layout_alignStart="@+id/proprio"
+        android:inputType="textNoSuggestions|number"
+        android:text="TextView"
+        android:textSize="14sp" />
 
-    <TextView
+    <EditText
         android:id="@+id/proprio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView3"
-        android:layout_alignBottom="@+id/textView3"
-        android:layout_alignStart="@+id/bDate"
-        android:text="TextView" />
+        android:layout_below="@+id/bDate"
+        android:layout_toEndOf="@+id/textView9"
+        android:inputType="textNoSuggestions"
+        android:text="TextView"
+        android:textSize="14sp" />
+
+    <EditText
+        android:id="@+id/limhr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/proprio"
+        android:layout_toEndOf="@+id/textView9"
+        android:inputType="textNoSuggestions|number"
+        android:text="TextView"
+        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/sexe"
@@ -66,7 +80,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:text="S"
+        android:text="F"
         android:textSize="50sp" />
 
     <TextView
@@ -76,57 +90,84 @@
         android:layout_below="@+id/sexe"
         android:layout_centerHorizontal="true" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_centerVertical="true"
-        android:text="Dernier maréchal : " />
-
-    <TextView
-        android:id="@+id/limhr"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/proprio"
-        android:layout_toEndOf="@+id/textView4"
-        android:text="TextView" />
-
-    <TextView
+    <EditText
         android:id="@+id/lastnico"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView"
-        android:layout_alignBottom="@+id/textView"
-        android:layout_toEndOf="@+id/textView"
-        android:text="TextView" />
+        android:layout_below="@+id/limhr"
+        android:layout_toEndOf="@+id/textView4"
+        android:inputType="textNoSuggestions|date"
+        android:text="TextView"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/textView3"
+        android:layout_below="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lastnico"
+        android:layout_toStartOf="@+id/lastnico" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView3"
+        android:text=""/>
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView9"
+        android:layout_toEndOf="@+id/textView6" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView4" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/limhr"
+        android:layout_alignBottom="@+id/limhr"
+        android:layout_alignParentStart="true"
+        android:text="Max hr/sem : " />
 
     <Button
-        android:id="@+id/button6"
+        android:id="@+id/button7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
-        android:onClick="editProfile"
-        android:text="Modifier" />
+        android:layout_toEndOf="@+id/textView11"
+        android:onClick="save"
+        android:text="Confirmer" />
 
     <TextView
-        android:id="@+id/sirenbr"
+        android:id="@+id/sireNbr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/name"
         android:layout_centerHorizontal="true"
-        android:text="[n° SIRE]" />
+        android:text="[N° SIRE]" />
 
     <RelativeLayout
-        android:id="@+id/relativeLayout2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/button6"
+        android:layout_above="@+id/button7"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView14">
-
+        android:layout_alignTop="@+id/textView7">
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -192,43 +233,40 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <TextView
+                <EditText
                     android:id="@+id/rationMt"
                     android:layout_weight="1"
                     android:background="#dcdcdc"
                     android:gravity="center"
+                    android:inputType="number"
                     android:padding="20dip"
                     android:text="N/A"
                     android:textColor="#000000" />
 
-                <TextView
+                <EditText
                     android:id="@+id/rationMd"
                     android:layout_weight="1"
                     android:background="#d3d3d3"
                     android:gravity="center"
+                    android:inputType="number"
                     android:padding="20dip"
                     android:text="N/A"
                     android:textColor="#000000" />
 
-                <TextView
+                <EditText
 
                     android:id="@+id/rationS"
                     android:layout_weight="1"
                     android:background="#cac9c9"
                     android:gravity="center"
+                    android:inputType="number"
                     android:padding="20dip"
                     android:text="N/A"
                     android:textColor="#000000" />
 
             </TableRow>
         </TableLayout>
-    </RelativeLayout>
 
-    <TextView
-        android:id="@+id/textView14"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView" />
+    </RelativeLayout>
 
 </RelativeLayout>

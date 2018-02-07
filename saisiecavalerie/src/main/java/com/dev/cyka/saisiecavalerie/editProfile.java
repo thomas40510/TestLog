@@ -3,6 +3,7 @@ package com.dev.cyka.saisiecavalerie;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,11 +15,15 @@ public class editProfile extends AppCompatActivity {
 
     public EditText bDate, limhr, proprio, lastnico;
     public EditText rationMt, rationMd, rationS;
+    public CheckBox isClub;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
+
+        isClub = (CheckBox) findViewById(R.id.checkClub);
+
         bDate = (EditText) findViewById(R.id.bDate);
         limhr = (EditText) findViewById(R.id.limhr);
         proprio =(EditText) findViewById(R.id.proprio);
@@ -38,7 +43,14 @@ public class editProfile extends AppCompatActivity {
 
         bDate.setText(PonyProfile.bDateStr);
         limhr.setText(PonyProfile.limhrStr);
-        proprio.setText(PonyProfile.proprioStr);
+        proprio.setText(null);
+        if (PonyProfile.proprioStr.equals("club")){
+            isClub.setChecked(true);
+        }
+        else {
+            proprio.setText(PonyProfile.proprioStr);
+        }
+
         lastnico.setText(PonyProfile.nicoStr);
 
         rationMt.setText(PonyProfile.rationStr[0]);
@@ -57,7 +69,13 @@ public class editProfile extends AppCompatActivity {
         DatabaseReference mref = reference.child(PonyProfile.nameStr);
         mref.child("bdate").setValue(bDate.getText().toString());
         mref.child("limhr").setValue(limhr.getText().toString());
-        mref.child("proprio").setValue(proprio.getText().toString());
+
+        if (isClub.isChecked()){
+            mref.child("proprio").setValue("club");
+        }
+        else {
+            mref.child("proprio").setValue(proprio.getText().toString());
+        }
         mref.child("lastNico").setValue(lastnico.getText().toString());
 
         DatabaseReference mref1 = mref.child("ration");

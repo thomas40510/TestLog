@@ -16,21 +16,23 @@
         android:text="Yedro"
         android:textSize="18sp"
         android:textStyle="bold" />
+
     <TextView
-        android:id="@+id/sexe"
+        android:id="@+id/type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:text="F"
+        android:text="C"
         android:textSize="50sp" />
+
     <TextView
-        android:id="@+id/sireNbr"
+        android:id="@+id/sexe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/name"
         android:layout_centerHorizontal="true"
-        android:text="[N° SIRE]" />
+        android:text="[sexe]" />
 
     <!--birthdate-->
     <TextView
@@ -38,7 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/sireNbr"
+        android:layout_below="@+id/sexe"
 
         android:text="Birthdate : " />
     <EditText
@@ -122,8 +124,9 @@
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/sexe"
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@+id/type"
+        android:layout_centerHorizontal="true"
+        android:textSize="10sp" />
     <TextView
         android:id="@+id/textView5"
         android:layout_width="wrap_content"

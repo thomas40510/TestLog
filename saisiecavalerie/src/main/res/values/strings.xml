@@ -2,9 +2,9 @@
     <string name="app_name">Saisie cavalerie</string>
 
     <string-array name="sexes">
-        <item>Mâle</item>
-        <item>Femelle</item>
-        <item>Etalon</item>
+        <item>Hongre</item>
+        <item>Jument</item>
+        <item>Entier</item>
     </string-array>
     <string-array name="typelist">
         <item>P</item>

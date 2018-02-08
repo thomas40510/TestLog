@@ -63,6 +63,7 @@ public class NewPony extends AppCompatActivity {
                 return false;
             }
         };
+        lastnico.setNextFocusDownId(R.id.rationMt);
         rationMt.setNextFocusDownId(R.id.rationMd);
         rationMd.setNextFocusDownId(R.id.rationS);
         rationS.setOnKeyListener(listener);

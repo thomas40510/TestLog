@@ -23,14 +23,14 @@ public class PonyProfile extends AppCompatActivity {
     public View view, view2;
     public TextView bDate;
     public TextView proprio;
-    public TextView sexe;
+    public TextView sexe, type;
     public TextView lastNico;
     public TextView rationMt;
     public TextView rationMd;
     public TextView rationN;
     public TextView limhr;
 
-    public static String nameStr,bDateStr,proprioStr,sexeStr, nicoStr, limhrStr;
+    public static String nameStr,bDateStr,proprioStr,sexeStr, nicoStr, limhrStr, typeStr;
     public static String[] rationStr = {"N/A", "N/A", "N/A"};
 
     @Override
@@ -46,6 +46,7 @@ public class PonyProfile extends AppCompatActivity {
         rationMd = (TextView) findViewById(R.id.rationMd);
         rationN = (TextView) findViewById(R.id.rationS);
         limhr = (TextView) findViewById(R.id.limhr);
+        type = (TextView) findViewById(R.id.type);
 
         Bundle extras = getIntent().getExtras();
         nameStr = extras.getString("name");
@@ -63,6 +64,7 @@ public class PonyProfile extends AppCompatActivity {
                 bDateStr = dataSnapshot.child("bdate").getValue(String.class);
                 proprioStr = dataSnapshot.child("proprio").getValue(String.class);
                 sexeStr = dataSnapshot.child("sex").getValue(String.class);
+                typeStr = dataSnapshot.child("type").getValue(String.class);
                 nicoStr = dataSnapshot.child("lastNico").getValue(String.class);
                 limhrStr = dataSnapshot.child("limhr").getValue(String.class);
 
@@ -73,7 +75,8 @@ public class PonyProfile extends AppCompatActivity {
 
                 bDate.setText(bDateStr);
                 proprio.setText(proprioStr);
-                sexe.setText(sexeStr);
+                sexe.setText("["+sexeStr+"]");
+                type.setText(typeStr);
                 lastNico.setText(nicoStr);
                 limhr.setText(limhrStr);
 

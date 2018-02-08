@@ -8,7 +8,6 @@
     tools:context="com.dev.cyka.saisiecavalerie.NewPony">
 
     <!--name-->
-
     <EditText
         android:id="@+id/name"
         android:layout_width="wrap_content"
@@ -30,7 +29,6 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textView19"
         android:text="Sexe : " />
-
     <Spinner
         android:id="@+id/Sspinner"
         android:layout_width="wrap_content"
@@ -133,7 +131,7 @@
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/sexe"
+        android:layout_below="@+id/type"
         android:layout_centerHorizontal="true" />
 
     <TextView
@@ -170,10 +168,12 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textView15" />
-
-
-    <!--rations (tableau)-->
-
+    <TextView
+        android:id="@+id/textView20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView4" />
     <TextView
         android:id="@+id/textView12"
         android:layout_width="wrap_content"
@@ -182,6 +182,7 @@
         android:layout_centerHorizontal="true"
         android:textSize="12sp" />
 
+    <!--type-->
     <TextView
         android:id="@+id/textView18"
         android:layout_width="wrap_content"
@@ -189,6 +190,13 @@
         android:layout_alignParentStart="true"
         android:layout_alignTop="@+id/Tspinner"
         android:text="Catégorie : " />
+    <Spinner
+        android:id="@+id/Tspinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/Sspinner"
+        android:layout_below="@+id/textView12"
+        android:layout_toStartOf="@+id/textView12" />
 
     <TextView
         android:id="@+id/textView19"
@@ -235,8 +243,6 @@
             </TableRow>
 
             <!-- Row 2 with 3 columns -->
-
-
             <TableRow
                 android:id="@+id/tableRow1"
                 android:layout_width="match_parent"
@@ -273,8 +279,6 @@
             </TableRow>
 
             <!-- Row 3 with 3 columns -->
-
-
             <TableRow
                 android:id="@+id/tableRow2"
                 android:layout_width="match_parent"
@@ -317,20 +321,9 @@
 
     </RelativeLayout>
 
-    <Spinner
-        android:id="@+id/Tspinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/Sspinner"
-        android:layout_below="@+id/textView12"
-        android:layout_toStartOf="@+id/textView12" />
 
-    <TextView
-        android:id="@+id/textView20"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView4" />
+
+
 
 
 </RelativeLayout>

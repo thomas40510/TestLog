@@ -6,6 +6,7 @@
     tools:context="com.dev.cyka.saisiecavalerie.PonyProfile"
     android:layout_margin="@dimen/activity_vertical_margin">
 
+    <!--name-->
     <TextView
         android:id="@+id/name"
         android:layout_width="wrap_content"
@@ -16,15 +17,42 @@
         android:textSize="18sp"
         android:textStyle="bold" />
 
+    <!--type-->
+    <TextView
+        android:id="@+id/type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="P"
+        android:textSize="50sp" />
+
+    <!--sexe-->
+    <TextView
+        android:id="@+id/sexe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/name"
+        android:layout_centerHorizontal="true"
+        android:text="Sexe" />
+
+    <!--bdate-->
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/sirenbr"
-        android:layout_marginTop="16dp"
+        android:layout_below="@+id/textView21"
         android:text="birthdate : " />
+    <TextView
+        android:id="@+id/bDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView21"
+        android:layout_toEndOf="@+id/textView4"
+        android:text="TextView" />
 
+    <!--proprio-->
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
@@ -32,25 +60,6 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textView2"
         android:text="Proprio : " />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/limhr"
-        android:layout_alignBottom="@+id/limhr"
-        android:layout_alignParentStart="true"
-        android:text="max hr / sem : " />
-
-    <TextView
-        android:id="@+id/bDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView2"
-        android:layout_alignBottom="@+id/textView2"
-        android:layout_toEndOf="@+id/textView4"
-        android:text="TextView" />
-
     <TextView
         android:id="@+id/proprio"
         android:layout_width="wrap_content"
@@ -60,30 +69,14 @@
         android:layout_alignStart="@+id/bDate"
         android:text="TextView" />
 
+    <!--maxHours-->
     <TextView
-        android:id="@+id/sexe"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:text="S"
-        android:textSize="50sp" />
-
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/sexe"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_centerVertical="true"
-        android:text="Dernier maréchal : " />
-
+        android:layout_below="@+id/textView3"
+        android:text="max hr / sem : " />
     <TextView
         android:id="@+id/limhr"
         android:layout_width="wrap_content"
@@ -92,6 +85,14 @@
         android:layout_toEndOf="@+id/textView4"
         android:text="TextView" />
 
+    <!--lastNico-->
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:text="Dernier maréchal : " />
     <TextView
         android:id="@+id/lastnico"
         android:layout_width="wrap_content"
@@ -100,6 +101,26 @@
         android:layout_alignBottom="@+id/textView"
         android:layout_toEndOf="@+id/textView"
         android:text="TextView" />
+
+    <!--formatting-->
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/type"
+        android:layout_centerHorizontal="true" />
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView" />
+    <TextView
+        android:id="@+id/textView21"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/sexe"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:id="@+id/button6"
@@ -111,14 +132,7 @@
         android:onClick="editProfile"
         android:text="Modifier" />
 
-    <TextView
-        android:id="@+id/sirenbr"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/name"
-        android:layout_centerHorizontal="true"
-        android:text="[n° SIRE]" />
-
+    <!--rations-->
     <RelativeLayout
         android:id="@+id/relativeLayout2"
         android:layout_width="match_parent"
@@ -137,8 +151,7 @@
             <TableRow
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal">
-
+                android:gravity="left">
 
                 <TextView
                     android:id="@+id/textView13"
@@ -148,8 +161,6 @@
             </TableRow>
 
             <!-- Row 2 with 3 columns -->
-
-
             <TableRow
                 android:id="@+id/tableRow1"
                 android:layout_width="match_parent"
@@ -185,8 +196,6 @@
             </TableRow>
 
             <!-- Row 3 with 3 columns -->
-
-
             <TableRow
                 android:id="@+id/tableRow2"
                 android:layout_width="match_parent"
@@ -223,12 +232,5 @@
             </TableRow>
         </TableLayout>
     </RelativeLayout>
-
-    <TextView
-        android:id="@+id/textView14"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView" />
 
 </RelativeLayout>

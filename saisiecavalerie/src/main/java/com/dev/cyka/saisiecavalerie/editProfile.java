@@ -1,8 +1,11 @@
 package com.dev.cyka.saisiecavalerie;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -33,11 +36,33 @@ public class editProfile extends AppCompatActivity {
         rationMd = (EditText) findViewById(R.id.rationMd);
         rationS = (EditText) findViewById(R.id.rationS);
 
+        View.OnKeyListener listener = new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                // If the event is a key-down event on the "enter" button
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
+                        (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    // Perform action on key press
+                    InputMethodManager inputManager = (InputMethodManager)
+                            getSystemService(Context.INPUT_METHOD_SERVICE);
+                    inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
+                            InputMethodManager.HIDE_NOT_ALWAYS);
+                    return true;
+                }
+                return false;
+            }
+        };
+        lastnico.setNextFocusDownId(R.id.rationMt);
+        rationMt.setNextFocusDownId(R.id.rationMd);
+        rationMd.setNextFocusDownId(R.id.rationS);
+        rationS.setOnKeyListener(listener);
+
 
         // Sets un-changing infos
 
         ((TextView)findViewById(R.id.name)).setText(PonyProfile.nameStr);
         ((TextView)findViewById(R.id.sexe)).setText(PonyProfile.sexeStr);
+        ((TextView)findViewById(R.id.type)).setText(PonyProfile.typeStr);
 
         // Sets textboxes' text as it appears in DB
 

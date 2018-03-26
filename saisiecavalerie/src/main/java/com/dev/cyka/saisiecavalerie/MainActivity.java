@@ -33,4 +33,8 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, NewPony.class);
         startActivity(intent);
     }
+    public void newVerm(View view){
+        Intent intent = new Intent(this, AddVerm.class);
+        startActivity(intent);
+    }
 }

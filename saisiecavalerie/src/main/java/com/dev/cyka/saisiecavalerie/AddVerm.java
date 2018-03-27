@@ -5,13 +5,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.InputType;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
@@ -39,6 +39,7 @@ public class AddVerm extends AppCompatActivity {
     private List<Integer> rmainList;
     private int rmain;
     private String toPrintStr;
+    public String[] months = {"Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet","Août", "Septembre", "Octobre", "Novembre", "Décembre"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -280,43 +281,20 @@ public class AddVerm extends AppCompatActivity {
         builder.show();
     }
 
-    /**
-     public void decrement() {
-     final FirebaseDatabase dbase = FirebaseDatabase.getInstance();
-     DatabaseReference mref = dbase.getReference("users");
-     for (String s : selected) {
-     final DatabaseReference myref = mref.child(s);
-     myref.addListenerForSingleValueEvent(new ValueEventListener() {
-    @Override
-    public void onDataChange(DataSnapshot dataSnapshot) {
-    rmain = Integer.parseInt(dataSnapshot.child("remainH").getValue().toString());
-    myref.child("remainH").setValue(String.valueOf(rmain-1));
-    }
-
-    @Override
-    public void onCancelled(DatabaseError databaseError) {
-
-    }
-    });
-     //ref.setValue(rmain);
-     Log.e("DBG", "" + rmain);
-     }
-     Toast.makeText(this, "done !", Toast.LENGTH_LONG).show();
-     selected.clear();
-     finish();
-     }
-     */
     public void vermDetails() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Vermifuge")
                 .setMessage("Entrer les informations sur le vermifuge.");
+
         final EditText vermName = new EditText(this);
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.MATCH_PARENT);
         vermName.setLayoutParams(lp);
-        vermName.setInputType(InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS | InputType.TYPE_CLASS_TEXT);
         vermName.setHint("nom du vermifuge");
+        vermName.setSingleLine();
+        vermName.setImeOptions(EditorInfo.IME_ACTION_DONE);
+
 
         final DatePicker picker = new DatePicker(this);
         picker.setCalendarViewShown(false);
@@ -333,9 +311,15 @@ public class AddVerm extends AppCompatActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
                 String vermNameStr = vermName.getText().toString();
                 String dateStr = "";
-                dateStr = dateStr.concat(picker.getYear() + "/").concat(picker.getMonth() + "/").concat(picker.getDayOfMonth() + "");
+                dateStr = dateStr.concat(picker.getYear() + "/").concat(months[picker.getMonth()] + "/").concat(picker.getDayOfMonth() + "");
                 saveVerm(vermNameStr, dateStr);
                 Log.e("date", dateStr);
+            }
+        });
+        builder.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
             }
         });
         builder.show();

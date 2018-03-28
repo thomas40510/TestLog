@@ -113,6 +113,18 @@ public class PonyProfile extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.deleteUser:
                 confirmDelete(view);
+
+            case R.id.showverm:
+                Intent intent = new Intent(this, showVV.class);
+                intent.putExtra("type", "verm")
+                        .putExtra("name", nameStr);
+                startActivity(intent);
+
+            case R.id.showvac:
+                Intent intent1 = new Intent(this, showVV.class);
+                intent1.putExtra("type", "vac")
+                        .putExtra("name", nameStr);
+                startActivity(intent1);
             default:
                 return super.onOptionsItemSelected(item);
         }

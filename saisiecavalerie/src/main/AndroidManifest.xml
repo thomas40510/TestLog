@@ -32,7 +32,14 @@
         <activity android:name=".NewPony" />
         <activity android:name=".PonyProfile" />
         <activity android:name=".editProfile" />
-        <activity android:name=".AddVerm"></activity>
+        <activity android:name=".AddVerm" />
+        <activity android:name=".addVac" />
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="a4cef1009bf2fffd5e20116c62be7af1bcac4b05" />
+
+        <activity android:name=".showVV"></activity>
     </application>
 
 </manifest>

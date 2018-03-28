@@ -34,5 +34,15 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/button2"
         android:onClick="newVerm"
-        android:text="Button" />
+        android:text="Nouvelle vermifigation" />
+
+    <Button
+        android:id="@+id/button8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/button4"
+        android:onClick="addvac"
+        android:text="Nouvelle vaccination" />
+
 </RelativeLayout>

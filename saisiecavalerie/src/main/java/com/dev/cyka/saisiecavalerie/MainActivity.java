@@ -6,6 +6,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.crashlytics.android.Crashlytics;
+
+import io.fabric.sdk.android.Fabric;
+
 public class MainActivity extends AppCompatActivity {
 
     public static SharedPreferences prefs;
@@ -13,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_main);
 
         prefs = getSharedPreferences(sharedPrefs.sharedPrefs, MODE_PRIVATE);
@@ -21,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         DBFetch fetch = new DBFetch();
         fetch.fetchDB();
         //showRenew();
+
 
     }
 
@@ -37,4 +43,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, AddVerm.class);
         startActivity(intent);
     }
+    public void addvac(View view){
+        Intent intent = new Intent(this, addVac.class);
+        startActivity(intent);
+    }
+
 }

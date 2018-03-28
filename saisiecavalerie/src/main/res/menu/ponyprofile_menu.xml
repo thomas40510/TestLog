@@ -3,4 +3,10 @@
     <item
         android:id="@+id/deleteUser"
         android:title="Supprimer" />
+    <item
+        android:id="@+id/showverm"
+        android:title="Vermifuges" />
+    <item
+        android:id="@+id/showvac"
+        android:title="Vaccins" />
 </menu>

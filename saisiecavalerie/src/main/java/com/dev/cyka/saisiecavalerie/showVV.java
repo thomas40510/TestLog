@@ -3,6 +3,7 @@ package com.dev.cyka.saisiecavalerie;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -10,13 +11,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class showVV extends AppCompatActivity {
 
     private String nameStr, type, dbChildName;
-    private List<String> dateList;
-    private List<String> nameList;
+    private List<String> dateList = new ArrayList<>();
+    private List<String> nameList = new ArrayList<>();
+    private String completeList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,26 +30,32 @@ public class showVV extends AppCompatActivity {
         nameStr = extras.getString("name");
         type = extras.getString("type");
 
-        if (type.equals("verm")){
+        Log.e("DBG @ln31", type + "-" + nameStr);
+
+        if (type.equals("verm")) {
             dbChildName = "lastverm";
-        }
-        else{
+        } else {
             dbChildName = "lastvacs";
         }
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference reference = database.getReference("cavalerie").child(dbChildName);
+        DatabaseReference reference = database.getReference("cavalerie").child(nameStr).child(dbChildName);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 dateList.clear();
+                nameList.clear();
 
                 for (DataSnapshot postsnapshot : dataSnapshot.getChildren()) {
-                    Iterable postpostsnapshot = dataSnapshot.getChildren();
-                    String date = postsnapshot.getKey()+"-"+postsnapshot.getChildren()+"-"+"(get children of children";
+                    String date = postsnapshot.getKey();
                     dateList.add(date);
+
+                    String name = postsnapshot.getValue().toString();
+                    Log.e("DBG", name);
+                    nameList.add(name);
                 }
-                Log.d("INFO", dateList.toString()+dateList.size());
+                Log.d("INFO", dateList.toString() + dateList.size());
+                showList();
 
             }
 
@@ -55,5 +64,15 @@ public class showVV extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void showList() {
+        completeList = "";
+        TextView listView = (TextView) findViewById(R.id.vermvacTextView);
+        for (int i = dateList.size()-1; i>-1; i--) {
+            completeList = completeList.concat(dateList.get(i) + " : " + nameList.get(i) + "\n");
+        }
+        Log.e("DBG", completeList);
+        listView.setText(completeList);
     }
 }

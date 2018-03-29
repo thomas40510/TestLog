@@ -311,7 +311,8 @@ public class addVac extends AppCompatActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
                 String vermNameStr = vermName.getText().toString();
                 String dateStr = "";
-                dateStr = dateStr.concat(picker.getYear() + "/").concat(months[picker.getMonth()] + "/").concat(picker.getDayOfMonth() + "");
+                //dateStr = dateStr.concat(picker.getYear() + "/").concat(months[picker.getMonth()] + "/").concat(picker.getDayOfMonth() + "");
+                dateStr = dateStr.concat(picker.getYear()+"-"+picker.getMonth()+"-"+picker.getDayOfMonth());
                 saveVerm(vermNameStr, dateStr);
                 Log.e("date", dateStr);
             }

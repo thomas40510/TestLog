@@ -25,7 +25,7 @@ android {
         minSdkVersion 19
         targetSdkVersion 26
         versionCode 1
-        versionName "Alpha0"
+        versionName "Alpha_1"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -51,6 +51,9 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation('com.crashlytics.sdk.android:crashlytics:2.9.1@aar') {
         transitive = true
+    }
+    implementation('com.crashlytics.sdk.android:answers:1.4.1@aar') {
+        transitive = true;
     }
 }
 

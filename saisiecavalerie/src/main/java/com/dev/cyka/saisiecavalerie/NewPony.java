@@ -13,6 +13,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.crashlytics.android.answers.Answers;
+import com.crashlytics.android.answers.CustomEvent;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -102,6 +104,11 @@ public class NewPony extends AppCompatActivity {
             mref1.child("s").setValue(rationS.getText().toString());
 
             Toast.makeText(this, "équidé ajouté !", Toast.LENGTH_SHORT).show();
+
+            Answers.getInstance().logCustom(new CustomEvent("Added"));
+            Answers.getInstance().logCustom(new CustomEvent("Added")
+                    .putCustomAttribute("Name", name.getText().toString()));
+
             finish();
         }
     }

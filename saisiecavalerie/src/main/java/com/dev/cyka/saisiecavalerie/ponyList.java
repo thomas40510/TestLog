@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -79,7 +78,6 @@ public class ponyList extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 // TODO Auto-generated method stub
-                Toast.makeText(getApplicationContext(), arrayList.get(position), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), PonyProfile.class);
                 intent.putExtra("name", arrayList.get(position));
                 startActivity(intent);

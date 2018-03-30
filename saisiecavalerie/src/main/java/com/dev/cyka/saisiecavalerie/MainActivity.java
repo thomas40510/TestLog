@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.TextView;
 
 import com.crashlytics.android.Crashlytics;
 
@@ -26,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         DBFetch fetch = new DBFetch();
         fetch.fetchDB();
         //showRenew();
-
+        ((TextView) findViewById(R.id.versionName)).setText(BuildConfig.VERSION_NAME);
 
     }
 

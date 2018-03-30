@@ -32,10 +32,15 @@ public class showVV extends AppCompatActivity {
 
         Log.e("DBG @ln31", type + "-" + nameStr);
 
+        TextView titleTxt = (TextView) findViewById(R.id.titleTxt);
+
         if (type.equals("verm")) {
             dbChildName = "lastverm";
+            titleTxt.setText(nameStr+" - "+"Derniers vermifuges");
         } else {
             dbChildName = "lastvacs";
+            titleTxt.setText(nameStr+" - "+"Derniers vaccins");
+
         }
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -70,7 +75,7 @@ public class showVV extends AppCompatActivity {
         completeList = "";
         TextView listView = (TextView) findViewById(R.id.vermvacTextView);
         for (int i = dateList.size()-1; i>-1; i--) {
-            completeList = completeList.concat(dateList.get(i) + " : " + nameList.get(i) + "\n");
+            completeList = completeList.concat(dateList.get(i) + " : " + nameList.get(i) + "\n\n");
         }
         Log.e("DBG", completeList);
         listView.setText(completeList);

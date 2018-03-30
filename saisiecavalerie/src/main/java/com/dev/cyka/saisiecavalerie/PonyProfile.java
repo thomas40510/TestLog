@@ -12,6 +12,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.crashlytics.android.answers.Answers;
+import com.crashlytics.android.answers.CustomEvent;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -167,11 +169,20 @@ public class PonyProfile extends AppCompatActivity {
     }
 
     public void usrDelete(View view){
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference reference = database.getReference("cavalerie");
-        reference.child(nameStr).setValue(null);
+        if (!nameStr.equals("Tempting") && !nameStr.equals("Yedro")) {
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            DatabaseReference reference = database.getReference("cavalerie");
+            reference.child(nameStr).setValue(null);
 
-        Toast.makeText(this, "Utilisateur Supprimé", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Équidé Supprimé", Toast.LENGTH_SHORT).show();
+
+            Answers.getInstance().logCustom(new CustomEvent("Removed"));
+            Answers.getInstance().logCustom(new CustomEvent("Removed")
+                    .putCustomAttribute("Name", nameStr));
+        }
+        else{
+            Toast.makeText(this, "Erreur lors de la suppression", Toast.LENGTH_SHORT).show();
+        }
         finish();
     }
 }

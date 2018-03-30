@@ -7,10 +7,34 @@
     tools:context=".showVV">
 
     <TextView
-        android:id="@+id/vermvacTextView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:id="@+id/titleTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:text="TextView" />
+        android:text="[name] - Derniers [var]"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView22"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/titleTxt" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="442dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView22">
+
+        <TextView
+            android:id="@+id/vermvacTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:text="TextView" />
+    </ScrollView>
+
 </RelativeLayout>

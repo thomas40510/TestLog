@@ -12,6 +12,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.crashlytics.android.answers.Answers;
+import com.crashlytics.android.answers.CustomEvent;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -23,14 +25,14 @@ public class PonyProfile extends AppCompatActivity {
     public View view, view2;
     public TextView bDate;
     public TextView proprio;
-    public TextView sexe;
+    public TextView sexe, type;
     public TextView lastNico;
     public TextView rationMt;
     public TextView rationMd;
     public TextView rationN;
     public TextView limhr;
 
-    public static String nameStr,bDateStr,proprioStr,sexeStr, nicoStr, limhrStr;
+    public static String nameStr,bDateStr,proprioStr,sexeStr, nicoStr, limhrStr, typeStr;
     public static String[] rationStr = {"N/A", "N/A", "N/A"};
 
     @Override
@@ -46,6 +48,7 @@ public class PonyProfile extends AppCompatActivity {
         rationMd = (TextView) findViewById(R.id.rationMd);
         rationN = (TextView) findViewById(R.id.rationS);
         limhr = (TextView) findViewById(R.id.limhr);
+        type = (TextView) findViewById(R.id.type);
 
         Bundle extras = getIntent().getExtras();
         nameStr = extras.getString("name");
@@ -63,6 +66,7 @@ public class PonyProfile extends AppCompatActivity {
                 bDateStr = dataSnapshot.child("bdate").getValue(String.class);
                 proprioStr = dataSnapshot.child("proprio").getValue(String.class);
                 sexeStr = dataSnapshot.child("sex").getValue(String.class);
+                typeStr = dataSnapshot.child("type").getValue(String.class);
                 nicoStr = dataSnapshot.child("lastNico").getValue(String.class);
                 limhrStr = dataSnapshot.child("limhr").getValue(String.class);
 
@@ -73,7 +77,8 @@ public class PonyProfile extends AppCompatActivity {
 
                 bDate.setText(bDateStr);
                 proprio.setText(proprioStr);
-                sexe.setText(sexeStr);
+                sexe.setText("["+sexeStr+"]");
+                type.setText(typeStr);
                 lastNico.setText(nicoStr);
                 limhr.setText(limhrStr);
 
@@ -108,8 +113,24 @@ public class PonyProfile extends AppCompatActivity {
     public boolean onOptionsItemSelected(final MenuItem item) {
 
         switch (item.getItemId()) {
+            case R.id.showverm:
+                Intent intent = new Intent(this, showVV.class);
+                intent.putExtra("type", "verm");
+                intent.putExtra("name", nameStr);
+                startActivity(intent);
+                return true;
+
+            case R.id.showvac:
+                Intent intent1 = new Intent(this, showVV.class);
+                intent1.putExtra("type", "vac");
+                intent1.putExtra("name", nameStr);
+                startActivity(intent1);
+                return true;
+
             case R.id.deleteUser:
                 confirmDelete(view);
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -148,11 +169,20 @@ public class PonyProfile extends AppCompatActivity {
     }
 
     public void usrDelete(View view){
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference reference = database.getReference("cavalerie");
-        reference.child(nameStr).setValue(null);
+        if (!nameStr.equals("Tempting") && !nameStr.equals("Yedro")) {
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            DatabaseReference reference = database.getReference("cavalerie");
+            reference.child(nameStr).setValue(null);
 
-        Toast.makeText(this, "Utilisateur Supprimé", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Équidé Supprimé", Toast.LENGTH_SHORT).show();
+
+            Answers.getInstance().logCustom(new CustomEvent("Removed"));
+            Answers.getInstance().logCustom(new CustomEvent("Removed")
+                    .putCustomAttribute("Name", nameStr));
+        }
+        else{
+            Toast.makeText(this, "Erreur lors de la suppression", Toast.LENGTH_SHORT).show();
+        }
         finish();
     }
 }

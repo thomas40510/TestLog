@@ -3,11 +3,13 @@ package com.dev.cyka.saisiecavalerie;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -45,7 +47,7 @@ public class ponyList extends AppCompatActivity {
         // Fetches values from DB to display it in list
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myref = database.getReference("users");
+        DatabaseReference myref = database.getReference("cavalerie");
         myref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -55,6 +57,7 @@ public class ponyList extends AppCompatActivity {
                     String user = postsnapshot.getKey();
                     arrayList.add(user);
                 }
+
                 Log.d("INFO", arrayList.toString());
                 adapter.notifyDataSetChanged();
                 //updateText(1);
@@ -75,7 +78,6 @@ public class ponyList extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 // TODO Auto-generated method stub
-                Toast.makeText(getApplicationContext(), arrayList.get(position), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), PonyProfile.class);
                 intent.putExtra("name", arrayList.get(position));
                 startActivity(intent);
@@ -83,4 +85,31 @@ public class ponyList extends AppCompatActivity {
             }
         });
     }
+
+    /**
+     * Actions for toolbar menu
+     */
+    @Override
+    //load menu file//
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.ponylist_menu, menu); //your file name
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    //set on-click actions//
+    public boolean onOptionsItemSelected(final MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.refresh:
+                DBFetch fetch = new DBFetch();
+                fetch.fetchDB();
+                arrayList = DBFetch.userlist;
+                adapter.notifyDataSetChanged();
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
 }

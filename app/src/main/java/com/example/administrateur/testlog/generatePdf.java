@@ -3,10 +3,8 @@ package com.example.administrateur.testlog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Environment;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
@@ -33,24 +31,6 @@ public class generatePdf extends AppCompatActivity {
 
     // Method for creating a pdf file from text, saving it then opening it for display
     public void createPdf(String text, String titleText, String fName, Context context) {
-
-        /*
-        Checks if apps has the permission to read / write to local storage
-         */
-        int check = ActivityCompat.checkSelfPermission(context, android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        if (check == PackageManager.PERMISSION_GRANTED) {
-            Log.i("PermissionManager", "write granted");
-        } else {
-            requestPermissions(new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE},1024);
-        }
-
-        int check2 = ActivityCompat.checkSelfPermission(context, android.Manifest.permission.READ_EXTERNAL_STORAGE);
-        if (check2 == PackageManager.PERMISSION_GRANTED){
-            Log.i("PermissionManager", "read granted");
-        }
-        else {
-            requestPermissions(new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE}, 1024);
-        }
 
         /*
         Begin document generation

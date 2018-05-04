@@ -1,8 +1,12 @@
 package com.dev.cyka.saisiecavalerie;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,11 +18,15 @@ public class editProfile extends AppCompatActivity {
 
     public EditText bDate, limhr, proprio, lastnico;
     public EditText rationMt, rationMd, rationS;
+    public CheckBox isClub;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
+
+        isClub = (CheckBox) findViewById(R.id.checkClub);
+
         bDate = (EditText) findViewById(R.id.bDate);
         limhr = (EditText) findViewById(R.id.limhr);
         proprio =(EditText) findViewById(R.id.proprio);
@@ -28,17 +36,46 @@ public class editProfile extends AppCompatActivity {
         rationMd = (EditText) findViewById(R.id.rationMd);
         rationS = (EditText) findViewById(R.id.rationS);
 
+        View.OnKeyListener listener = new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                // If the event is a key-down event on the "enter" button
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
+                        (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    // Perform action on key press
+                    InputMethodManager inputManager = (InputMethodManager)
+                            getSystemService(Context.INPUT_METHOD_SERVICE);
+                    inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
+                            InputMethodManager.HIDE_NOT_ALWAYS);
+                    return true;
+                }
+                return false;
+            }
+        };
+        lastnico.setNextFocusDownId(R.id.rationMt);
+        rationMt.setNextFocusDownId(R.id.rationMd);
+        rationMd.setNextFocusDownId(R.id.rationS);
+        rationS.setOnKeyListener(listener);
+
 
         // Sets un-changing infos
 
         ((TextView)findViewById(R.id.name)).setText(PonyProfile.nameStr);
         ((TextView)findViewById(R.id.sexe)).setText(PonyProfile.sexeStr);
+        ((TextView)findViewById(R.id.type)).setText(PonyProfile.typeStr);
 
         // Sets textboxes' text as it appears in DB
 
         bDate.setText(PonyProfile.bDateStr);
         limhr.setText(PonyProfile.limhrStr);
-        proprio.setText(PonyProfile.proprioStr);
+        proprio.setText(null);
+        if (PonyProfile.proprioStr.equals("club")){
+            isClub.setChecked(true);
+        }
+        else {
+            proprio.setText(PonyProfile.proprioStr);
+        }
+
         lastnico.setText(PonyProfile.nicoStr);
 
         rationMt.setText(PonyProfile.rationStr[0]);
@@ -57,7 +94,13 @@ public class editProfile extends AppCompatActivity {
         DatabaseReference mref = reference.child(PonyProfile.nameStr);
         mref.child("bdate").setValue(bDate.getText().toString());
         mref.child("limhr").setValue(limhr.getText().toString());
-        mref.child("proprio").setValue(proprio.getText().toString());
+
+        if (isClub.isChecked()){
+            mref.child("proprio").setValue("club");
+        }
+        else {
+            mref.child("proprio").setValue(proprio.getText().toString());
+        }
         mref.child("lastNico").setValue(lastnico.getText().toString());
 
         DatabaseReference mref1 = mref.child("ration");

@@ -25,4 +25,40 @@
         android:layout_below="@+id/button"
         android:onClick="newHorse"
         android:text="Saisir un nouvel équidé" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/button2"
+        android:onClick="newVerm"
+        android:text="Nouvelle vermifigation" />
+
+    <Button
+        android:id="@+id/button8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/button4"
+        android:onClick="addvac"
+        android:text="Nouvelle vaccination" />
+
+    <TextView
+        android:id="@+id/versionName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@+id/textView23"
+        android:text="0.0" />
+
+    <TextView
+        android:id="@+id/textView23"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:text="Version : " />
+
 </RelativeLayout>

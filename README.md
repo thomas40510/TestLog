@@ -1,6 +1,5 @@
-# TestLog
+# TestLog (nom provisoire)
 ## Application de gestion de centre équestre
-### (Nom provisoire)
 
 Application Android qui permet de gérer :
 - Les cavaliers

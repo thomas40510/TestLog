@@ -22,10 +22,10 @@ android {
 
     defaultConfig {
         applicationId "com.dev.cyka.saisiecavalerie"
-        minSdkVersion 19
+        minSdkVersion 23
         targetSdkVersion 26
         versionCode 1
-        versionName "Alpha_1"
+        versionName "sc_Alpha2"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 

@@ -58,4 +58,14 @@
         Que pour voir en un jour flêtrir tant de lauriers ? \n
     </string>
 
+    <string-array name="sexes">
+        <item>Hongre</item>
+        <item>Jument</item>
+        <item>Entier</item>
+    </string-array>
+    <string-array name="typelist">
+        <item>P</item>
+        <item>C</item>
+    </string-array>
+
 </resources>

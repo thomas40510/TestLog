@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/deleteUser"
+        android:title="Supprimer" />
+    <item
+        android:id="@+id/showverm"
+        android:title="Vermifuges" />
+    <item
+        android:id="@+id/showvac"
+        android:title="Vaccins" />
+</menu>

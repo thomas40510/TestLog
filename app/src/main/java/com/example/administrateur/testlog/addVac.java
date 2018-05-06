@@ -1,4 +1,5 @@
-package com.dev.cyka.saisiecavalerie;
+package com.example.administrateur.testlog;
+
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -30,7 +31,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddVerm extends AppCompatActivity {
+public class addVac extends AppCompatActivity {
 
     private ListView list;
     public List<String> arrayList;
@@ -148,7 +149,7 @@ public class AddVerm extends AppCompatActivity {
 
                     //for (int i = 0; i < infodata.size(); i++) {
                     if (infodata.get(position).isclicked) {
-                        System.out.println("Selectes Are == " + arrayList.get(position));
+                        System.out.println("Selected Are == " + arrayList.get(position));
                         selected.add(arrayList.get(position));
                         //}
                     } else {
@@ -194,31 +195,31 @@ public class AddVerm extends AppCompatActivity {
                 break;
             //adapter.notifyDataSetChanged();
             /**
-            case R.id.printLs:
+             case R.id.printLs:
 
-                toPrintStr = "";
+             toPrintStr = "";
 
-                FirebaseDatabase dbase = FirebaseDatabase.getInstance();
-                DatabaseReference mref = dbase.getReference("users");
-                mref.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        for (String s : arrayList) {
-                            String rStr = dataSnapshot.child(s).child("remainH").getValue().toString();
-                            toPrintStr = toPrintStr.concat(s + "  :   " + rStr + "\n");
-                        }
-                        generatePdf gen = new generatePdf();
-                        gen.createPdf(toPrintStr, "Relevé des séances restantes", "cards-" + System.currentTimeMillis() + ".pdf", getApplicationContext());
-                    }
+             FirebaseDatabase dbase = FirebaseDatabase.getInstance();
+             DatabaseReference mref = dbase.getReference("users");
+             mref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+            for (String s : arrayList) {
+            String rStr = dataSnapshot.child(s).child("remainH").getValue().toString();
+            toPrintStr = toPrintStr.concat(s + "  :   " + rStr + "\n");
+            }
+            generatePdf gen = new generatePdf();
+            gen.createPdf(toPrintStr, "Relevé des séances restantes", "cards-" + System.currentTimeMillis() + ".pdf", getApplicationContext());
+            }
 
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
 
-                    }
-                });
-                //ref.setValue(rmain);
-                Log.e("DBG", "" + rmain);
-                break;
+            }
+            });
+             //ref.setValue(rmain);
+             Log.e("DBG", "" + rmain);
+             break;
              */
             default:
                 return super.onOptionsItemSelected(item);
@@ -283,15 +284,15 @@ public class AddVerm extends AppCompatActivity {
 
     public void vermDetails() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Vermifuge")
-                .setMessage("Entrer les informations sur le vermifuge.");
+        builder.setTitle("Vaccin")
+                .setMessage("Entrer les informations sur le vaccin...");
 
         final EditText vermName = new EditText(this);
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.MATCH_PARENT);
         vermName.setLayoutParams(lp);
-        vermName.setHint("nom du vermifuge");
+        vermName.setHint("nom du vaccin");
         vermName.setSingleLine();
         vermName.setImeOptions(EditorInfo.IME_ACTION_DONE);
 
@@ -352,7 +353,7 @@ public class AddVerm extends AppCompatActivity {
         FirebaseDatabase dbase = FirebaseDatabase.getInstance();
         DatabaseReference mref = dbase.getReference("cavalerie");
         for (int i = 0; i<selected.size();i++){
-            mref.child(selected.get(i)).child("lastverm").child(dateStr).setValue(vermNameStr);
+            mref.child(selected.get(i)).child("lastvacs").child(dateStr).setValue(vermNameStr);
         }
 
         Toast.makeText(this, "Changements enregistrés !", Toast.LENGTH_LONG).show();

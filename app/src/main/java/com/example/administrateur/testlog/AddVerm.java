@@ -1,5 +1,4 @@
-package com.dev.cyka.saisiecavalerie;
-
+package com.example.administrateur.testlog;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -194,31 +193,31 @@ public class AddVerm extends AppCompatActivity {
                 break;
             //adapter.notifyDataSetChanged();
             /**
-            case R.id.printLs:
+             case R.id.printLs:
 
-                toPrintStr = "";
+             toPrintStr = "";
 
-                FirebaseDatabase dbase = FirebaseDatabase.getInstance();
-                DatabaseReference mref = dbase.getReference("users");
-                mref.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        for (String s : arrayList) {
-                            String rStr = dataSnapshot.child(s).child("remainH").getValue().toString();
-                            toPrintStr = toPrintStr.concat(s + "  :   " + rStr + "\n");
-                        }
-                        generatePdf gen = new generatePdf();
-                        gen.createPdf(toPrintStr, "Relevé des séances restantes", "cards-" + System.currentTimeMillis() + ".pdf", getApplicationContext());
-                    }
+             FirebaseDatabase dbase = FirebaseDatabase.getInstance();
+             DatabaseReference mref = dbase.getReference("users");
+             mref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+            for (String s : arrayList) {
+            String rStr = dataSnapshot.child(s).child("remainH").getValue().toString();
+            toPrintStr = toPrintStr.concat(s + "  :   " + rStr + "\n");
+            }
+            generatePdf gen = new generatePdf();
+            gen.createPdf(toPrintStr, "Relevé des séances restantes", "cards-" + System.currentTimeMillis() + ".pdf", getApplicationContext());
+            }
 
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
 
-                    }
-                });
-                //ref.setValue(rmain);
-                Log.e("DBG", "" + rmain);
-                break;
+            }
+            });
+             //ref.setValue(rmain);
+             Log.e("DBG", "" + rmain);
+             break;
              */
             default:
                 return super.onOptionsItemSelected(item);

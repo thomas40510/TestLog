@@ -30,7 +30,7 @@ public class userSelect extends AppCompatActivity {
 
     private ListView list;
     public List<String> arrayList;
-    private List<InfoRowdata> infodata;
+    private List<InfoRowData> infodata;
     private List<String> selected;
     private List<Integer> rmainList;
     private int rmain;
@@ -64,9 +64,9 @@ public class userSelect extends AppCompatActivity {
                 Log.e("DEBUG", "" + arrayList.size());
 
                 Log.e("DBG", "reached !");
-                infodata = new ArrayList<InfoRowdata>();
+                infodata = new ArrayList<InfoRowData>();
                 for (int i = 0; i < arrayList.size(); i++) {
-                    infodata.add(new InfoRowdata(false, i));
+                    infodata.add(new InfoRowData(false, i));
                     // System.out.println(i);
                     //System.out.println("Data is == "+data[i]);
                 }
@@ -84,9 +84,9 @@ public class userSelect extends AppCompatActivity {
         });
 
         Log.e("DBG", "reached !");
-        infodata = new ArrayList<InfoRowdata>();
+        infodata = new ArrayList<InfoRowData>();
         for (int i = 0; i < arrayList.size(); i++) {
-            infodata.add(new InfoRowdata(false, i));
+            infodata.add(new InfoRowData(false, i));
             // System.out.println(i);
             //System.out.println("Data is == "+data[i]);
         }

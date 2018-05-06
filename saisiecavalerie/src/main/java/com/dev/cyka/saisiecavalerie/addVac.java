@@ -64,7 +64,7 @@ public class addVac extends AppCompatActivity {
                     arrayList.add(user);
                 }
                 */
-                arrayList = DBFetch.userlist;
+                arrayList = DBFetch.clist;
                 Log.d("INFO", arrayList.toString());
                 Log.e("DEBUG", "" + arrayList.size());
 
@@ -190,7 +190,7 @@ public class addVac extends AppCompatActivity {
                 break;
             case R.id.refresh:
                 //updateValue();
-                arrayList = DBFetch.userlist;
+                arrayList = DBFetch.clist;
                 break;
             //adapter.notifyDataSetChanged();
             /**

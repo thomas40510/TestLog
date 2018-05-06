@@ -37,6 +37,7 @@
         <activity android:name=".CreateProfile" />
         <activity android:name=".userSelect" />
         <activity android:name=".LoginActivity">
+
             <!--
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -53,6 +54,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".addVac" />
+        <activity android:name=".AddVerm" />
+        <activity android:name=".ceditProfile" />
+        <activity android:name=".cMainActivity" />
+        <activity android:name=".NewPony" />
+        <activity android:name=".ponyList" />
+        <activity android:name=".PonyProfile" />
+        <activity android:name=".showVV" />
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="a4cef1009bf2fffd5e20116c62be7af1bcac4b05" />
+
+        <activity android:name=".MainMenu"></activity>
     </application>
 
 </manifest>

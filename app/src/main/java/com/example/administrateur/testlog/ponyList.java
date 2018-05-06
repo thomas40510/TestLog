@@ -1,4 +1,4 @@
-package com.dev.cyka.saisiecavalerie;
+package com.example.administrateur.testlog;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,7 +29,7 @@ public class ponyList extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ponylist);
+        setContentView(R.layout.activity_pony_list);
 
         list = (ListView) findViewById(R.id.listView);
         arrayList = new ArrayList<>();

@@ -17,34 +17,34 @@ import java.util.List;
 
 
 public class DBFetch extends Activity {
-    public static List<String> userlist = new ArrayList<>();
-    public static String toRenewStr;
+    public static List<String> clist = new ArrayList<>();
+    public static String toRenStr;
     private List<String> fetchedList = new ArrayList<>();
     SharedPreferences prefs = MainActivity.prefs;
     private int i;
 
     public void fetchDB (){
-        toRenewStr = "";
+        toRenStr = "";
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myref = database.getReference("cavalerie");
         myref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                userlist.clear();
+                clist.clear();
                 String[] savedArray = loadArray("array");
                 Log.e("DBG", "loadArray.size "+savedArray.length);
                 Log.e("DBG", "childrenCount"+dataSnapshot.getChildrenCount());
                 if (savedArray.length != dataSnapshot.getChildrenCount()){
                     for (DataSnapshot postsnapshot : dataSnapshot.getChildren()) {
                         String user = postsnapshot.getKey();
-                        userlist.add(user);
+                        clist.add(user);
                     }
-                    listSave(userlist);
+                    listSave(clist);
                 }
                 else {
-                    Collections.addAll(userlist, savedArray);
+                    Collections.addAll(clist, savedArray);
                 }
-                Log.d("INFO", userlist.toString()+userlist.size());
+                Log.d("INFO", clist.toString()+ clist.size());
 
                 /*
                 Pour afficher à chaque update de la DB

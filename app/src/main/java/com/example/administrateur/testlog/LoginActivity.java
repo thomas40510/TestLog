@@ -33,13 +33,14 @@ public class LoginActivity extends AppCompatActivity {
 
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
-        auth.signOut();
+        //del this line to remember user
+        //auth.signOut();
 
         SharedPreferences preferences = getSharedPreferences(shPrefs.sharedPrefs, MODE_PRIVATE);
         String lastMail = preferences.getString("lastMail", null);
 
         if (auth.getCurrentUser() != null) {
-            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            startActivity(new Intent(LoginActivity.this, MainMenu.class));
             finish();
         }
 
@@ -133,7 +134,7 @@ public class LoginActivity extends AppCompatActivity {
                                     SharedPreferences.Editor editor  = getSharedPreferences(shPrefs.sharedPrefs, MODE_PRIVATE).edit();
                                     editor.putString("lastMail", inputEmail.getText().toString());
                                     editor.commit();
-                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                    Intent intent = new Intent(LoginActivity.this, MainMenu.class);
                                     startActivity(intent);
                                     finish();
                                 }

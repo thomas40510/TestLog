@@ -126,5 +126,73 @@ public class DBFetch extends Activity {
     editor.commit();
     }
 
+    public static List<String> clist = new ArrayList<>();
+    public static String toRenStr;
+    SharedPreferences cprefs = cMainActivity.prefs;
+
+
+    public void cfetchDB(){
+        toRenStr = "";
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myref = database.getReference("cavalerie");
+        myref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                clist.clear();
+                String[] savedArray = cloadArray("array");
+                Log.e("DBG", "loadArray.size "+savedArray.length);
+                Log.e("DBG", "childrenCount"+dataSnapshot.getChildrenCount());
+                if (savedArray.length != dataSnapshot.getChildrenCount()){
+                    for (DataSnapshot postsnapshot : dataSnapshot.getChildren()) {
+                        String user = postsnapshot.getKey();
+                        clist.add(user);
+                    }
+                    clistSave(clist);
+                }
+                else {
+                    Collections.addAll(clist, savedArray);
+                }
+                Log.d("INFO", clist.toString()+ clist.size());
+
+                /*
+                Pour afficher à chaque update de la DB
+                 */
+                i++;
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+
+        });
+        /* Pour ne l'afficher qu'au démarrage
+        i++;
+        fetchRenew();
+        */
+    }
+
+    public String[] cloadArray(String arrayName) {
+        int size = cprefs.getInt("usrList_size", 0);
+        Log.e("DBG", "size " + size);
+        String array[] = new String[size];
+        for (int i = 0; i < size; i++) {
+            array[i] = cprefs.getString("pony" + "_" + i, null);
+            //Log.i("DBG fetchDB @ ln66", array[i]);
+        }
+        return array;
+    }
+
+    public void clistSave(List<String> list){
+        SharedPreferences.Editor editor = cprefs.edit();
+        Log.e("DBG", "list size "+list.size());
+        for (int i = 0; i<list.size(); i++){
+            editor.putString("pony"+"_"+i, list.get(i));
+            Log.e("DBG fetchDB @ ln75", list.get(i));
+        }
+        editor.putInt("usrList_size", list.size());
+        editor.commit();
+    }
 
 }

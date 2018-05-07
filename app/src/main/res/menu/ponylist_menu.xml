@@ -4,4 +4,10 @@
     <item
         android:id="@+id/refresh"
         android:title="refresh" />
+    <item
+        android:id="@+id/print"
+        android:title="Imprimer" />
+    <item
+        android:id="@+id/printRations"
+        android:title="Item" />
 </menu>

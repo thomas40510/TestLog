@@ -1,6 +1,7 @@
 package com.example.administrateur.testlog;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -107,9 +108,71 @@ public class ponyList extends AppCompatActivity {
                 fetch.fetchDB();
                 arrayList = DBFetch.clist;
                 adapter.notifyDataSetChanged();
+                break;
+            case R.id.print:
+                print();
+                break;
+            case R.id.printRations:
+                new MyAsyncTask().execute();
+                break;
             default:
                 return super.onOptionsItemSelected(item);
         }
+        return true;
+    }
+    public void print(){
+        String text ="";
+        for (int i=0; i<DBFetch.clist.size(); i++){
+            text = text.concat(DBFetch.clist.get(i) + "\n");
+        }
+        generatePdf gen = new generatePdf();
+        gen.createPdf(text, "Cavalerie", "caval-"+System.currentTimeMillis()+".pdf", getApplicationContext());
     }
 
+    public String[][] rations = new String[DBFetch.clist.size()][4];
+
+    public void printRations(){
+        generatePdf gen = new generatePdf();
+        gen.createTablePdf(rations, "Rations", "test-" + System.currentTimeMillis() + ".pdf", getApplicationContext());
+    }
+
+    public String[][] getRations() {
+        DBFetch.clist.remove("Tempting");
+        for (final String name : DBFetch.clist) {
+            final int index = DBFetch.clist.indexOf(name);
+            rations[index][0] = name;
+            System.out.println(""+index);
+            FirebaseDatabase db = FirebaseDatabase.getInstance();
+            DatabaseReference myref = db.getReference("cavalerie");
+            DatabaseReference nameRef = myref.child(name).child("ration");
+            nameRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    rations[index][1] = dataSnapshot.child("mt").getValue(String.class);
+                    rations[index][2] = dataSnapshot.child("md").getValue(String.class);
+                    rations[index][3] = dataSnapshot.child("s").getValue(String.class);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+            System.out.println("r : "+rations[index][1]);
+        }
+        return rations;
+    }
+
+    //AsyncTask to make sure to get values from DB
+    private class MyAsyncTask extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected Void doInBackground(Void... params) {
+            rations = getRations();
+            return null;
+        }
+        @Override
+        protected void onPostExecute(Void result) {
+            printRations();
+        }
+    }
 }

@@ -94,15 +94,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, userSelect.class);
         startActivity(intent);
     }
-    public void gotoAuth (View view){
-        Intent intent = new Intent(this, LoginActivity.class);
+    public void gotoMenu(View view){
+        Intent intent = new Intent(this, MainMenu.class);
         startActivity(intent);
     }
-
-    public void forceCrash(View view) {
-        throw new RuntimeException("This is a crash");
-    }
-
-
 
 }

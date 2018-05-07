@@ -21,10 +21,8 @@ public class cMainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_c_main);
 
         prefs = getSharedPreferences(shPrefs.sharedPrefs, MODE_PRIVATE);
-
         //updateValue();
-        DBFetch fetch = new DBFetch();
-        fetch.cfetchDB();
+        new DBFetch().cfetchDB();
         //showRenew();
 
     }
@@ -51,6 +49,5 @@ public class cMainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainMenu.class);
         startActivity(intent);
     }
-
 
 }

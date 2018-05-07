@@ -138,10 +138,11 @@ public class ponyList extends AppCompatActivity {
 
     public String[][] getRations() {
         DBFetch.clist.remove("Tempting");
+
         for (final String name : DBFetch.clist) {
             final int index = DBFetch.clist.indexOf(name);
             rations[index][0] = name;
-            System.out.println(""+index);
+            System.out.println("" + index);
             FirebaseDatabase db = FirebaseDatabase.getInstance();
             DatabaseReference myref = db.getReference("cavalerie");
             DatabaseReference nameRef = myref.child(name).child("ration");
@@ -158,8 +159,9 @@ public class ponyList extends AppCompatActivity {
 
                 }
             });
-            System.out.println("r : "+rations[index][1]);
+            System.out.println("r : " + rations[index][1]);
         }
+
         return rations;
     }
 
@@ -167,6 +169,7 @@ public class ponyList extends AppCompatActivity {
     private class MyAsyncTask extends AsyncTask<Void, Void, Void> {
         @Override
         protected Void doInBackground(Void... params) {
+            rations = getRations();
             rations = getRations();
             return null;
         }

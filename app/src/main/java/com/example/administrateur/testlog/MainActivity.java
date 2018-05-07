@@ -10,6 +10,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,20 +70,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int REQUEST = 112;
 
     public void display (View view){
-        //Intent intent = new Intent(this, editDB.class);
-        //startActivity(intent);
-
-        String test = "";
-
-        for (int i = 0; i<DBFetch.userlist.size(); i++){
-            test = test.concat(DBFetch.userlist.get(i)+"\n");
-        }
-
-        generatePdf gen = new generatePdf();
-        gen.createPdf(test, "Users", "file.pdf", this);
-
-        //createPdf(test, "Users");
-
+        Toast.makeText(this, "J'avais dit de ne pas cliquer !!", Toast.LENGTH_SHORT).show();
     }
 
     public void display3 (View view){

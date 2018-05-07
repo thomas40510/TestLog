@@ -3,6 +3,9 @@ package com.example.administrateur.testlog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -20,6 +23,7 @@ public class showVV extends AppCompatActivity {
     private List<String> dateList = new ArrayList<>();
     private List<String> nameList = new ArrayList<>();
     private String completeList;
+    private String typeStr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,12 +40,13 @@ public class showVV extends AppCompatActivity {
 
         if (type.equals("verm")) {
             dbChildName = "lastverm";
-            titleTxt.setText(nameStr+" - "+"Derniers vermifuges");
+            typeStr = "vermifuges";
         } else {
             dbChildName = "lastvacs";
-            titleTxt.setText(nameStr+" - "+"Derniers vaccins");
+            typeStr = "vaccins";
 
         }
+        titleTxt.setText(nameStr+" - Derniers "+typeStr);
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference("cavalerie").child(nameStr).child(dbChildName);
@@ -69,6 +74,35 @@ public class showVV extends AppCompatActivity {
 
             }
         });
+    }
+
+    /**
+     * Actions for toolbar menu
+     */
+    @Override
+    //load menu file//
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.showvac_menu, menu); //your file name
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    //set on-click actions//
+    public boolean onOptionsItemSelected(final MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.print:
+                print();
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+        return true;
+    }
+    public void print(){
+        generatePdf gen = new generatePdf();
+        gen.createPdf(completeList, nameStr+" - Derniers "+typeStr, nameStr+" - "+type+System.currentTimeMillis()+".pdf", getApplicationContext());
     }
 
     public void showList() {

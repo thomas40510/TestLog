@@ -68,7 +68,6 @@ public class DBFetch extends Activity {
         i++;
         fetchRenew();
         */
-
     }
 
     public void fetchRenew(){
@@ -154,11 +153,6 @@ public class DBFetch extends Activity {
                 }
                 Log.d("INFO", clist.toString()+ clist.size());
 
-                /*
-                Pour afficher à chaque update de la DB
-                 */
-                i++;
-
             }
 
             @Override
@@ -167,10 +161,6 @@ public class DBFetch extends Activity {
             }
 
         });
-        /* Pour ne l'afficher qu'au démarrage
-        i++;
-        fetchRenew();
-        */
     }
 
     public String[] cloadArray(String arrayName) {

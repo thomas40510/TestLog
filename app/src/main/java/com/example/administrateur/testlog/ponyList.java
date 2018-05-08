@@ -1,15 +1,19 @@
 package com.example.administrateur.testlog;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -26,6 +30,7 @@ public class ponyList extends AppCompatActivity {
     private ListView list;
     private ArrayAdapter<String> adapter;
     private List<String> arrayList;
+    private ProgressDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -165,16 +170,33 @@ public class ponyList extends AppCompatActivity {
         return rations;
     }
 
+    AlphaAnimation inAnimation, outAnimation;
+    FrameLayout progressBarHolder;
+
+
     //AsyncTask to make sure to get values from DB
     private class MyAsyncTask extends AsyncTask<Void, Void, Void> {
         @Override
+        protected void onPreExecute(){
+            progressBarHolder = (FrameLayout) findViewById(R.id.progressBarHolder);
+            inAnimation = new AlphaAnimation(0f,1f);
+            inAnimation.setDuration(200);
+            progressBarHolder.setAnimation(inAnimation);
+            progressBarHolder.setVisibility(View.VISIBLE);
+        }
+        @Override
         protected Void doInBackground(Void... params) {
             rations = getRations();
-            rations = getRations();
+            SystemClock.sleep(500);
+
             return null;
         }
         @Override
         protected void onPostExecute(Void result) {
+            outAnimation = new AlphaAnimation(1f,0f);
+            outAnimation.setDuration(200);
+            progressBarHolder.setAnimation(outAnimation);
+            progressBarHolder.setVisibility(View.GONE);
             printRations();
         }
     }

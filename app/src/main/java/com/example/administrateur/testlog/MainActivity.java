@@ -4,8 +4,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Looper;
 import android.os.StrictMode;
+import android.os.SystemClock;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -39,10 +42,7 @@ public class MainActivity extends AppCompatActivity {
         n = 1;
         builder = new AlertDialog.Builder(this);
 
-        //updateValue();
-        DBFetch fetch = new DBFetch();
-        fetch.fetchDB();
-        //showRenew();
+        new MyAsyncTask().execute();
 
 
     }
@@ -86,5 +86,28 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainMenu.class);
         startActivity(intent);
     }
+
+    private class MyAsyncTask extends AsyncTask<Void, Void, Void>
+    {
+        @Override
+        protected void onPreExecute(){
+            findViewById(R.id.progressBar4).setVisibility(View.VISIBLE);
+        }
+        @Override
+        protected Void doInBackground(Void... params) {
+            Looper.prepare();
+            //updateValue();
+            new DBFetch().fetchDB();
+            Log.e("DBG", "reached");
+            SystemClock.sleep(1000);
+            //showRenew();
+            return null;
+        }
+        @Override
+        protected void onPostExecute(Void result) {
+            findViewById(R.id.progressBar4).setVisibility(View.GONE);
+        }
+    }
+
 
 }

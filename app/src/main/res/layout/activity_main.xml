@@ -46,5 +46,12 @@
         android:onClick="gotoMenu"
         android:text="Retour au menu" />
 
+    <ProgressBar
+        android:id="@+id/progressBar4"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
+
 
 </RelativeLayout>

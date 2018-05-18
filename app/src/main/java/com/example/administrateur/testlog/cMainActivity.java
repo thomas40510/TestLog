@@ -60,7 +60,9 @@ public class cMainActivity extends AppCompatActivity {
         }
         @Override
         protected Void doInBackground(Void... params) {
-            Looper.prepare();
+            if(Looper.myLooper()==null){
+                Looper.prepare();
+            }
             //updateValue();
             new DBFetch().cfetchDB();
             Log.e("DBG", "reached");

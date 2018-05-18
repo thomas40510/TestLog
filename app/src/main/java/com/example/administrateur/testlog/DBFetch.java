@@ -109,7 +109,7 @@ public class DBFetch extends Activity {
         String array[] = new String[size];
         for (int i = 0; i < size; i++) {
             array[i] = prefs.getString("usr" + "_" + i, null);
-            Log.i("DBG fetchDB @ ln66", array[i]);
+            //Log.i("DBG fetchDB @ ln66", array[i]);
         }
         return array;
     }
@@ -126,6 +126,7 @@ public class DBFetch extends Activity {
     }
 
     public static List<String> clist = new ArrayList<>();
+    public static List<String> clistPrt = new ArrayList<>();
     public static String toRenStr;
     SharedPreferences cprefs = cMainActivity.prefs;
 
@@ -152,6 +153,8 @@ public class DBFetch extends Activity {
                     Collections.addAll(clist, savedArray);
                 }
                 Log.d("INFO", clist.toString()+ clist.size());
+                clistPrt.addAll(clist);
+                clistPrt.remove("Tempting");
 
             }
 

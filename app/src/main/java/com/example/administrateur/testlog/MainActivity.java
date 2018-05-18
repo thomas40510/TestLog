@@ -95,7 +95,9 @@ public class MainActivity extends AppCompatActivity {
         }
         @Override
         protected Void doInBackground(Void... params) {
-            Looper.prepare();
+            if(Looper.myLooper()==null){
+                Looper.prepare();
+            }
             //updateValue();
             new DBFetch().fetchDB();
             Log.e("DBG", "reached");

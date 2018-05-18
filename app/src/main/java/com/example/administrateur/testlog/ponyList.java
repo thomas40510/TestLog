@@ -127,25 +127,24 @@ public class ponyList extends AppCompatActivity {
     }
     public void print(){
         String text ="";
-        for (int i=0; i<DBFetch.clist.size(); i++){
-            text = text.concat(DBFetch.clist.get(i) + "\n");
+        for (int i=0; i<DBFetch.clistPrt.size(); i++){
+            text = text.concat(DBFetch.clistPrt.get(i) + "\n");
         }
         generatePdf gen = new generatePdf();
         gen.createPdf(text, "Cavalerie", "caval-"+System.currentTimeMillis()+".pdf", getApplicationContext());
     }
 
-    public String[][] rations = new String[DBFetch.clist.size()][4];
+    public String[][] rations = new String[DBFetch.clistPrt.size()][4];
 
     public void printRations(){
         generatePdf gen = new generatePdf();
-        gen.createTablePdf(rations, "Rations", "test-" + System.currentTimeMillis() + ".pdf", getApplicationContext());
+        gen.createTablePdf(rations, "Rations", "rations-" + System.currentTimeMillis() + ".pdf", getApplicationContext());
     }
 
     public String[][] getRations() {
-        DBFetch.clist.remove("Tempting");
 
-        for (final String name : DBFetch.clist) {
-            final int index = DBFetch.clist.indexOf(name);
+        for (final String name : DBFetch.clistPrt) {
+            final int index = DBFetch.clistPrt.indexOf(name);
             rations[index][0] = name;
             System.out.println("" + index);
             FirebaseDatabase db = FirebaseDatabase.getInstance();

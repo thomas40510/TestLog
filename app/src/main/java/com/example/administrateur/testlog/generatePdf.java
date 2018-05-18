@@ -115,7 +115,7 @@ public class generatePdf extends AppCompatActivity {
             }
 
             File file = new File(dir, fileName);
-            file.createNewFile();
+            //file.createNewFile();
             FileOutputStream fOut = new FileOutputStream(file);
             PdfWriter.getInstance(doc, fOut);
 

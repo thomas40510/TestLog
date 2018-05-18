@@ -55,7 +55,7 @@ dependencies {
         transitive = true
     }
     implementation('com.crashlytics.sdk.android:answers:1.4.1@aar') {
-        transitive = true;
+        transitive = true
     }
 }
 

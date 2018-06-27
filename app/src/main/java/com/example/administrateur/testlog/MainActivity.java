@@ -91,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
     {
         @Override
         protected void onPreExecute(){
+            hideButtons();
             findViewById(R.id.progressBar4).setVisibility(View.VISIBLE);
         }
         @Override
@@ -108,6 +109,23 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void result) {
             findViewById(R.id.progressBar4).setVisibility(View.GONE);
+            showButtons();
+        }
+    }
+    public void hideButtons(){
+        for (int i=2;i<5; i++){
+            String buttonId = "button" + i;
+            int resID = getResources().getIdentifier(buttonId, "id", getPackageName());
+            findViewById(resID).setAlpha(0.5f);
+            findViewById(resID).setClickable(false);
+        }
+    }
+    public void showButtons(){
+        for (int i=2;i<5; i++){
+            String buttonId = "button" + i;
+            int resID = getResources().getIdentifier(buttonId, "id", getPackageName());
+            findViewById(resID).setAlpha(1f);
+            findViewById(resID).setClickable(true);
         }
     }
 

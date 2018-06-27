@@ -50,7 +50,7 @@ public class Profile extends AppCompatActivity {
         name.setText(nameStr);
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myref = database.getReference("users");
+        DatabaseReference myref = database.getReference("cavaliers");
         DatabaseReference nameRef = myref.child(nameStr);
 
         nameRef.addValueEventListener(new ValueEventListener() {
@@ -147,7 +147,7 @@ public class Profile extends AppCompatActivity {
 
     public void usrDelete(View view){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference reference = database.getReference("users");
+        DatabaseReference reference = database.getReference("cavaliers");
         reference.child(nameStr).setValue(null);
 
         Toast.makeText(this, "Utilisateur Supprimé", Toast.LENGTH_SHORT).show();

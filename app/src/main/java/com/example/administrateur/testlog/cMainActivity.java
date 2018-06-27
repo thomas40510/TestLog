@@ -56,6 +56,7 @@ public class cMainActivity extends AppCompatActivity {
     {
         @Override
         protected void onPreExecute(){
+            hideButtons();
             findViewById(R.id.progressBar3).setVisibility(View.VISIBLE);
         }
         @Override
@@ -73,6 +74,28 @@ public class cMainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void result) {
             findViewById(R.id.progressBar3).setVisibility(View.GONE);
+            showButtons();
+        }
+    }
+
+    public void hideButtons(){
+        findViewById(R.id.viewCavalButton).setAlpha(0.5f);
+        findViewById(R.id.viewCavalButton).setClickable(false);
+        for (int i=2;i<5; i++){
+            String buttonId = "button" + i;
+            int resID = getResources().getIdentifier(buttonId, "id", getPackageName());
+            findViewById(resID).setAlpha(0.5f);
+            findViewById(resID).setClickable(false);
+        }
+    }
+    public void showButtons(){
+        findViewById(R.id.viewCavalButton).setAlpha(1f);
+        findViewById(R.id.viewCavalButton).setClickable(true);
+        for (int i=2;i<5; i++){
+            String buttonId = "button" + i;
+            int resID = getResources().getIdentifier(buttonId, "id", getPackageName());
+            findViewById(resID).setAlpha(1f);
+            findViewById(resID).setClickable(true);
         }
     }
 

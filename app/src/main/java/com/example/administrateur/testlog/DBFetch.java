@@ -30,7 +30,7 @@ public class DBFetch extends Activity {
     public void fetchDB (){
         toRenewStr = "";
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myref = database.getReference("users");
+        DatabaseReference myref = database.getReference("cavaliers");
         myref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -73,7 +73,7 @@ public class DBFetch extends Activity {
     public void fetchRenew(){
 
         FirebaseDatabase dbase = FirebaseDatabase.getInstance();
-        DatabaseReference mref = dbase.getReference("users");
+        DatabaseReference mref = dbase.getReference("cavaliers");
         if (i<2) {
             mref.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override

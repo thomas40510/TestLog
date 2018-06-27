@@ -58,7 +58,7 @@ public class editDB extends AppCompatActivity {
     public void edit(List<String> userlist){
         for (String s : userlist) {
             FirebaseDatabase database = FirebaseDatabase.getInstance();
-            DatabaseReference myref = database.getReference("users");
+            DatabaseReference myref = database.getReference("cavaliers");
             DatabaseReference ref = myref.child(s);
 
             ref.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -85,7 +85,7 @@ public class editDB extends AppCompatActivity {
         }
         for (int i=0; i<dateArray.size(); i++){
             FirebaseDatabase database = FirebaseDatabase.getInstance();
-            DatabaseReference myref = database.getReference("users");
+            DatabaseReference myref = database.getReference("cavaliers");
             DatabaseReference ref = myref.child(userlist.get(i));
             ref.child("Birthdate").setValue(dateArray.get(i));
         }

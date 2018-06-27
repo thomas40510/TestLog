@@ -46,7 +46,7 @@ public class CreateProfile extends AppCompatActivity {
 
     public void save (View view){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference reference = database.getReference("users");
+        DatabaseReference reference = database.getReference("cavaliers");
         DatabaseReference mref = reference.child(name.getText().toString());
 
         mref.child("fléchage").setValue(flechage.getText().toString());

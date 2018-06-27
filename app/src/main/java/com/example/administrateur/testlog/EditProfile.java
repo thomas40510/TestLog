@@ -49,7 +49,7 @@ public class EditProfile extends AppCompatActivity {
 
     public void save (View view){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference reference = database.getReference("users");
+        DatabaseReference reference = database.getReference("cavaliers");
         DatabaseReference mref = reference.child(Profile.nameStr);
         mref.child("Birthdate").setValue(bDate.getText().toString());
         mref.child("Forfait").setValue(forfait.getText().toString());

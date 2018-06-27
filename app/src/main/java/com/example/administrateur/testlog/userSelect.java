@@ -48,7 +48,7 @@ public class userSelect extends AppCompatActivity {
         rmainList = new ArrayList<>();
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myref = database.getReference("users");
+        DatabaseReference myref = database.getReference("cavaliers");
         myref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -193,7 +193,7 @@ public class userSelect extends AppCompatActivity {
                 toPrintStr = "";
 
                 FirebaseDatabase dbase = FirebaseDatabase.getInstance();
-                DatabaseReference mref = dbase.getReference("users");
+                DatabaseReference mref = dbase.getReference("cavaliers");
                 mref.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -228,7 +228,7 @@ public class userSelect extends AppCompatActivity {
         arrayList = new ArrayList<>();
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myref = database.getReference("users");
+        DatabaseReference myref = database.getReference("cavaliers");
         myref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -278,7 +278,7 @@ public class userSelect extends AppCompatActivity {
     /**
     public void decrement() {
         final FirebaseDatabase dbase = FirebaseDatabase.getInstance();
-        DatabaseReference mref = dbase.getReference("users");
+        DatabaseReference mref = dbase.getReference("cavaliers");
         for (String s : selected) {
             final DatabaseReference myref = mref.child(s);
             myref.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -305,7 +305,7 @@ public class userSelect extends AppCompatActivity {
         rmainList.clear();
 
         FirebaseDatabase dbase = FirebaseDatabase.getInstance();
-        DatabaseReference mref = dbase.getReference("users");
+        DatabaseReference mref = dbase.getReference("cavaliers");
         mref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -331,7 +331,7 @@ public class userSelect extends AppCompatActivity {
 
     public void writeValues(){
         FirebaseDatabase dbase = FirebaseDatabase.getInstance();
-        DatabaseReference mref = dbase.getReference("users");
+        DatabaseReference mref = dbase.getReference("cavaliers");
         for (int i = 0; i<selected.size();i++){
             mref.child(selected.get(i)).child("remainH").setValue(rmainList.get(i).toString());
         }

@@ -206,7 +206,7 @@
         android:layout_below="@+id/textView18" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/button4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -219,7 +219,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/button3"
+        android:layout_above="@+id/button4"
         android:layout_alignParentStart="true"
         android:layout_alignTop="@+id/textView7">
         <TableLayout

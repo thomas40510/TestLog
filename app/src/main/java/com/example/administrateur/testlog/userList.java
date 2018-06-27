@@ -67,7 +67,7 @@ public class userList extends AppCompatActivity {
             // Fetches values from DB to display it in list
 
             FirebaseDatabase database = FirebaseDatabase.getInstance();
-            DatabaseReference myref = database.getReference("users");
+            DatabaseReference myref = database.getReference("cavaliers");
             myref.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
@@ -149,7 +149,7 @@ public class userList extends AppCompatActivity {
         gen.createPdf(test, "Cavaliers", "userList-" + System.currentTimeMillis() + ".pdf", getApplicationContext());
         //gen.createPdf(test, "Cavaliers", "file.pdf", this);
 
-        //createPdf(test, "Users");
+        //createPdf(test, "cavaliers");
 
     }
 

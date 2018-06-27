@@ -198,7 +198,7 @@ public class AddVerm extends AppCompatActivity {
              toPrintStr = "";
 
              FirebaseDatabase dbase = FirebaseDatabase.getInstance();
-             DatabaseReference mref = dbase.getReference("users");
+             DatabaseReference mref = dbase.getReference("cavalerie");
              mref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

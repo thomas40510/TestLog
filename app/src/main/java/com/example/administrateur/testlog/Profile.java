@@ -29,7 +29,9 @@ public class Profile extends AppCompatActivity {
     public TextView forfait;
     public  TextView remaining;
     public TextView licence;
-    public static String nameStr,bDateStr,addressStr,cityStr,flechStr,forfaitStr,remainStr,licStr;
+    public TextView tel, mail;
+    public static String nameStr,bDateStr,addressStr,cityStr,flechStr,forfaitStr,remainStr,licStr,telStr,mailStr,telWhoStr;
+    public static String numberStr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,8 @@ public class Profile extends AppCompatActivity {
         remaining = (TextView) findViewById(R.id.remaining);
         forfait = (TextView) findViewById(R.id.forfait);
         licence = (TextView) findViewById(R.id.licence);
+        tel = (TextView) findViewById(R.id.tel);
+        mail = (TextView) findViewById(R.id.mail);
 
         Bundle extras = getIntent().getExtras();
         nameStr = extras.getString("name");
@@ -63,7 +67,9 @@ public class Profile extends AppCompatActivity {
                 forfaitStr = dataSnapshot.child("Forfait").getValue(String.class);
                 remainStr = dataSnapshot.child("remainH").getValue(String.class);
                 licStr = dataSnapshot.child("licNbr").getValue(String.class);
-
+                numberStr = dataSnapshot.child("tel").child("nbr").getValue(String.class);
+                telWhoStr = dataSnapshot.child("tel").child("who").getValue(String.class);
+                mailStr = dataSnapshot.child("mail").getValue(String.class);
 
                 bDate.setText(bDateStr);
                 address.setText(addressStr+", "+cityStr);
@@ -72,6 +78,14 @@ public class Profile extends AppCompatActivity {
                 remaining.setText(remainStr);
                 licence.setText(licStr);
 
+                if (!telWhoStr.equals("mainWho")){
+                    telStr = numberStr.concat(" ("+telWhoStr+")");
+                } else {
+                    telStr = numberStr;
+                }
+                tel.setText(telStr);
+
+                mail.setText(mailStr);
             }
 
             @Override

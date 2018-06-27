@@ -2,14 +2,7 @@ package com.example.administrateur.testlog;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
-
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +18,11 @@ public class editDB extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_db);
     }
+
     public void onClick(View view){
+        userlist = DBFetch.userlist;
+    }
+    /**public void onClick(View view){
         userlist = DBFetch.userlist;
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference mref = database.getReference("licences");
@@ -52,8 +49,8 @@ public class editDB extends AppCompatActivity {
 
             });
         }
-    }
-     /* /!\ Used for bDates formatting in DB, don't use till needed again (DANGER !!)/!\
+    }*/
+     /** /!\ Used for bDates formatting in DB, don't use till needed again (DANGER !!)/!\
 
     public void edit(List<String> userlist){
         for (String s : userlist) {
@@ -92,4 +89,14 @@ public class editDB extends AppCompatActivity {
 
     }
     */
+     /*
+    public void edit(List<String> userlist){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myref = database.getReference("cavaliers");
+        for (String s : userlist) {
+            DatabaseReference ref = myref.child(s).child("mail");
+            ref.setValue("none");
+        }
+        Toast.makeText(this, "done", Toast.LENGTH_SHORT).show();
+    }*/
 }

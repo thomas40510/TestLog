@@ -77,11 +77,14 @@ public class Profile extends AppCompatActivity {
                 forfait.setText(forfaitStr);
                 remaining.setText(remainStr);
                 licence.setText(licStr);
-
-                if (!telWhoStr.equals("mainWho")){
-                    telStr = numberStr.concat(" ("+telWhoStr+")");
-                } else {
-                    telStr = numberStr;
+                try {
+                    if (!telWhoStr.equals("mainWho")) {
+                        telStr = numberStr.concat(" (" + telWhoStr + ")");
+                    } else {
+                        telStr = numberStr;
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
                 tel.setText(telStr);
 

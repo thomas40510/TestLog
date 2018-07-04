@@ -108,8 +108,13 @@ public class MainActivity extends AppCompatActivity {
         }
         @Override
         protected void onPostExecute(Void result) {
-            findViewById(R.id.progressBar4).setVisibility(View.GONE);
-            showButtons();
+            if (DBFetch.userlist.size()!=0) {
+                findViewById(R.id.progressBar4).setVisibility(View.GONE);
+                showButtons();
+            }
+            else {
+                new MyAsyncTask().execute();
+            }
         }
     }
     public void hideButtons(){

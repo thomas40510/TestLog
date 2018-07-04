@@ -73,8 +73,12 @@ public class cMainActivity extends AppCompatActivity {
         }
         @Override
         protected void onPostExecute(Void result) {
-            findViewById(R.id.progressBar3).setVisibility(View.GONE);
-            showButtons();
+            if (DBFetch.clist.size()!=0) {
+                findViewById(R.id.progressBar3).setVisibility(View.GONE);
+                showButtons();
+            } else {
+                new MyAsyncTask().execute();
+            }
         }
     }
 

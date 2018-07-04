@@ -80,11 +80,12 @@ public class DBFetch extends Activity {
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     for (String s : userlist) {
                         DataSnapshot snapshot = dataSnapshot.child(s).child("remainH");
-                        int remains = Integer.parseInt(snapshot.getValue().toString());
-                        if (remains <= 0) {
-                            toRenewStr = toRenewStr.concat(s + " (" + remains + ")" + "\n");
-                        }
+                            int remains = Integer.parseInt(snapshot.getValue().toString());
+                            if (remains <= 0) {
+                                toRenewStr = toRenewStr.concat(s + " (" + remains + ")" + "\n");
+                            }
                     }
+
                     MainActivity showNew = new MainActivity();
                     showNew.showRenew();
                     toRenewStr = "";

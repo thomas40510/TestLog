@@ -266,8 +266,6 @@ public class userSelect extends AppCompatActivity {
                 .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        //decrement();
-                        //TODO : implement date chooser
                         enterDate();
                     }
                 })

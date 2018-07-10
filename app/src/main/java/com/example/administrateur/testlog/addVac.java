@@ -285,7 +285,7 @@ public class addVac extends AppCompatActivity {
     public void vermDetails() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Vaccin")
-                .setMessage("Entrer les informations sur le vaccin...");
+                .setMessage("Entrez les informations sur le vaccin...");
 
         final EditText vermName = new EditText(this);
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(

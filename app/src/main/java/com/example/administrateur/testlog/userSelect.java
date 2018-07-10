@@ -13,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,6 +37,7 @@ public class userSelect extends AppCompatActivity {
     private List<Integer> rmainList;
     private int rmain;
     private String toPrintStr;
+    public String date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -263,7 +266,9 @@ public class userSelect extends AppCompatActivity {
                 .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        decrement();
+                        //decrement();
+                        //TODO : implement date chooser
+                        enterDate();
                     }
                 })
                 .setNegativeButton("Non", new DialogInterface.OnClickListener() {
@@ -274,33 +279,39 @@ public class userSelect extends AppCompatActivity {
                 });
         builder.show();
     }
+    public void enterDate(){
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Date de la séance :");
 
-    /**
-    public void decrement() {
-        final FirebaseDatabase dbase = FirebaseDatabase.getInstance();
-        DatabaseReference mref = dbase.getReference("cavaliers");
-        for (String s : selected) {
-            final DatabaseReference myref = mref.child(s);
-            myref.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    rmain = Integer.parseInt(dataSnapshot.child("remainH").getValue().toString());
-                    myref.child("remainH").setValue(String.valueOf(rmain-1));
-                }
 
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
+        final DatePicker picker = new DatePicker(this);
+        picker.setCalendarViewShown(false);
 
-                }
-            });
-            //ref.setValue(rmain);
-            Log.e("DBG", "" + rmain);
-        }
-        Toast.makeText(this, "done !", Toast.LENGTH_LONG).show();
-        selected.clear();
-        finish();
+        LinearLayout layout = new LinearLayout(this);
+        layout.setOrientation(LinearLayout.VERTICAL);
+        layout.addView(picker);
+
+        builder.setView(layout);
+
+        builder.setPositiveButton("Confirmer", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                date = "";
+                //dateStr = dateStr.concat(picker.getYear() + "/").concat(months[picker.getMonth()] + "/").concat(picker.getDayOfMonth() + "");
+                date = date.concat(picker.getYear()+"-"+picker.getMonth()+"-"+picker.getDayOfMonth());
+                decrement();
+                Log.e("date", date);
+            }
+        });
+        builder.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        builder.show();
     }
-     */
+
     public void decrement() {
         rmainList.clear();
 
@@ -309,9 +320,19 @@ public class userSelect extends AppCompatActivity {
         mref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                String histo;
                 for (String s : selected) {
                     Log.e("DBG @ln281", dataSnapshot.child(s).child("remainH").getValue().toString());
                     rmain = Integer.parseInt(dataSnapshot.child(s).child("remainH").getValue().toString());
+                    try {
+                        histo = dataSnapshot.child(s).child("histoCarte").child(date).getValue().toString();
+                    } catch (Exception e){
+                        e.printStackTrace();
+                        histo = null;
+                    }
+                    if(histo!=null){
+                        date = date+"(2)";
+                    }
                     rmainList.add(rmain - 1);
                 }
                 writeValues();
@@ -334,6 +355,8 @@ public class userSelect extends AppCompatActivity {
         DatabaseReference mref = dbase.getReference("cavaliers");
         for (int i = 0; i<selected.size();i++){
             mref.child(selected.get(i)).child("remainH").setValue(rmainList.get(i).toString());
+
+            mref.child(selected.get(i)).child("histoCarte").child(date).setValue("1 heure prise sur la carte");
         }
 
         Toast.makeText(this, "Changements enregistrés !", Toast.LENGTH_LONG).show();

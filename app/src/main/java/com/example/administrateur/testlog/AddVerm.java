@@ -283,7 +283,7 @@ public class AddVerm extends AppCompatActivity {
     public void vermDetails() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Vermifuge")
-                .setMessage("Entrer les informations sur le vermifuge.");
+                .setMessage("Entrez les informations sur le vermifuge.");
 
         final EditText vermName = new EditText(this);
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(

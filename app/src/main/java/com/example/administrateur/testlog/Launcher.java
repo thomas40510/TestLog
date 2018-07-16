@@ -64,6 +64,7 @@ public class Launcher extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
+
     }
 
     public boolean isInternetWorking() {

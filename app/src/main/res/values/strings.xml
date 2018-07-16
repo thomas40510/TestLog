@@ -64,8 +64,8 @@
         <item>Entier</item>
     </string-array>
     <string-array name="typelist">
-        <item>P</item>
         <item>C</item>
+        <item>P</item>
     </string-array>
 
 </resources>

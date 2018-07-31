@@ -1,5 +1,6 @@
 package com.example.administrateur.testlog;
 
+import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -7,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -27,9 +29,18 @@ public class LoginActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private Button btnSignup, btnLogin, btnReset;
 
-    @Override
+    private String nextScreen;
+
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        try{
+            Bundle extras = getIntent().getExtras();
+            nextScreen = extras.getString("nextScreen");
+        } catch (Exception e){
+            e.printStackTrace();
+        }
 
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
@@ -46,7 +57,6 @@ public class LoginActivity extends AppCompatActivity {
 
         // set the view now
         setContentView(R.layout.activity_login);
-
 
         inputEmail = (EditText) findViewById(R.id.email);
         inputPassword = (EditText) findViewById(R.id.password);
@@ -134,7 +144,19 @@ public class LoginActivity extends AppCompatActivity {
                                     SharedPreferences.Editor editor  = getSharedPreferences(shPrefs.sharedPrefs, MODE_PRIVATE).edit();
                                     editor.putString("lastMail", inputEmail.getText().toString());
                                     editor.commit();
-                                    Intent intent = new Intent(LoginActivity.this, MainMenu.class);
+
+                                    Intent intent;
+
+                                    switch (nextScreen){
+                                        case "cavaliers":
+                                            intent = new Intent(LoginActivity.this, MainActivity.class);
+                                            break;
+                                        case "cavalerie":
+                                            intent = new Intent(LoginActivity.this, cMainActivity.class);
+                                            break;
+                                        default:
+                                            intent = new Intent(LoginActivity.this, MainMenu.class);
+                                    }
                                     startActivity(intent);
                                     finish();
                                 }

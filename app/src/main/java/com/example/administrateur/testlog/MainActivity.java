@@ -9,11 +9,15 @@ import android.os.Bundle;
 import android.os.Looper;
 import android.os.StrictMode;
 import android.os.SystemClock;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +39,12 @@ public class MainActivity extends AppCompatActivity {
         StrictMode.VmPolicy.Builder polBuilder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(polBuilder.build());
 
+        if(FirebaseAuth.getInstance().getCurrentUser() == null){
+            Intent intent = new Intent(this, LoginActivity.class);
+            intent.putExtra("nextScreen", "cavaliers");
+            startActivity(intent);
+            finish();
+        }
 
 
         prefs = getSharedPreferences(shPrefs.sharedPrefs, MODE_PRIVATE);

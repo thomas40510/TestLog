@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.crashlytics.android.Crashlytics;
+import com.google.firebase.auth.FirebaseAuth;
 
 import io.fabric.sdk.android.Fabric;
 
@@ -23,6 +24,13 @@ public class cMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_c_main);
+
+        if(FirebaseAuth.getInstance().getCurrentUser() == null){
+            Intent intent = new Intent(this, LoginActivity.class);
+            intent.putExtra("nextScreen", "cavalerie");
+            startActivity(intent);
+            finish();
+        }
 
         prefs = getSharedPreferences(shPrefs.sharedPrefs, MODE_PRIVATE);
 

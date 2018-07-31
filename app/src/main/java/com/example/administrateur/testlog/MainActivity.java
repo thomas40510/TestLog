@@ -14,6 +14,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -54,6 +55,19 @@ public class MainActivity extends AppCompatActivity {
 
         new MyAsyncTask().execute();
 
+        ((Button)findViewById(R.id.button3)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                gotoSelect(true);
+            }
+        });
+        ((Button)findViewById(R.id.button5)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                gotoSelect(false);
+            }
+        });
+
 
     }
 
@@ -88,8 +102,9 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void gotoSelect(View view){
+    public void gotoSelect(boolean decrement){
         Intent intent = new Intent(this, userSelect.class);
+        intent.putExtra("decrement", decrement);
         startActivity(intent);
     }
     public void gotoMenu(View view){
@@ -129,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     public void hideButtons(){
-        for (int i=2;i<5; i++){
+        for (int i=2;i<6; i++){
             String buttonId = "button" + i;
             int resID = getResources().getIdentifier(buttonId, "id", getPackageName());
             findViewById(resID).setAlpha(0.5f);
@@ -137,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     public void showButtons(){
-        for (int i=2;i<5; i++){
+        for (int i=2;i<6; i++){
             String buttonId = "button" + i;
             int resID = getResources().getIdentifier(buttonId, "id", getPackageName());
             findViewById(resID).setAlpha(1f);

@@ -16,6 +16,8 @@ import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,11 +41,21 @@ public class userSelect extends AppCompatActivity {
     private String toPrintStr;
     public String date;
 
+    private boolean decrement;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_select);
         list = (ListView) findViewById(R.id.listView);
+
+        try {
+            Bundle extras = getIntent().getExtras();
+            decrement = extras.getBoolean("decrement");
+        } catch (Exception e){
+            e.printStackTrace();
+            decrement = true;
+        }
 
         //arrayList = updateValue(arrayList);
         arrayList = new ArrayList<>();
@@ -277,6 +289,8 @@ public class userSelect extends AppCompatActivity {
                 });
         builder.show();
     }
+
+
     public void enterDate(){
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Date de la séance :");
@@ -297,7 +311,11 @@ public class userSelect extends AppCompatActivity {
                 date = "";
                 //dateStr = dateStr.concat(picker.getYear() + "/").concat(months[picker.getMonth()] + "/").concat(picker.getDayOfMonth() + "");
                 date = date.concat(picker.getYear()+"-"+picker.getMonth()+"-"+picker.getDayOfMonth());
-                decrement();
+                if (decrement) {
+                    decrement();
+                } else {
+                    enterCard();
+                }
                 Log.e("date", date);
             }
         });
@@ -333,7 +351,7 @@ public class userSelect extends AppCompatActivity {
                     }
                     rmainList.add(rmain - 1);
                 }
-                writeValues();
+                writeValues("1 heure prise sur la carte", "none");
             }
 
             @Override
@@ -343,18 +361,115 @@ public class userSelect extends AppCompatActivity {
         });
         //ref.setValue(rmain);
         Log.e("DBG", "" + rmain);
+    }
+
+    public void enterCard(){
+        rmainList.clear();
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Type de carte :");
 
 
+        final RadioGroup radioGroup = new RadioGroup(this);
+        final RadioButton radio10 = new RadioButton(this);
+        radio10.setText("Carte de 10 h");
+        radio10.setId(10);
+        final RadioButton radio30 = new RadioButton(this);
+        radio30.setText("Carte de 30 h");
+        radio30.setId(30);
+        final RadioButton radioFT = new RadioButton(this);
+        radioFT.setText("Forfait trimestriel");
+        radioFT.setId(42);
+        final RadioButton radioFC = new RadioButton(this);
+        radioFC.setText("Forfait compétition");
+        radioFC.setId(43);
+
+        ArrayList<View> radioList = new ArrayList<View>();
+        radioList.add(radio10);
+        radioList.add(radio30);
+        radioList.add(radioFT);
+        radioList.add(radioFC);
+        for (View v : radioList){
+            radioGroup.addView(v);
+        }
+
+        LinearLayout layout = new LinearLayout(this);
+        layout.setOrientation(LinearLayout.VERTICAL);
+        layout.addView(radioGroup);
+
+        builder.setView(layout);
+        builder.setPositiveButton("Confirmer", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                final int toAdd;
+                final String cardType;
+                switch (radioGroup.getCheckedRadioButtonId()){
+                    case 10:
+                        toAdd = 10;
+                        cardType = "c10";
+                        break;
+                    case 30 :
+                        toAdd = 30;
+                        cardType = "c30";
+                        break;
+                    case 42 :
+                        toAdd = 26;
+                        cardType = "FT";
+                        break;
+                    case 43 :
+                        toAdd = 39;
+                        cardType = "FC";
+                        break;
+                    default:
+                        toAdd = 0;
+                        cardType = "none";
+                        break;
+                }
+
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference mref = database.getReference("cavaliers");
+                mref.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (String s : selected) {
+                            Log.e("DBG @ln281", dataSnapshot.child(s).child("remainH").getValue().toString());
+                            rmain = Integer.parseInt(dataSnapshot.child(s).child("remainH").getValue().toString());
+
+                            rmainList.add(rmain + toAdd);
+                        }
+                        writeValues(toAdd+" heures ajoutées sur la carte", cardType);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
+                }
+        });
+        builder.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(intent);
+                    }
+        });
+        builder.show();
     }
 
 
-    public void writeValues(){
+    public void writeValues(String histoMsg, String cardType){
         FirebaseDatabase dbase = FirebaseDatabase.getInstance();
         DatabaseReference mref = dbase.getReference("cavaliers");
         for (int i = 0; i<selected.size();i++){
             mref.child(selected.get(i)).child("remainH").setValue(rmainList.get(i).toString());
 
-            mref.child(selected.get(i)).child("histoCarte").child(date).setValue("1 heure prise sur la carte");
+            mref.child(selected.get(i)).child("histoCarte").child(date).setValue(histoMsg);
+
+            if(!cardType.equals("none")){
+                mref.child(selected.get(i)).child("Forfait").setValue(cardType);
+            }
         }
 
         Toast.makeText(this, "Changements enregistrés !", Toast.LENGTH_LONG).show();

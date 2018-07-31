@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:shortcutId="cavaliers"
+        android:enabled="true"
+        android:icon="@drawable/baseline_supervised_user_circle_black_24"
+        android:shortcutShortLabel="@string/cavaliers_shortcut_short_message"
+        android:shortcutLongLabel="@string/cavaliers_shortcut_long_message"
+        android:shortcutDisabledMessage="@string/cavaliers_shortcut_disabled_message">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.example.administrateur.testlog"
+            android:targetClass="com.example.administrateur.testlog.MainActivity" />
+
+    </shortcut>
+    <shortcut
+        android:shortcutId="cavalerie"
+        android:enabled="true"
+        android:icon="@drawable/ic_shortcut_example"
+        android:shortcutShortLabel="@string/cavalerie_shortcut_short_message"
+        android:shortcutLongLabel="@string/cavalerie_shortcut_long_message"
+        android:shortcutDisabledMessage="@string/cavalerie_shortcut_disabled_message">
+    <intent
+        android:action="android.intent.action.VIEW"
+        android:targetPackage="com.example.administrateur.testlog"
+        android:targetClass="com.example.administrateur.testlog.cMainActivity" />
+    </shortcut>
+    <!-- Specify more shortcuts here. -->
+</shortcuts>

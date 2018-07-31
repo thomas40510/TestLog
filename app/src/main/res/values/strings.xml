@@ -44,6 +44,13 @@
     <string name="lbl_forgot_password">Mot de passe oublié ?</string>
     <string name="forgot_password_msg">Entrez l\'adresse mail associée à votre compte, nous vous enverrons un mail de récupération.</string>
 
+    <string name="cavaliers_shortcut_short_message">Cavaliers</string>
+    <string name="cavaliers_shortcut_long_message">Accès à la gestion des cavaliers</string>
+    <string name="cavaliers_shortcut_disabled_message">Cavaliers (indisponible)</string>
+    <string name="cavalerie_shortcut_short_message">Cavalerie</string>
+    <string name="cavalerie_shortcut_long_message">Accès à la gestion de la cavalerie</string>
+    <string name="cavalerie_shortcut_disabled_message">Cavalerie (indisponible)</string>
+
     <string-array name="cardRefs">
         <item>c10</item>
         <item>c30</item>

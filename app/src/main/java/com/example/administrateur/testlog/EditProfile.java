@@ -2,8 +2,11 @@ package com.example.administrateur.testlog;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,6 +16,9 @@ import com.google.firebase.database.FirebaseDatabase;
 public class EditProfile extends AppCompatActivity {
 
     EditText bDate, address, city, forfait, remain;
+    EditText phone, mail;
+    RadioGroup radioGroup;
+    RadioButton radioFather, radioMother;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +30,10 @@ public class EditProfile extends AppCompatActivity {
         city = (EditText) findViewById(R.id.city);
         forfait = (EditText) findViewById(R.id.forfait);
         remain = (EditText) findViewById(R.id.remaining);
+        phone = (EditText) findViewById(R.id.phone);
+        mail = (EditText) findViewById(R.id.mail);
+
+        radioGroup = (RadioGroup) findViewById(R.id.radiogroup);
 
 
         // Sets un-changing infos
@@ -40,6 +50,19 @@ public class EditProfile extends AppCompatActivity {
         city.setText(Profile.cityStr);
         forfait.setText(Profile.forfaitStr);
         remain.setText(Profile.remainStr);
+        phone.setText(Profile.numberStr.replace("none", ""));
+        mail.setText(Profile.mailStr.replace("none",""));
+
+        switch (Profile.telWhoStr){
+            case "Père":
+                radioGroup.check(R.id.radioFather);
+                Log.e("DBG", "father");
+                break;
+            case "Mère":
+                radioGroup.check(R.id.radioMother);
+                Log.e("DBG", "mother");
+                break;
+        }
     }
 
 
@@ -56,6 +79,32 @@ public class EditProfile extends AppCompatActivity {
         mref.child("adresse").setValue(address.getText().toString());
         mref.child("ville").setValue(city.getText().toString());
         mref.child("remainH").setValue(remain.getText().toString());
+
+        if(mail.getText().toString().isEmpty()){
+            mref.child("mail").setValue("none");
+        }
+        else {
+            mref.child("mail").setValue(mail.getText().toString());
+        }
+
+        if(phone.getText().toString().isEmpty()){
+            mref.child("tel").child("nbr").setValue("none");
+            mref.child("tel").child("who").setValue("mainWho");
+        }
+        else {
+            String who = "";
+            mref.child("tel").child("nbr").setValue(phone.getText().toString());
+            switch (radioGroup.getCheckedRadioButtonId()){
+                case R.id.radioFather:
+                    who = "Père";
+                    break;
+                case R.id.radioMother:
+                    who = "Mère";
+                    break;
+            }
+            mref.child("tel").child("who").setValue(who);
+        }
+
 
         Toast.makeText(this, "Profil modifié !", Toast.LENGTH_SHORT).show();
         finish();

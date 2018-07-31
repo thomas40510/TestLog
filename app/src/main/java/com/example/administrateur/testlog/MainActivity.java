@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
                 Looper.prepare();
             }
             //updateValue();
-            new DBFetch().fetchDB();
+            new DBFetch().fetchDB(false);
             Log.e("DBG", "reached");
             SystemClock.sleep(1000);
             //showRenew();
@@ -111,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
             if (DBFetch.userlist.size()!=0) {
                 findViewById(R.id.progressBar4).setVisibility(View.GONE);
                 showButtons();
+                new DBFetch().fetchDB(true);
             }
             else {
                 new MyAsyncTask().execute();

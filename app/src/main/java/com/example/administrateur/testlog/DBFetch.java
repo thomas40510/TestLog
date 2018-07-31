@@ -27,7 +27,7 @@ public class DBFetch extends Activity {
     SharedPreferences prefs = MainActivity.prefs;
     private int i;
 
-    public void fetchDB (){
+    public void fetchDB (final boolean dorenew){
         toRenewStr = "";
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myref = database.getReference("cavaliers");
@@ -52,9 +52,12 @@ public class DBFetch extends Activity {
 
                 /*
                 Pour afficher à chaque update de la DB
-                 */
-                i++;
-                fetchRenew();
+                */
+                if(dorenew){
+                    i++;
+                    fetchRenew();
+                }
+
 
             }
 
@@ -65,6 +68,7 @@ public class DBFetch extends Activity {
 
         });
         /* Pour ne l'afficher qu'au démarrage
+
         i++;
         fetchRenew();
         */
@@ -85,7 +89,7 @@ public class DBFetch extends Activity {
                                 toRenewStr = toRenewStr.concat(s + " (" + remains + ")" + "\n");
                             }
                     }
-
+                    Log.e("DBG", "showing renew");
                     MainActivity showNew = new MainActivity();
                     showNew.showRenew();
                     toRenewStr = "";

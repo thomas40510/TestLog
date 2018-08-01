@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -29,9 +30,9 @@ public class Profile extends AppCompatActivity {
     public TextView forfait;
     public  TextView remaining;
     public TextView licence;
-    public TextView tel, mail;
+    public TextView tel, mail,textHisto;
     public static String nameStr,bDateStr,addressStr,cityStr,flechStr,forfaitStr,remainStr,licStr,telStr,mailStr,telWhoStr;
-    public static String numberStr;
+    public static String numberStr,histoStr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +98,8 @@ public class Profile extends AppCompatActivity {
             }
         });
 
+        getHisto(view);
+
         findViewById(R.id.cpIcon).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -130,6 +133,38 @@ public class Profile extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public void getHisto(View view){
+        Log.e("DBG", "reached !");
+        textHisto = (TextView) findViewById(R.id.textHisto);
+        histoStr = "";
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myref = database.getReference("cavaliers");
+        DatabaseReference histoRef = myref.child(nameStr).child("histoCarte");
+
+        histoRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot postsnapshot : dataSnapshot.getChildren()) {
+                    String action = postsnapshot.getKey()+" : "+dataSnapshot.child(postsnapshot.getKey()).getValue().toString();
+
+                    histoStr = histoStr.concat(action+"\n");
+                    Log.e("DBG", action+" / "+histoStr);
+                }
+                textHisto.setText(histoStr);
+                Log.e("DBG",histoStr);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+
     }
 
     public void editProfile (View view){

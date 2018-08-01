@@ -310,7 +310,7 @@ public class userSelect extends AppCompatActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
                 date = "";
                 //dateStr = dateStr.concat(picker.getYear() + "/").concat(months[picker.getMonth()] + "/").concat(picker.getDayOfMonth() + "");
-                date = date.concat(picker.getYear()+"-"+picker.getMonth()+"-"+picker.getDayOfMonth());
+                date = date.concat(picker.getYear()+"-"+(picker.getMonth()+1)+"-"+picker.getDayOfMonth());
                 if (decrement) {
                     decrement();
                 } else {
@@ -347,7 +347,13 @@ public class userSelect extends AppCompatActivity {
                         histo = null;
                     }
                     if(histo!=null){
-                        date = date+"(2)";
+                        int childrenCount = 0;
+                        for (DataSnapshot postsnapshot : dataSnapshot.child(s).child("histoCarte").getChildren()){
+                            if (postsnapshot.getKey().contains(date)){
+                                childrenCount++;
+                            }
+                        }
+                        date = date+"("+(childrenCount+1)+")";
                     }
                     rmainList.add(rmain - 1);
                 }
@@ -431,10 +437,25 @@ public class userSelect extends AppCompatActivity {
                 mref.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
+                        String histo;
                         for (String s : selected) {
                             Log.e("DBG @ln281", dataSnapshot.child(s).child("remainH").getValue().toString());
                             rmain = Integer.parseInt(dataSnapshot.child(s).child("remainH").getValue().toString());
-
+                            try {
+                                histo = dataSnapshot.child(s).child("histoCarte").child(date).getValue().toString();
+                            } catch (Exception e){
+                                e.printStackTrace();
+                                histo = null;
+                            }
+                            if(histo!=null){
+                                int childrenCount = 0;
+                                for (DataSnapshot postsnapshot : dataSnapshot.child(s).child("histoCarte").getChildren()){
+                                    if (postsnapshot.getKey().contains(date)){
+                                        childrenCount++;
+                                    }
+                                }
+                                date = date+"("+(childrenCount+1)+")";
+                            }
                             rmainList.add(rmain + toAdd);
                         }
                         writeValues(toAdd+" heures ajoutées sur la carte", cardType);

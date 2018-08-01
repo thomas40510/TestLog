@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
         android:id="@+id/deleteUser"
-        android:title="Supprimer" />
+        android:title="Supprimer le cavalier" />
+    <item
+        android:id="@+id/printHisto"
+        android:title="Imprimer l'historique" />
 </menu>

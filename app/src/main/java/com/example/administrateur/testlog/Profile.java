@@ -98,7 +98,7 @@ public class Profile extends AppCompatActivity {
             }
         });
 
-        getHisto(view);
+        getHisto(true);
 
         findViewById(R.id.cpIcon).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,12 +130,15 @@ public class Profile extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.deleteUser:
                 confirmDelete(view);
+                return true;
+            case R.id.printHisto:
+                printHisto();
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
-    public void getHisto(View view){
+    public void getHisto(final Boolean show){
         Log.e("DBG", "reached !");
         textHisto = (TextView) findViewById(R.id.textHisto);
         histoStr = "";
@@ -153,7 +156,9 @@ public class Profile extends AppCompatActivity {
                     histoStr = histoStr.concat(action+"\n");
                     Log.e("DBG", action+" / "+histoStr);
                 }
-                textHisto.setText(histoStr);
+                if(show) {
+                    textHisto.setText(histoStr);
+                }
                 Log.e("DBG",histoStr);
             }
 
@@ -162,9 +167,11 @@ public class Profile extends AppCompatActivity {
 
             }
         });
+    }
 
-
-
+    public void printHisto(){
+        generatePdf gen = new generatePdf();
+        gen.createPdf(histoStr, nameStr+" - Historique des opérations", (nameStr.replace(" ","")).toLowerCase()+"-histo-" + System.currentTimeMillis() + ".pdf", getApplicationContext());
     }
 
     public void editProfile (View view){

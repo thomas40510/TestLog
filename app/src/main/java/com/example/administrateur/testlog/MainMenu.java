@@ -51,6 +51,10 @@ public class MainMenu extends AppCompatActivity {
         Intent intent = new Intent(this, cMainActivity.class);
         startActivity(intent);
     }
+    public void gotoReprise(View view){
+        Intent reprise = new Intent(this, rMainActivity.class);
+        startActivity(reprise);
+    }
     public void gotoAuth (View view){
         Intent intent = new Intent(this, LoginActivity.class);
         FirebaseAuth auth = FirebaseAuth.getInstance();

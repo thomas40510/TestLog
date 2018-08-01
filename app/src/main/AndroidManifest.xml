@@ -16,8 +16,8 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_app"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
@@ -50,10 +50,13 @@
         <activity android:name=".Launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <meta-data android:name="android.app.shortcuts"
-                android:resource="@xml/shortcuts"/>
+
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts" />
         </activity>
         <activity android:name=".addVac" />
         <activity android:name=".AddVerm" />
@@ -68,7 +71,7 @@
             android:name="io.fabric.ApiKey"
             android:value="a4cef1009bf2fffd5e20116c62be7af1bcac4b05" />
 
-        <activity android:name=".MainMenu"></activity>
+        <activity android:name=".MainMenu" />
 
         <provider
             android:name=".GenericFileProvider"
@@ -77,8 +80,12 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths"/>
+                android:resource="@xml/provider_paths" />
         </provider>
+
+        <activity android:name=".rMainActivity" />
+        <activity android:name=".repList" />
+        <activity android:name=".repInfo"></activity>
     </application>
 
 </manifest>

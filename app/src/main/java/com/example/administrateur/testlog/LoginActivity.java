@@ -40,6 +40,7 @@ public class LoginActivity extends AppCompatActivity {
             nextScreen = extras.getString("nextScreen");
         } catch (Exception e){
             e.printStackTrace();
+            nextScreen = "Main";
         }
 
         //Get Firebase auth instance

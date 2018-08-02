@@ -47,6 +47,11 @@ public class rMainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void goBack(View view){
+        Intent intent = new Intent(this, MainMenu.class);
+        startActivity(intent);
+    }
+
     public void test(View view){
         List<String> l = new ArrayList<>();
         l.clear();

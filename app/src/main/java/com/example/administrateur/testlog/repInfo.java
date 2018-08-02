@@ -1,7 +1,11 @@
 package com.example.administrateur.testlog;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -15,9 +19,9 @@ import java.util.List;
 
 public class repInfo extends AppCompatActivity {
 
-    String day, reprise;
+    public static String day, reprise;
 
-    private List<String> cavalList = new ArrayList<>();
+    public static List<String> cavalList = new ArrayList<>();
     private String cavalListStr;
 
     @Override
@@ -31,7 +35,38 @@ public class repInfo extends AppCompatActivity {
 
         ((TextView)findViewById(R.id.titleTxt)).setText(day+" - cours de "+ reprise.replace(":", "h"));
 
-        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        getCavalListStr();
+    }
+
+    /**
+     * Actions for toolbar menu
+     */
+    @Override
+    //load menu file//
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.rep_menu, menu); //your file name
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    //set on-click actions//
+    public boolean onOptionsItemSelected(final MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.addUser:
+                gotoSelect("addUser");
+                return true;
+            case R.id.delUser:
+                gotoSelect("delUser");
+                return false;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public String getCavalListStr(){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myref = database.getReference("reprises");
         DatabaseReference repRef = myref.child(day).child(reprise);
 
@@ -57,6 +92,13 @@ public class repInfo extends AppCompatActivity {
 
             }
         });
+        return cavalListStr;
+    }
 
+
+    public void gotoSelect(String whatsNext){
+        Intent intent = new Intent(this, userSelect.class);
+        intent.putExtra("whatsNext", whatsNext);
+        startActivity(intent);
     }
 }

@@ -28,6 +28,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class userSelect extends AppCompatActivity {
@@ -41,7 +42,7 @@ public class userSelect extends AppCompatActivity {
     private String toPrintStr;
     public String date;
 
-    private boolean decrement;
+    private String whatsNext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,12 +50,20 @@ public class userSelect extends AppCompatActivity {
         setContentView(R.layout.activity_user_select);
         list = (ListView) findViewById(R.id.listView);
 
+        /*
         try {
             Bundle extras = getIntent().getExtras();
             decrement = extras.getBoolean("decrement");
         } catch (Exception e){
             e.printStackTrace();
             decrement = true;
+        }*/
+
+        try{
+            Bundle extras = getIntent().getExtras();
+            whatsNext = extras.getString("whatsNext");
+        } catch (Exception e){
+            e.printStackTrace();
         }
 
         //arrayList = updateValue(arrayList);
@@ -74,7 +83,22 @@ public class userSelect extends AppCompatActivity {
                     arrayList.add(user);
                 }
                 */
-                arrayList = DBFetch.userlist;
+                switch (whatsNext){
+                    case "addUser":
+                        arrayList.clear();
+                        for (String s : DBFetch.userlist){
+                            if (!dataSnapshot.child(s).child("isAssigned").getValue(Boolean.class)){
+                                arrayList.add(s);
+                            }
+                        }
+                        break;
+                    case "delUser":
+                        arrayList.addAll(repInfo.cavalList);
+                        break;
+                    default :
+                        arrayList.addAll(DBFetch.userlist);
+                        break;
+                }
                 Log.d("INFO", arrayList.toString());
                 Log.e("DEBUG", "" + arrayList.size());
 
@@ -158,7 +182,7 @@ public class userSelect extends AppCompatActivity {
 
                     //for (int i = 0; i < infodata.size(); i++) {
                     if (infodata.get(position).isclicked) {
-                        System.out.println("Selectes Are == " + arrayList.get(position));
+                        System.out.println("Selected Are == " + arrayList.get(position));
                         selected.add(arrayList.get(position));
                         //}
                     } else {
@@ -278,7 +302,11 @@ public class userSelect extends AppCompatActivity {
                 .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        enterDate();
+                        if (whatsNext.equals("decrement") || whatsNext.equals("increment")){
+                            enterDate();
+                        } else {
+                            manUsers();
+                        }
                     }
                 })
                 .setNegativeButton("Non", new DialogInterface.OnClickListener() {
@@ -311,7 +339,7 @@ public class userSelect extends AppCompatActivity {
                 date = "";
                 //dateStr = dateStr.concat(picker.getYear() + "/").concat(months[picker.getMonth()] + "/").concat(picker.getDayOfMonth() + "");
                 date = date.concat(picker.getYear()+"-"+(picker.getMonth()+1)+"-"+picker.getDayOfMonth());
-                if (decrement) {
+                if (whatsNext.equals("decrement")) {
                     decrement();
                 } else {
                     enterCard();
@@ -326,6 +354,31 @@ public class userSelect extends AppCompatActivity {
             }
         });
         builder.show();
+    }
+
+    public void manUsers(){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference cref = database.getReference("cavaliers");
+        DatabaseReference repref = database.getReference("reprises").child(repInfo.day).child(repInfo.reprise);
+
+        switch (whatsNext){
+            case "addUser":
+                repref.child("cavaliers").setValue(selected);
+                break;
+            case "delUser":
+                for (String s : selected){
+                    arrayList.remove(s);
+                }
+                repref.child("cavaliers").setValue(arrayList);
+                break;
+        }
+
+        for (String u : selected){
+            cref.child(u).child("isAssigned").setValue(whatsNext.equals("addUser"));
+        }
+
+        Toast.makeText(this, "Opération effectuée !", Toast.LENGTH_SHORT).show();
+        finish();
     }
 
     public void decrement() {
@@ -494,7 +547,6 @@ public class userSelect extends AppCompatActivity {
         }
 
         Toast.makeText(this, "Changements enregistrés !", Toast.LENGTH_LONG).show();
-        selected.clear();
         finish();
     }
 }

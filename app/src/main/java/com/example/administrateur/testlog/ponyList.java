@@ -109,10 +109,7 @@ public class ponyList extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.refresh:
-                DBFetch fetch = new DBFetch();
-                fetch.fetchDB(true);
-                arrayList = DBFetch.clist;
-                adapter.notifyDataSetChanged();
+
                 break;
             case R.id.print:
                 print();

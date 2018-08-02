@@ -19,6 +19,8 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +39,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        prefs = getSharedPreferences(shPrefs.sharedPrefs, MODE_PRIVATE);
+
+
         StrictMode.VmPolicy.Builder polBuilder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(polBuilder.build());
 
@@ -48,7 +53,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        prefs = getSharedPreferences(shPrefs.sharedPrefs, MODE_PRIVATE);
+
+
 
         n = 1;
         builder = new AlertDialog.Builder(this);
@@ -58,13 +64,13 @@ public class MainActivity extends AppCompatActivity {
         ((Button)findViewById(R.id.button3)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                gotoSelect(true);
+                gotoSelect("decrement");
             }
         });
         ((Button)findViewById(R.id.button5)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                gotoSelect(false);
+                gotoSelect("increment");
             }
         });
 
@@ -95,6 +101,13 @@ public class MainActivity extends AppCompatActivity {
 
     public void display (View view){
         Toast.makeText(this, "J'avais dit de ne pas cliquer !!", Toast.LENGTH_SHORT).show();
+        /*
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference ref = database.getReference("cavaliers");
+        for (String s : DBFetch.userlist){
+            ref.child(s).child("isAssigned").setValue(false);
+        }
+        */
     }
 
     public void display3 (View view){
@@ -102,9 +115,9 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void gotoSelect(boolean decrement){
+    public void gotoSelect(String whatsNext){
         Intent intent = new Intent(this, userSelect.class);
-        intent.putExtra("decrement", decrement);
+        intent.putExtra("whatsNext", whatsNext);
         startActivity(intent);
     }
     public void gotoMenu(View view){
@@ -125,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
                 Looper.prepare();
             }
             //updateValue();
-            new DBFetch().fetchDB(false);
+            new DBFetch().fetchDB(false, true);
             Log.e("DBG", "reached");
             SystemClock.sleep(1000);
             //showRenew();
@@ -136,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
             if (DBFetch.userlist.size()!=0) {
                 findViewById(R.id.progressBar4).setVisibility(View.GONE);
                 showButtons();
-                new DBFetch().fetchDB(true);
+                new DBFetch().fetchDB(true, true);
             }
             else {
                 new MyAsyncTask().execute();

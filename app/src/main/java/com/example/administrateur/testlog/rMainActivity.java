@@ -1,6 +1,7 @@
 package com.example.administrateur.testlog;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,10 +15,15 @@ import java.util.List;
 
 public class rMainActivity extends AppCompatActivity {
 
+    public static SharedPreferences prefs;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_r_main);
+
+        prefs = getSharedPreferences(shPrefs.sharedPrefs, MODE_PRIVATE);
+
 
         ((Button) findViewById(R.id.buttonMercredi)).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -31,6 +37,8 @@ public class rMainActivity extends AppCompatActivity {
                 gotoRep("samedi");
             }
         });
+
+        new DBFetch().fetchDB(false, false);
     }
 
     public void gotoRep(String day){
@@ -45,11 +53,5 @@ public class rMainActivity extends AppCompatActivity {
         for (int i = 1;i<10; i++){
             l.add(""+i);
         }
-
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myref = database.getReference("reprises");
-        DatabaseReference dayRef = myref.child("mercredi").child("14:30");
-
-        dayRef.child("cavaliers").setValue(l);
     }
 }

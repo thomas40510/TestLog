@@ -7,7 +7,7 @@
 
 
     <Button
-        android:id="@+id/viewCavalButton"
+        android:id="@+id/button401"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -17,31 +17,31 @@
         android:text="Voir ma cavalerie" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/button402"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/viewCavalButton"
+        android:layout_below="@+id/button401"
         android:onClick="newHorse"
         android:text="Saisir un nouvel équidé" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/button403"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/button2"
+        android:layout_below="@+id/button402"
         android:onClick="newVerm"
         android:text="Nouvelle vermifigation" />
 
     <Button
-        android:id="@+id/buttonDecrement"
+        android:id="@+id/button404"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/button4"
+        android:layout_below="@+id/button403"
         android:onClick="addvac"
         android:text="Nouvelle vaccination" />
 

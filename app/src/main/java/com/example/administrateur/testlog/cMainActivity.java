@@ -91,9 +91,7 @@ public class cMainActivity extends AppCompatActivity {
     }
 
     public void hideButtons(){
-        findViewById(R.id.viewCavalButton).setAlpha(0.5f);
-        findViewById(R.id.viewCavalButton).setClickable(false);
-        for (int i=2;i<5; i++){
+        for (int i=401;i<405; i++){
             String buttonId = "button" + i;
             int resID = getResources().getIdentifier(buttonId, "id", getPackageName());
             findViewById(resID).setAlpha(0.5f);
@@ -101,9 +99,7 @@ public class cMainActivity extends AppCompatActivity {
         }
     }
     public void showButtons(){
-        findViewById(R.id.viewCavalButton).setAlpha(1f);
-        findViewById(R.id.viewCavalButton).setClickable(true);
-        for (int i=2;i<5; i++){
+        for (int i=401;i<405; i++){
             String buttonId = "button" + i;
             int resID = getResources().getIdentifier(buttonId, "id", getPackageName());
             findViewById(resID).setAlpha(1f);

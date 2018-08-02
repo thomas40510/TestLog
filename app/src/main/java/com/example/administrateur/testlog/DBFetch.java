@@ -2,6 +2,7 @@ package com.example.administrateur.testlog;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.google.firebase.database.DataSnapshot;
@@ -24,11 +25,20 @@ public class DBFetch extends Activity {
     public static List<String> userlist = new ArrayList<>();
     public static String toRenewStr;
     private List<String> fetchedList = new ArrayList<>();
-    SharedPreferences prefs = MainActivity.prefs;
+    private SharedPreferences prefs;
+
     private int i;
 
-    public void fetchDB (final boolean dorenew){
+    public void fetchDB (final boolean dorenew, boolean fromMain){
         toRenewStr = "";
+
+        if (fromMain) {
+            prefs = MainActivity.prefs;
+        } else {
+            prefs = rMainActivity.prefs;
+        }
+
+
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myref = database.getReference("cavaliers");
         myref.addValueEventListener(new ValueEventListener() {

@@ -60,6 +60,9 @@ public class repInfo extends AppCompatActivity {
             case R.id.delUser:
                 gotoSelect("delUser");
                 return false;
+            case R.id.decrement:
+                gotoSelect("decrementlist");
+                return false;
             default:
                 return super.onOptionsItemSelected(item);
         }

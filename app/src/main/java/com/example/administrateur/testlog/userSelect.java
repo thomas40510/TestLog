@@ -92,6 +92,8 @@ public class userSelect extends AppCompatActivity {
                             }
                         }
                         break;
+                    case "decrementlist":
+                        selected.addAll(repInfo.cavalList);
                     case "delUser":
                         arrayList.addAll(repInfo.cavalList);
                         break;
@@ -169,6 +171,9 @@ public class userSelect extends AppCompatActivity {
 
             final CheckBox cb = (CheckBox) row
                     .findViewById(R.id.chbContent);
+            if(whatsNext.equals("decrementlist")) {
+                infodata.get(position).isclicked = true;
+            }
             cb.setOnClickListener(new View.OnClickListener() {
 
                 @Override
@@ -302,7 +307,7 @@ public class userSelect extends AppCompatActivity {
                 .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if (whatsNext.equals("decrement") || whatsNext.equals("increment")){
+                        if (whatsNext.contains("decrement") || whatsNext.equals("increment")){
                             enterDate();
                         } else {
                             manUsers();
@@ -339,7 +344,7 @@ public class userSelect extends AppCompatActivity {
                 date = "";
                 //dateStr = dateStr.concat(picker.getYear() + "/").concat(months[picker.getMonth()] + "/").concat(picker.getDayOfMonth() + "");
                 date = date.concat(picker.getYear()+"-"+(picker.getMonth()+1)+"-"+picker.getDayOfMonth());
-                if (whatsNext.equals("decrement")) {
+                if (whatsNext.contains("decrement")) {
                     decrement();
                 } else {
                     enterCard();

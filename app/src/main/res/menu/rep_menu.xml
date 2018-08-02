@@ -8,4 +8,7 @@
     <item
         android:id="@+id/delUser"
         android:title="Supprimer un cavalier" />
+    <item
+        android:id="@+id/decrement"
+        android:title="-1 sur les cartes" />
 </menu>

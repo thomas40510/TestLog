@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainlayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainMenu">
 
     <Button
-        android:id="@+id/button11"
+        android:id="@+id/button101"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -15,20 +16,20 @@
         android:text="Cavaliers" />
 
     <Button
-        android:id="@+id/button12"
+        android:id="@+id/button102"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/button11"
+        android:layout_below="@+id/button101"
         android:onClick="gotoCaval"
         android:text="Cavalerie" />
 
     <Button
-        android:id="@+id/button10"
+        android:id="@+id/button104"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/button8"
+        android:layout_below="@+id/button103"
         android:onClick="gotoAuth"
         android:text="Log Out" />
 
@@ -65,11 +66,11 @@
         android:text="[version]" />
 
     <Button
-        android:id="@+id/button8"
+        android:id="@+id/button103"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/button12"
+        android:layout_below="@+id/button102"
         android:onClick="gotoReprise"
         android:text="Reprises" />
 

@@ -8,6 +8,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -41,6 +44,35 @@ public class MainMenu extends AppCompatActivity {
                 handler.postDelayed(this, delay);
             }
         }, delay);
+    }
+
+    /**
+     * Actions for toolbar menu
+     */
+    @Override
+    //load menu file//
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu); //your file name
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    //set on-click actions//
+    public boolean onOptionsItemSelected(final MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.about:
+                Intent about = new Intent(this, aboutScreen.class);
+                startActivity(about);
+                return true;
+            case R.id.settings:
+                Intent settings = new Intent(this, Settings.class);
+                startActivity(settings);
+                return false;
+            default :
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     public void gotoMain(View view){

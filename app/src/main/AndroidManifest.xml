@@ -85,7 +85,9 @@
 
         <activity android:name=".rMainActivity" />
         <activity android:name=".repList" />
-        <activity android:name=".repInfo"></activity>
+        <activity android:name=".repInfo" />
+        <activity android:name=".aboutScreen" />
+        <activity android:name=".Settings"></activity>
     </application>
 
 </manifest>

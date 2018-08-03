@@ -70,4 +70,8 @@ public class Settings extends AppCompatActivity {
     public void openMsg(View view){
         //TODO : implement Smooch messaging
     }
+
+    public void goBack(View view){
+        finish();
+    }
 }

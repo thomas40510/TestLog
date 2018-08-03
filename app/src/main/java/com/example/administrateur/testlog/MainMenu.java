@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+
 public class MainMenu extends AppCompatActivity {
 
     @Override
@@ -44,6 +45,7 @@ public class MainMenu extends AppCompatActivity {
                 handler.postDelayed(this, delay);
             }
         }, delay);
+
     }
 
     /**

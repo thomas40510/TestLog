@@ -5,9 +5,6 @@
         android:id="@+id/addUser"
         android:title="Ajouter" />
     <item
-        android:id="@+id/refresh"
-        android:title="refresh" />
-    <item
         android:id="@+id/printLs"
         android:title="imprimer" />
 </menu>

@@ -51,6 +51,11 @@
     <string name="cavalerie_shortcut_long_message">Accès à la gestion de la cavalerie</string>
     <string name="cavalerie_shortcut_disabled_message">Cavalerie (indisponible)</string>
 
+    <string name="Smooch_activityConversation">Messages</string>
+    <string name="Smooch_startOfConversation">This is the start of your conversation with the team.</string>
+    <string name="Smooch_welcome">Feel free to leave us a message about anything that\'s on your mind.</string>
+    <string name="Smooch_messageHint">Type a message…</string>
+
     <string-array name="cardRefs">
         <item>c10</item>
         <item>c30</item>

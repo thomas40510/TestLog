@@ -1,13 +1,19 @@
 package com.example.administrateur.testlog;
 
+import android.Manifest;
+import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.v7.app.AlertDialog;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.telephony.SmsManager;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -20,6 +26,7 @@ public class Settings extends AppCompatActivity {
 
     private String userMail;
     private String fcm;
+    String message;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,20 +41,15 @@ public class Settings extends AppCompatActivity {
 
     public void askforBackup(View view){
 
-        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
         builder.setTitle("Confirmation")
                 .setMessage("Confirmez-vous la demande d'un backup de la base de données ? (en sachant qu'il y en a un automatique chaque jour)")
                 .setPositiveButton("Je confirme", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        try{
-                            sendMail sendMail = new sendMail(Settings.this,"thomasprevost85@gmail.com", "Demande de backup", "Merci de faire un backup de la BDD ! \n\n ***************************************** \n " +
-                                    "Message sender : "+userMail+ "\n FCM : "+fcm);
-                            sendMail.execute();
-                        }catch (Exception e){
-                            e.printStackTrace();
-                            Toast.makeText(getApplicationContext(), "Erreur d'envoi...", Toast.LENGTH_SHORT).show();
-                        }
+
+                        sendAutoMail("Demande de backup", "Merci de faire un backup de la BDD !");
+
                     }
                 })
                 .setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
@@ -61,20 +63,15 @@ public class Settings extends AppCompatActivity {
     }
     public void askforRestore(View view){
 
-        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
         builder.setTitle("Confirmation")
                 .setMessage("Voulez-vous vraiment demander la restoration de la base de données à partir d'une sauvegarde précédente ? (Il ne faut pas hésiter à envoyer un message au dev s'il faut récupérer une sauvegarde précise)")
                 .setPositiveButton("Je confirme", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        try{
-                            sendMail sendMail = new sendMail(Settings.this,"thomasprevost85@gmail.com", "Demande de restore", "Merci de restorer la BDD à partir d'une sauvegarde plus ancienne ! \n\n ***************************************** \n " +
-                                    "Message sender : "+userMail+ "\n FCM : "+fcm);
-                            sendMail.execute();
-                        }catch (Exception e){
-                            e.printStackTrace();
-                            Toast.makeText(getApplicationContext(), "Erreur d'envoi...", Toast.LENGTH_SHORT).show();
-                        }
+
+                        sendAutoMail("Demande de restore", "Merci de restorer la BDD à partir d'une sauvegarde plus ancienne !");
+
                     }
                 })
                 .setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
@@ -130,10 +127,96 @@ public class Settings extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void openMsg(View view){
-        //TODO : implement Smooch messaging
+    public void chooseMean(View view){
+        AlertDialog.Builder chooser = new AlertDialog.Builder(this);
+        chooser.setTitle("Sélection")
+                .setMessage("Comment voulez-vous contacter le développeur ?")
+                .setPositiveButton("Par mail", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        sendMsg("mail");
+                    }
+                })
+                .setNegativeButton("Par SMS", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        sendMsg("SMS");
+                    }
+                })
+                .setNeutralButton("Annuler", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+        chooser.show();
     }
 
+    public void sendMsg(final String mean){
+        //TODO : implement Smooch messaging
+
+        AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
+        builder.setTitle("Message à envoyer :");
+
+        final EditText editText = new EditText(this);
+        editText.setSingleLine(false);
+        editText.setLines(4);
+        editText.setMaxLines(5);
+        editText.setGravity(Gravity.LEFT | Gravity.TOP);
+        editText.setHorizontalScrollBarEnabled(false);
+        editText.setHint("Message...");
+
+        LinearLayout layout = new LinearLayout(this);
+        layout.setOrientation(LinearLayout.VERTICAL);
+        layout.addView(editText);
+
+        builder.setView(layout);
+
+        builder.setPositiveButton("Envoyer", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if (mean.equals("mail")) {
+                    sendAutoMail("Message from user", "---Begin user message--- \n" + editText.getText().toString() + "\n ---End user message---");
+                } else {
+                    sendSMS(editText.getText().toString());
+                }
+            }
+        });
+        builder.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        builder.show();
+    }
+
+    public void sendSMS(String message){
+
+        ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.SEND_SMS},1);
+
+        String number = "5554";
+
+        try {
+
+            SmsManager.getDefault().sendTextMessage(number, null, message, null, null);
+            Toast.makeText(this, "Message envoyé", Toast.LENGTH_SHORT).show();
+        } catch (Exception e){
+            e.printStackTrace();
+            Toast.makeText(this, "Erreur lors de l'envoi du message", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void sendAutoMail(String subject, String message){
+        try{
+            sendMail sendMail = new sendMail(Settings.this,"thomasprevost85@gmail.com", subject, message+"\n\n ***************************************** \n " +
+                    "Message sender : "+userMail+ "\n FCM : "+fcm);
+            sendMail.execute();
+        }catch (Exception e){
+            e.printStackTrace();
+            Toast.makeText(getApplicationContext(), "Erreur d'envoi...", Toast.LENGTH_SHORT).show();
+        }
+    }
 
 
     public void goBack(View view){

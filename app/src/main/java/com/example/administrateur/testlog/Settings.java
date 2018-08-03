@@ -83,7 +83,6 @@ public class Settings extends AppCompatActivity {
         builder.show();
     }
     public void delLocal(View view){
-        //TODO : implement a method to delete all local files (including sharedPreferences)
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Confirmation")
                 .setMessage("Êtes-vous sûr de vouloir effacer toutes les données locales ? (c'est-à-dire l'intégralité des fichiers créés, ainsi que le cache de l'application). Vous serez alors déconnecté de l'application.")
@@ -153,7 +152,6 @@ public class Settings extends AppCompatActivity {
     }
 
     public void sendMsg(final String mean){
-        //TODO : implement Smooch messaging
 
         AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
         builder.setTitle("Message à envoyer :");

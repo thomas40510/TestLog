@@ -193,7 +193,7 @@ public class Settings extends AppCompatActivity {
 
         ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.SEND_SMS},1);
 
-        String number = "5554";
+        String number = "+33621041300";
 
         try {
 

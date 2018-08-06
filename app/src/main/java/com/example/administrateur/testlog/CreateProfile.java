@@ -1,7 +1,9 @@
 package com.example.administrateur.testlog;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
@@ -98,21 +100,51 @@ public class CreateProfile extends AppCompatActivity {
      */
 
     public void save (View view){
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference reference = database.getReference("cavaliers");
-        DatabaseReference mref = reference.child(name.getText().toString());
 
-        mref.child("fléchage").setValue(flechage.getText().toString());
-        mref.child("Birthdate").setValue(bDate.getText().toString());
-        mref.child("Forfait").setValue(forfait.getText().toString());
-        mref.child("adresse").setValue(address.getText().toString());
-        mref.child("ville").setValue(city.getText().toString());
-        mref.child("remainH").setValue(remain.getText().toString());
-        mref.child("tel").child("nbr").setValue(phonenbr.getText().toString());
-        mref.child("tel").child("who").setValue(whoStr);
-        mref.child("mail").setValue(mailStr);
+        if (verifDate(bDate.getText().toString())) {
 
-        Toast.makeText(this, "Utilisateur Créé", Toast.LENGTH_SHORT).show();
-        finish();
+
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            DatabaseReference reference = database.getReference("cavaliers");
+            DatabaseReference mref = reference.child(name.getText().toString());
+
+
+            mref.child("fléchage").setValue(flechage.getText().toString());
+            mref.child("Birthdate").setValue(bDate.getText().toString());
+            mref.child("Forfait").setValue(forfait.getText().toString());
+            mref.child("adresse").setValue(address.getText().toString());
+            mref.child("ville").setValue(city.getText().toString());
+            mref.child("remainH").setValue(remain.getText().toString());
+            mref.child("tel").child("nbr").setValue(phonenbr.getText().toString());
+            mref.child("tel").child("who").setValue(whoStr);
+            mref.child("mail").setValue(mailStr);
+
+            Toast.makeText(this, "Utilisateur Créé", Toast.LENGTH_SHORT).show();
+            finish();
+        } else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Erreur")
+                    .setMessage("La date entrée est incorrecte. Merci de vérifier les valeurs et le format (dd/mm/aaaa")
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                        }
+                    });
+            builder.show();
+        }
+    }
+
+    public boolean verifDate(String date){
+        int[][] list = new int[][] {{1,31},{2,28},{3,31},{4,30},{5,31},{6,30},{7,31},{8,31},{9,30},{10,31},{11,30},{12,31}};
+
+        int month = Integer.parseInt(""+date.charAt(3)+date.charAt(4));
+        if (month>0 && month<13){
+            int day = Integer.parseInt(""+date.charAt(0)+date.charAt(1));
+            int max = list[month-1][1];
+
+            return (day>0 && day<max+1);
+        }
+        return false;
     }
 }

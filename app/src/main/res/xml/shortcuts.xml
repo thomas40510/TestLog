@@ -12,7 +12,6 @@
             android:action="android.intent.action.VIEW"
             android:targetPackage="com.example.administrateur.testlog"
             android:targetClass="com.example.administrateur.testlog.MainActivity" />
-
     </shortcut>
     <shortcut
         android:shortcutId="cavalerie"
@@ -25,6 +24,18 @@
         android:action="android.intent.action.VIEW"
         android:targetPackage="com.example.administrateur.testlog"
         android:targetClass="com.example.administrateur.testlog.cMainActivity" />
+    </shortcut>
+    <shortcut
+        android:shortcutId="reprises"
+        android:enabled="true"
+        android:icon="@drawable/baseline_sort_black_24"
+        android:shortcutShortLabel="@string/reprise_shortcut_short_message"
+        android:shortcutLongLabel="@string/reprise_shortcut_long_message"
+        android:shortcutDisabledMessage="@string/reprise_shortcut_disabled_message">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.example.administrateur.testlog"
+            android:targetClass="com.example.administrateur.testlog.rMainActivity" />
     </shortcut>
     <!-- Specify more shortcuts here. -->
 </shortcuts>

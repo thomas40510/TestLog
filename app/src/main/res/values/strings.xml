@@ -50,6 +50,9 @@
     <string name="cavalerie_shortcut_short_message">Cavalerie</string>
     <string name="cavalerie_shortcut_long_message">Accès à la gestion de la cavalerie</string>
     <string name="cavalerie_shortcut_disabled_message">Cavalerie (indisponible)</string>
+    <string name="reprise_shortcut_short_message">Reprises</string>
+    <string name="reprise_shortcut_long_message">Accès à la gestion des reprises</string>
+    <string name="reprise_shortcut_disabled_message">Reprises (indisponible)</string>
 
 
     <string-array name="cardRefs">

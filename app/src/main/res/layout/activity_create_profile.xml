@@ -21,7 +21,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:capitalize="characters"
-                android:hint="fléchage"
+                android:hint="fléchage*"
                 android:singleLine="true"
                 android:textAlignment="center"
                 android:textAllCaps="false"
@@ -41,7 +41,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/name"
                 android:layout_marginTop="23dp"
-                android:text="birthdate : " />
+                android:text="birthdate* : " />
 
             <TextView
                 android:id="@+id/textView7"
@@ -56,7 +56,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/textView8"
                 android:layout_centerHorizontal="true"
-                android:hint="NOM Prénom"
+                android:hint="NOM Prénom*"
                 android:inputType="textNoSuggestions"
                 android:singleLine="true"
                 android:textAlignment="center"
@@ -87,7 +87,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/textView5"
-                android:text="Adresse : " />
+                android:text="Adresse* : " />
 
             <EditText
                 android:id="@+id/remaining"
@@ -106,7 +106,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/textView6"
-                android:text="Ville / CP : " />
+                android:text="Ville / CP* : " />
 
             <TextView
                 android:id="@+id/textView10"
@@ -135,7 +135,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/textView11"
-                android:text="Reste : " />
+                android:text="Reste* : " />
 
             <AutoCompleteTextView
                 android:id="@+id/forfait"

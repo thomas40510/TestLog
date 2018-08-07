@@ -25,8 +25,6 @@ public class Launcher extends AppCompatActivity {
         Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_launcher_loading);
 
-
-
         /*
         Begin_launcher
         */

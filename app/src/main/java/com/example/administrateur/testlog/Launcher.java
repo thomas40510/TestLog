@@ -1,18 +1,13 @@
 package com.example.administrateur.testlog;
 
-import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 
 import com.crashlytics.android.Crashlytics;
 
@@ -30,26 +25,7 @@ public class Launcher extends AppCompatActivity {
         Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_launcher_loading);
 
-         /*
-        Checks if apps has the permission to read / write to local storage
-         */
-        int check = ActivityCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        if (check == PackageManager.PERMISSION_GRANTED) {
-            Log.i("PermissionManager", "write granted");
-        } else {
-            //requestPermissions(new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE},1024);
-            ActivityCompat.requestPermissions((Activity) this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1024 );
-        }
 
-        int check2 = ActivityCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE);
-        if (check2 == PackageManager.PERMISSION_GRANTED){
-            Log.i("PermissionManager", "read granted");
-        }
-        else {
-            //requestPermissions(new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE}, 1024);
-            ActivityCompat.requestPermissions((Activity) this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1024 );
-
-        }
 
         /*
         Begin_launcher

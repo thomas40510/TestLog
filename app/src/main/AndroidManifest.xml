@@ -111,7 +111,6 @@
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@mipmap/ic_launcher_round" />
 
-        <activity android:name=".testActivity"></activity>
     </application>
 
 </manifest>

@@ -48,11 +48,13 @@ public class cMainActivity extends AppCompatActivity {
         startActivity(intent);
     }
     public void newVerm(View view){
-        Intent intent = new Intent(this, AddVerm.class);
+        Intent intent = new Intent(this, addVV.class);
+        intent.putExtra("isVac", false);
         startActivity(intent);
     }
     public void addvac(View view){
-        Intent intent = new Intent(this, addVac.class);
+        Intent intent = new Intent(this, addVV.class);
+        intent.putExtra("isVac", true);
         startActivity(intent);
     }
 
@@ -86,7 +88,7 @@ public class cMainActivity extends AppCompatActivity {
                 Looper.prepare();
             }
             //updateValue();
-            new DBFetch().cfetchDB();
+            new DBFetch().cfetchDB(true);
             Log.e("DBG", "reached");
             SystemClock.sleep(1000);
             //showRenew();

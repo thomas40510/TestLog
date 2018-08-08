@@ -5,4 +5,44 @@
     android:layout_height="match_parent"
     tools:context=".eMainActivity">
 
+    <Button
+        android:id="@+id/bFront"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:text="Devant" />
+
+    <Button
+        android:id="@+id/bBack"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/bFront"
+        android:text="Derrière" />
+
+    <Button
+        android:id="@+id/bPoney"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/bBack"
+        android:text="écurie poney" />
+
+    <Button
+        android:id="@+id/bPrivate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/bPoney"
+        android:text="écurie privée" />
+
+    <Button
+        android:id="@+id/button22"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:onClick="goBack"
+        android:text="Retour au menu" />
 </RelativeLayout>

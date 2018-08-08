@@ -31,7 +31,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class addVac extends AppCompatActivity {
+public class addVV extends AppCompatActivity {
 
     private ListView list;
     public List<String> arrayList;
@@ -42,10 +42,22 @@ public class addVac extends AppCompatActivity {
     private String toPrintStr;
     public String[] months = {"Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet","Août", "Septembre", "Octobre", "Novembre", "Décembre"};
 
+    public boolean isVac;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_verm);
+        setContentView(R.layout.activity_add_vv);
+
+        Bundle extras = getIntent().getExtras();
+        isVac = extras.getBoolean("isVac");
+
+        if (isVac){
+            setTitle("Nouveau vaccin");
+        } else{
+            setTitle("Nouveau vermifuge");
+        }
+
         list = (ListView) findViewById(R.id.listView);
 
         //arrayList = updateValue(arrayList);
@@ -191,7 +203,8 @@ public class addVac extends AppCompatActivity {
                 break;
             case R.id.refresh:
                 //updateValue();
-                arrayList = DBFetch.clist;
+                arrayList.clear();
+                arrayList.addAll(DBFetch.clist);
                 break;
             //adapter.notifyDataSetChanged();
             /**
@@ -270,7 +283,8 @@ public class addVac extends AppCompatActivity {
                 .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        vermDetails();
+                        vDetails();
+
                     }
                 })
                 .setNegativeButton("Non", new DialogInterface.OnClickListener() {
@@ -282,19 +296,25 @@ public class addVac extends AppCompatActivity {
         builder.show();
     }
 
-    public void vermDetails() {
+    public void vDetails() {
+        String vType;
+        if (isVac){
+            vType = "vaccin";
+        } else {
+            vType = "vermifuge";
+        }
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Vaccin")
-                .setMessage("Entrez les informations sur le vaccin...");
+        builder.setTitle(vType.replace("v", "V"))
+                .setMessage("Entrez les informations sur le "+vType+"...");
 
-        final EditText vermName = new EditText(this);
+        final EditText vName = new EditText(this);
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.MATCH_PARENT);
-        vermName.setLayoutParams(lp);
-        vermName.setHint("nom du vaccin");
-        vermName.setSingleLine();
-        vermName.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        vName.setLayoutParams(lp);
+        vName.setHint("nom du "+vType);
+        vName.setSingleLine();
+        vName.setImeOptions(EditorInfo.IME_ACTION_DONE);
 
 
         final DatePicker picker = new DatePicker(this);
@@ -302,7 +322,7 @@ public class addVac extends AppCompatActivity {
 
         LinearLayout layout = new LinearLayout(this);
         layout.setOrientation(LinearLayout.VERTICAL);
-        layout.addView(vermName);
+        layout.addView(vName);
         layout.addView(picker);
 
         builder.setView(layout);
@@ -310,11 +330,11 @@ public class addVac extends AppCompatActivity {
         builder.setPositiveButton("Confirmer", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                String vermNameStr = vermName.getText().toString();
+                String vNameStr = vName.getText().toString();
                 String dateStr = "";
                 //dateStr = dateStr.concat(picker.getYear() + "/").concat(months[picker.getMonth()] + "/").concat(picker.getDayOfMonth() + "");
                 dateStr = dateStr.concat(picker.getYear()+"-"+picker.getMonth()+"-"+picker.getDayOfMonth());
-                saveVerm(vermNameStr, dateStr);
+                writeValues(vNameStr, dateStr);
                 Log.e("date", dateStr);
             }
         });
@@ -327,33 +347,19 @@ public class addVac extends AppCompatActivity {
         builder.show();
     }
 
-    public void saveVerm(final String verNameStr, final String dateStr){
-        FirebaseDatabase dbase = FirebaseDatabase.getInstance();
-        DatabaseReference mref = dbase.getReference("cavalerie");
-        mref.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                writeValues(verNameStr, dateStr);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-        //ref.setValue(rmain);
-        Log.e("DBG", "" + rmain);
 
 
-    }
-
-
-    public void writeValues(String vermNameStr, String dateStr){
+    public void writeValues(String vNameStr, String dateStr){
+        String vRefName;
+        if (isVac){
+            vRefName = "lastvacs";
+        } else{
+            vRefName = "lastverm";
+        }
         FirebaseDatabase dbase = FirebaseDatabase.getInstance();
         DatabaseReference mref = dbase.getReference("cavalerie");
         for (int i = 0; i<selected.size();i++){
-            mref.child(selected.get(i)).child("lastvacs").child(dateStr).setValue(vermNameStr);
+            mref.child(selected.get(i)).child(vRefName).child(dateStr).setValue(vNameStr);
         }
 
         Toast.makeText(this, "Changements enregistrés !", Toast.LENGTH_LONG).show();

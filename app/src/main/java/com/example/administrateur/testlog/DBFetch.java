@@ -142,10 +142,17 @@ public class DBFetch extends Activity {
     public static List<String> clist = new ArrayList<>();
     public static List<String> clistPrt = new ArrayList<>();
     public static String toRenStr;
-    SharedPreferences cprefs = cMainActivity.prefs;
+    SharedPreferences cprefs;
 
 
-    public void cfetchDB(){
+    public void cfetchDB(boolean fromMain){
+
+        if (fromMain) {
+            cprefs = cMainActivity.prefs;
+        } else {
+            cprefs = eMainActivity.prefs;
+        }
+
         toRenStr = "";
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myref = database.getReference("cavalerie");

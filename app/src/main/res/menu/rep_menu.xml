@@ -4,7 +4,9 @@
 
     <item
         android:id="@+id/addUser"
-        android:title="Ajouter des cavaliers" />
+        android:icon="@drawable/baseline_group_add_white_36"
+        android:title="Ajouter des cavaliers"
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/delUser"
         android:title="Supprimer un cavalier" />

@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
         android:id="@+id/addUser"
-        android:title="Ajouter" />
+        android:icon="@drawable/baseline_person_add_white_36"
+        android:title="Ajouter"
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/printLs"
-        android:title="imprimer" />
+        android:icon="@drawable/baseline_print_white_36"
+        android:title="imprimer"
+        app:showAsAction="ifRoom" />
 </menu>

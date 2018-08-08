@@ -23,7 +23,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:label="Cavaliers">
 
             <!--
             <intent-filter>
@@ -33,12 +34,17 @@
             </intent-filter>
             -->
         </activity>
-        <activity android:name=".userList" />
-        <activity android:name=".Profile" />
+        <activity android:name=".userList"
+            android:label="Cavaliers"/>
+        <activity android:name=".Profile"
+            android:label="Profil du cavalier"/>
         <activity android:name=".editDB" />
-        <activity android:name=".EditProfile" />
-        <activity android:name=".CreateProfile" />
-        <activity android:name=".userSelect" />
+        <activity android:name=".EditProfile"
+            android:label="Modification du profil"/>
+        <activity android:name=".CreateProfile"
+            android:label="Nouveau profil"/>
+        <activity android:name=".userSelect"
+            android:label="Cavaliers"/>
         <activity android:name=".LoginActivity">
 
             <!--
@@ -61,13 +67,20 @@
                 android:name="android.app.shortcuts"
                 android:resource="@xml/shortcuts" />
         </activity>
-        <activity android:name=".addVac" />
-        <activity android:name=".AddVerm" />
-        <activity android:name=".ceditProfile" />
-        <activity android:name=".cMainActivity" />
-        <activity android:name=".NewPony" />
-        <activity android:name=".ponyList" />
-        <activity android:name=".PonyProfile" />
+        <activity android:name=".addVac"
+            android:label="Nouveau vaccin"/>
+        <activity android:name=".AddVerm"
+            android:label="Nouveau vermifuge"/>
+        <activity android:name=".ceditProfile"
+            android:label="Cavalerie"/>
+        <activity android:name=".cMainActivity"
+            android:label="Cavalerie"/>
+        <activity android:name=".NewPony"
+            android:label="Nouvel équidé"/>
+        <activity android:name=".ponyList"
+            android:label="Cavalerie"/>
+        <activity android:name=".PonyProfile"
+            android:label="Profil de l'équidé"/>
         <activity android:name=".showVV" />
 
         <meta-data
@@ -86,11 +99,16 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
-        <activity android:name=".rMainActivity" />
-        <activity android:name=".repList" />
-        <activity android:name=".repInfo" />
-        <activity android:name=".aboutScreen" />
-        <activity android:name=".Settings" />
+        <activity android:name=".rMainActivity"
+            android:label="Reprises"/>
+        <activity android:name=".repList"
+            android:label="Reprises"/>
+        <activity android:name=".repInfo"
+            android:label="Reprises"/>
+        <activity android:name=".aboutScreen"
+            android:label="À propos"/>
+        <activity android:name=".Settings"
+            android:label="Paramètres"/>
 
         <service android:name=".MyInstanceIdService">
             <intent-filter>
@@ -111,7 +129,8 @@
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@mipmap/ic_launcher_round" />
 
-        <activity android:name=".eMainActivity"></activity>
+        <activity android:name=".eMainActivity"
+            android:label="Écuries"/>
     </application>
 
 </manifest>

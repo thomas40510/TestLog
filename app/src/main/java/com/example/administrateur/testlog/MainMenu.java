@@ -74,6 +74,9 @@ public class MainMenu extends AppCompatActivity {
                 Intent settings = new Intent(this, Settings.class);
                 startActivity(settings);
                 return false;
+            case R.id.logout:
+                gotoAuth();
+                return false;
             default :
                 return super.onOptionsItemSelected(item);
         }
@@ -88,10 +91,14 @@ public class MainMenu extends AppCompatActivity {
         startActivity(intent);
     }
     public void gotoReprise(View view){
-        Intent reprise = new Intent(this, rMainActivity.class);
-        startActivity(reprise);
+        Intent intent = new Intent(this, rMainActivity.class);
+        startActivity(intent);
     }
-    public void gotoAuth (View view){
+    public void gotoStables(View view){
+        Intent intent = new Intent(this, eMainActivity.class);
+        startActivity(intent);
+    }
+    public void gotoAuth (){
         Intent intent = new Intent(this, LoginActivity.class);
         FirebaseAuth auth = FirebaseAuth.getInstance();
         auth.signOut();

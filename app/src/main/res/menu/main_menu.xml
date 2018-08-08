@@ -6,10 +6,15 @@
         android:id="@+id/about"
         android:icon="@drawable/baseline_info_white_36"
         android:title="À propos"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="always" />
     <item
         android:id="@+id/settings"
         android:icon="@drawable/baseline_settings_white_36"
         android:title="Paramètres"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/logout"
+        android:icon="@drawable/baseline_exit_white"
+        android:title="Logout"
         app:showAsAction="ifRoom" />
 </menu>

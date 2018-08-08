@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:drawableLeft="@drawable/baseline_supervised_user_circle_black_24"
         android:onClick="gotoMain"
         android:text="Cavaliers" />
 
@@ -21,17 +22,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/button101"
+        android:drawableLeft="@drawable/horse_head"
         android:onClick="gotoCaval"
         android:text="Cavalerie" />
-
-    <Button
-        android:id="@+id/button104"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/button103"
-        android:onClick="gotoAuth"
-        android:text="Log Out" />
 
     <TextView
         android:id="@+id/webstatus"
@@ -71,7 +64,18 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/button102"
+        android:drawableLeft="@drawable/baseline_sort_black_24"
         android:onClick="gotoReprise"
         android:text="Reprises" />
+
+    <Button
+        android:id="@+id/button18"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/button103"
+        android:drawableLeft="@drawable/baseline_home_black_24"
+        android:onClick="gotoStables"
+        android:text="écuries" />
 
 </RelativeLayout>

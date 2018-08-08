@@ -9,6 +9,7 @@ import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
 import com.google.firebase.auth.FirebaseAuth;
@@ -58,6 +59,18 @@ public class cMainActivity extends AppCompatActivity {
     public void gotoMenu(View view){
         Intent intent = new Intent(this, MainMenu.class);
         startActivity(intent);
+    }
+
+    public void dontpress (View view){
+        /*
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference ref = database.getReference().child("cavalerie");
+
+        for (String s : DBFetch.clist){
+            ref.child(s).child("isAssigned").setValue(false);
+        }
+        */
+        Toast.makeText(this, "J'avais dit de ne pas appuyer !", Toast.LENGTH_SHORT).show();
     }
 
     private class MyAsyncTask extends AsyncTask<Void, Void, Void>

@@ -213,7 +213,9 @@ public class userSelect extends AppCompatActivity {
     //load menu file//
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.userlist_menu, menu); //your file name
+        if(whatsNext.equals("decrement") || whatsNext.equals("increment")) {
+            inflater.inflate(R.menu.userlist_menu, menu); //your file name
+        }
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -264,34 +266,6 @@ public class userSelect extends AppCompatActivity {
     }
 
 
-    /**
-     * Fetches users from DB
-     */
-    public void updateValue (){
-        arrayList = new ArrayList<>();
-
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myref = database.getReference("cavaliers");
-        myref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                arrayList.clear();
-                for (DataSnapshot postsnapshot: dataSnapshot.getChildren()){
-                    String user = postsnapshot.getKey();
-                    arrayList.add(user);
-                }
-                Log.d("INFO", arrayList.toString());
-                Log.e("DEBUG", ""+arrayList.size());
-                list.setAdapter(new MyAdapter());
-                //updateText(1);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-    }
     String usrList;
     public void confirm (View view){
         usrList = "";
@@ -367,7 +341,8 @@ public class userSelect extends AppCompatActivity {
 
         switch (whatsNext){
             case "addUser":
-                repref.child("cavaliers").setValue(selected);
+                repInfo.cavalList.addAll(selected);
+                repref.child("cavaliers").setValue(repInfo.cavalList);
                 break;
             case "delUser":
                 for (String s : selected){

@@ -31,7 +31,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class addVV extends AppCompatActivity {
+public class ponySelect extends AppCompatActivity {
 
     private ListView list;
     public List<String> arrayList;
@@ -42,21 +42,37 @@ public class addVV extends AppCompatActivity {
     private String toPrintStr;
     public String[] months = {"Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet","Août", "Septembre", "Octobre", "Novembre", "Décembre"};
 
-    public boolean isVac;
+    public String whatNext;
+    public boolean isVV;
+    public String where;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_vv);
+        setContentView(R.layout.activity_pony_select);
 
         Bundle extras = getIntent().getExtras();
-        isVac = extras.getBoolean("isVac");
+        whatNext = extras.getString("whatNext");
+        where = extras.getString("where");
 
-        if (isVac){
-            setTitle("Nouveau vaccin");
-        } else{
-            setTitle("Nouveau vermifuge");
+        switch (whatNext){
+            case "vermifuge":
+                setTitle("Nouveau vermifuge");
+                isVV = true;
+                break;
+            case "vaccin":
+                setTitle("Nouveau vaccin");
+                isVV = true;
+                break;
+            case "add":
+                setTitle("Ajouter des équidés");
+                isVV = false;
+                break;
+            default:
+                setTitle("Supprimer des équidés");
+                isVV = false;
         }
+
 
         list = (ListView) findViewById(R.id.listView);
 
@@ -77,7 +93,21 @@ public class addVV extends AppCompatActivity {
                     arrayList.add(user);
                 }
                 */
-                arrayList = DBFetch.clist;
+                arrayList.clear();
+                switch (whatNext){
+                    case "add":
+                        for (String s : DBFetch.clist){
+                            if (!dataSnapshot.child(s).child("isAssigned").getValue(Boolean.class)){
+                                arrayList.add(s);
+                            }
+                        }
+                        break;
+                    case "remove":
+                        arrayList.addAll(stabInfo.cavalList);
+                        break;
+                    default:
+                        arrayList.addAll(DBFetch.clist);
+                }
                 Log.d("INFO", arrayList.toString());
                 Log.e("DEBUG", "" + arrayList.size());
 
@@ -188,7 +218,11 @@ public class addVV extends AppCompatActivity {
     //load menu file//
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.addverm_menu, menu); //your file name
+        if (isVV) {
+            inflater.inflate(R.menu.addverm_menu, menu); //your file name
+        } else {
+
+        }
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -196,79 +230,53 @@ public class addVV extends AppCompatActivity {
     //set on-click actions//
     public boolean onOptionsItemSelected(final MenuItem item) {
 
-        switch (item.getItemId()) {
-            case R.id.addPony:
-                Intent intent = new Intent(this, NewPony.class);
-                startActivity(intent);
-                break;
-            case R.id.refresh:
-                //updateValue();
-                arrayList.clear();
-                arrayList.addAll(DBFetch.clist);
-                break;
-            //adapter.notifyDataSetChanged();
-            /**
-             case R.id.printLs:
+        if (isVV) {
 
-             toPrintStr = "";
+            switch (item.getItemId()) {
+                case R.id.addPony:
+                    Intent intent = new Intent(this, NewPony.class);
+                    startActivity(intent);
+                    break;
+                case R.id.refresh:
+                    //updateValue();
+                    arrayList.clear();
+                    arrayList.addAll(DBFetch.clist);
+                    break;
+                //adapter.notifyDataSetChanged();
+                /**
+                 case R.id.printLs:
 
-             FirebaseDatabase dbase = FirebaseDatabase.getInstance();
-             DatabaseReference mref = dbase.getReference("users");
-             mref.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-            for (String s : arrayList) {
-            String rStr = dataSnapshot.child(s).child("remainH").getValue().toString();
-            toPrintStr = toPrintStr.concat(s + "  :   " + rStr + "\n");
+                 toPrintStr = "";
+
+                 FirebaseDatabase dbase = FirebaseDatabase.getInstance();
+                 DatabaseReference mref = dbase.getReference("users");
+                 mref.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override public void onDataChange(DataSnapshot dataSnapshot) {
+                for (String s : arrayList) {
+                String rStr = dataSnapshot.child(s).child("remainH").getValue().toString();
+                toPrintStr = toPrintStr.concat(s + "  :   " + rStr + "\n");
+                }
+                generatePdf gen = new generatePdf();
+                gen.createPdf(toPrintStr, "Relevé des séances restantes", "cards-" + System.currentTimeMillis() + ".pdf", getApplicationContext());
+                }
+
+                @Override public void onCancelled(DatabaseError databaseError) {
+
+                }
+                });
+                 //ref.setValue(rmain);
+                 Log.e("DBG", "" + rmain);
+                 break;
+                 */
+                default:
+                    return super.onOptionsItemSelected(item);
             }
-            generatePdf gen = new generatePdf();
-            gen.createPdf(toPrintStr, "Relevé des séances restantes", "cards-" + System.currentTimeMillis() + ".pdf", getApplicationContext());
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-            });
-             //ref.setValue(rmain);
-             Log.e("DBG", "" + rmain);
-             break;
-             */
-            default:
-                return super.onOptionsItemSelected(item);
         }
         return true;
     }
 
 
-    /**
-     * Fetches users from DB
-     */
-    public void updateValue (){
-        arrayList = new ArrayList<>();
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myref = database.getReference("cavalerie");
-        myref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                arrayList.clear();
-                for (DataSnapshot postsnapshot: dataSnapshot.getChildren()){
-                    String user = postsnapshot.getKey();
-                    arrayList.add(user);
-                }
-                Log.d("INFO", arrayList.toString());
-                Log.e("DEBUG", ""+arrayList.size());
-                list.setAdapter(new MyAdapter());
-                //updateText(1);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-    }
     String usrList;
     public void confirm (View view){
         usrList = "";
@@ -283,7 +291,12 @@ public class addVV extends AppCompatActivity {
                 .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        vDetails();
+                        if (isVV) {
+                            vDetails();
+                        }
+                        else {
+                            saveInfo();
+                        }
 
                     }
                 })
@@ -298,7 +311,7 @@ public class addVV extends AppCompatActivity {
 
     public void vDetails() {
         String vType;
-        if (isVac){
+        if (whatNext.equals("vaccin")){
             vType = "vaccin";
         } else {
             vType = "vermifuge";
@@ -348,10 +361,9 @@ public class addVV extends AppCompatActivity {
     }
 
 
-
     public void writeValues(String vNameStr, String dateStr){
         String vRefName;
-        if (isVac){
+        if (whatNext.equals("vaccin")){
             vRefName = "lastvacs";
         } else{
             vRefName = "lastverm";
@@ -363,6 +375,29 @@ public class addVV extends AppCompatActivity {
         }
 
         Toast.makeText(this, "Changements enregistrés !", Toast.LENGTH_LONG).show();
+        selected.clear();
+        finish();
+    }
+
+    public void saveInfo(){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference ref = database.getReference().child("cavalerie");
+        DatabaseReference sRef = database.getReference().child("écuries");
+        if (whatNext.equals("add")){
+            stabInfo.cavalList.addAll(selected);
+            sRef.child(where).setValue(stabInfo.cavalList);
+
+        } else {
+            for (String s : selected){
+                arrayList.remove(s);
+            }
+            sRef.child(where).setValue(arrayList);
+        }
+        for (String c : selected){
+            ref.child(c).child("isAssigned").setValue(whatNext.equals("add"));
+        }
+
+        Toast.makeText(this, "changements enregistrés !", Toast.LENGTH_SHORT).show();
         selected.clear();
         finish();
     }

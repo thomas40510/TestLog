@@ -97,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void display (View view){
         Toast.makeText(this, "J'avais dit de ne pas cliquer !!", Toast.LENGTH_SHORT).show();
+
         /*
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference("cavaliers");
@@ -104,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
             ref.child(s).child("isAssigned").setValue(false);
         }
         */
+
     }
 
     public void display3 (View view){

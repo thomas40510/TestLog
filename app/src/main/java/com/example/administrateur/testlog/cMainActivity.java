@@ -48,12 +48,12 @@ public class cMainActivity extends AppCompatActivity {
         startActivity(intent);
     }
     public void newVerm(View view){
-        Intent intent = new Intent(this, addVV.class);
+        Intent intent = new Intent(this, ponySelect.class);
         intent.putExtra("isVac", false);
         startActivity(intent);
     }
     public void addvac(View view){
-        Intent intent = new Intent(this, addVV.class);
+        Intent intent = new Intent(this, ponySelect.class);
         intent.putExtra("isVac", true);
         startActivity(intent);
     }

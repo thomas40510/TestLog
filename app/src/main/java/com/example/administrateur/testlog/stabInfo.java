@@ -1,5 +1,6 @@
 package com.example.administrateur.testlog;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -116,6 +117,10 @@ public class stabInfo extends AppCompatActivity {
 
     public void gotoSelect(String s){
         //TODO : create activity to select horses, and redirect to it
+        Intent intent = new Intent(this, ponySelect.class);
+        intent.putExtra("whatNext", s);
+        intent.putExtra("where", whereRef);
+        startActivity(intent);
     }
 
 }

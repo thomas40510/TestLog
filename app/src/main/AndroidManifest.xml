@@ -74,7 +74,7 @@
                 android:resource="@xml/shortcuts" />
         </activity>
         <activity
-            android:name=".addVV"/>
+            android:name=".ponySelect"/>
         <activity
             android:name=".ceditProfile"
             android:label="Cavalerie" />

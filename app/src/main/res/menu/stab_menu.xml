@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/add"
-        android:title="Ajouer des équidés" />
+        android:title="Ajouter des équidés" />
     <item
         android:id="@+id/remove"
         android:title="Supprimer un équidé" />

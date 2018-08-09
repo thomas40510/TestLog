@@ -49,12 +49,14 @@ public class cMainActivity extends AppCompatActivity {
     }
     public void newVerm(View view){
         Intent intent = new Intent(this, ponySelect.class);
-        intent.putExtra("isVac", false);
+        intent.putExtra("whatNext", "vermifuge")
+                .putExtra("where", "");
         startActivity(intent);
     }
     public void addvac(View view){
         Intent intent = new Intent(this, ponySelect.class);
-        intent.putExtra("isVac", true);
+        intent.putExtra("whatNext", "vaccin")
+                .putExtra("where", "");
         startActivity(intent);
     }
 

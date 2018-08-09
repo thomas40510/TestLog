@@ -9,5 +9,5 @@
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/printRations"
-        android:title="Rations" />
+        android:title="Imprimer les rations" />
 </menu>

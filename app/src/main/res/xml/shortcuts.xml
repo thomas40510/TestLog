@@ -37,5 +37,17 @@
             android:targetPackage="com.example.administrateur.testlog"
             android:targetClass="com.example.administrateur.testlog.rMainActivity" />
     </shortcut>
+    <shortcut
+        android:shortcutId="écuries"
+        android:enabled="true"
+        android:icon="@drawable/baseline_home_black_24"
+        android:shortcutShortLabel="@string/écuries_shortcut_short_message"
+        android:shortcutLongLabel="@string/écuries_shortcut_long_message"
+        android:shortcutDisabledMessage="@string/écuries_shortcut_disabled_message">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.example.administrateur.testlog"
+            android:targetClass="com.example.administrateur.testlog.eMainActivity" />
+    </shortcut>
     <!-- Specify more shortcuts here. -->
 </shortcuts>

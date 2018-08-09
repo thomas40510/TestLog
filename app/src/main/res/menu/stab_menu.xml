@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
         android:id="@+id/add"
-        android:title="Ajouter des équidés" />
+        android:icon="@drawable/horse_add"
+        android:title="Ajouter des équidés"
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/remove"
-        android:title="Supprimer un équidé" />
+        android:icon="@drawable/horse_remove"
+        android:title="Supprimer un équidé"
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/print"
         android:title="Imprimer les rations" />

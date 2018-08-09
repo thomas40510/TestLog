@@ -53,6 +53,9 @@
     <string name="reprise_shortcut_short_message">Reprises</string>
     <string name="reprise_shortcut_long_message">Accès à la gestion des reprises</string>
     <string name="reprise_shortcut_disabled_message">Reprises (indisponible)</string>
+    <string name="écuries_shortcut_short_message">Écuries</string>
+    <string name="écuries_shortcut_long_message">Accès à la gestion des écuries</string>
+    <string name="écuries_shortcut_disabled_message">Écuries (indisponible)</string>
 
 
     <string-array name="cardRefs">

@@ -9,7 +9,9 @@
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/delUser"
-        android:title="Supprimer un cavalier" />
+        android:icon="@drawable/group_remove"
+        android:title="Supprimer un cavalier"
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/decrement"
         android:title="-1 sur les cartes" />

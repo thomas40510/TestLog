@@ -48,10 +48,6 @@ public class MainActivity extends AppCompatActivity {
             finish();
         }
 
-
-
-
-
         n = 1;
         builder = new AlertDialog.Builder(this);
 
@@ -69,7 +65,6 @@ public class MainActivity extends AppCompatActivity {
                 gotoSelect("increment");
             }
         });
-
 
     }
 

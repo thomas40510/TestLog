@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2018 Thomas Prévost / CE Sauveterre. Distribué sous license libre.
+ */
+
 package com.example.administrateur.testlog;
 
 import android.app.AlertDialog;
@@ -20,11 +24,11 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import java.io.File;
 
 
+
 public class Settings extends AppCompatActivity {
 
     private String userMail;
     private String fcm;
-    String message;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,8 +124,11 @@ public class Settings extends AppCompatActivity {
     public void gotoAuth (){
         Intent intent = new Intent(this, LoginActivity.class);
         FirebaseAuth auth = FirebaseAuth.getInstance();
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         auth.signOut();
         startActivity(intent);
+        finish();
     }
 
     public void chooseMean(View view){

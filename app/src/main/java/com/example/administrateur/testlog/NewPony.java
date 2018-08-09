@@ -97,6 +97,7 @@ public class NewPony extends AppCompatActivity {
                 mref.child("proprio").setValue(proprio.getText().toString());
             }
             mref.child("lastNico").setValue(lastnico.getText().toString());
+            mref.child("isAssigned").setValue(false);
 
             DatabaseReference mref1 = mref.child("ration");
             mref1.child("mt").setValue(rationMt.getText().toString());

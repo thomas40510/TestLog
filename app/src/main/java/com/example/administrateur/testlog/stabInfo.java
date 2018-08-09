@@ -1,11 +1,16 @@
 package com.example.administrateur.testlog;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -19,7 +24,7 @@ import java.util.List;
 
 public class stabInfo extends AppCompatActivity {
 
-    String where, titleText, whereRef;
+    String where, titleText, whereRef, pdfTitle;
     public static List<String> cavalList = new ArrayList<>();
     private String cavalListStr;
 
@@ -62,6 +67,7 @@ public class stabInfo extends AppCompatActivity {
                 return false;
             case R.id.print:
                 //TODO : générer feuille de rations pour l'écurie concernée
+                new MyAsyncTask().execute();
                 return false;
             default:
                 return super.onOptionsItemSelected(item);
@@ -85,6 +91,7 @@ public class stabInfo extends AppCompatActivity {
                 titleText = "Écurie privée";
                 whereRef = "privée";
         }
+        pdfTitle = "Rations - "+titleText.replace("É", "é");
     }
 
     public void getList(){
@@ -121,6 +128,73 @@ public class stabInfo extends AppCompatActivity {
         intent.putExtra("whatNext", s);
         intent.putExtra("where", whereRef);
         startActivity(intent);
+    }
+
+    public String[][] rations; //= new String[getsize()][4];
+
+    public void printRations(){
+        generatePdf gen = new generatePdf();
+        gen.createTablePdf(rations, pdfTitle, "rations-"+where+"-" + System.currentTimeMillis() + ".pdf", getApplicationContext());
+    }
+
+    public String[][] getRations() {
+        rations = new String[cavalList.size()][4];
+
+        for (final String name : cavalList) {
+            final int index = cavalList.indexOf(name);
+            rations[index][0] = name;
+            System.out.println("" + index);
+            FirebaseDatabase db = FirebaseDatabase.getInstance();
+            DatabaseReference myref = db.getReference("cavalerie");
+            DatabaseReference nameRef = myref.child(name).child("ration");
+            nameRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    rations[index][1] = dataSnapshot.child("mt").getValue(String.class);
+                    rations[index][2] = dataSnapshot.child("md").getValue(String.class);
+                    rations[index][3] = dataSnapshot.child("s").getValue(String.class);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+            System.out.println("r : " + rations[index][1]);
+        }
+
+        return rations;
+    }
+
+    AlphaAnimation inAnimation, outAnimation;
+    FrameLayout progressBarHolder;
+
+
+    //AsyncTask to make sure to get values from DB
+    private class MyAsyncTask extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected void onPreExecute(){
+            progressBarHolder = (FrameLayout) findViewById(R.id.progressBarHolder);
+            inAnimation = new AlphaAnimation(0f,1f);
+            inAnimation.setDuration(200);
+            progressBarHolder.setAnimation(inAnimation);
+            progressBarHolder.setVisibility(View.VISIBLE);
+        }
+        @Override
+        protected Void doInBackground(Void... params) {
+            rations = getRations();
+            SystemClock.sleep(500);
+
+            return null;
+        }
+        @Override
+        protected void onPostExecute(Void result) {
+            outAnimation = new AlphaAnimation(1f,0f);
+            outAnimation.setDuration(200);
+            progressBarHolder.setAnimation(outAnimation);
+            progressBarHolder.setVisibility(View.GONE);
+            printRations();
+        }
     }
 
 }

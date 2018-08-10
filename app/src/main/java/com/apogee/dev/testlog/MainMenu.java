@@ -1,6 +1,7 @@
 package com.apogee.dev.testlog;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
@@ -8,6 +9,7 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.StrictMode;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -24,6 +26,8 @@ import com.google.firebase.database.ValueEventListener;
 
 
 public class MainMenu extends AppCompatActivity {
+
+    int i = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,9 +53,28 @@ public class MainMenu extends AppCompatActivity {
         });
 
 
+        TextView versiontxt = (TextView) findViewById(R.id.version);
+        versiontxt.setText(BuildConfig.VERSION_NAME);
 
+        versiontxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                i++;
+                if (i == 5){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(MainMenu.this);
+                    builder.setTitle("Easter egg ?")
+                            .setMessage("Tu pensais vraiment trouver un easter-egg ici ? On n'est pas chez Google !!")
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
 
-        ((TextView) findViewById(R.id.version)).setText(BuildConfig.VERSION_NAME);
+                                }
+                            });
+                    builder.show();
+                    i = 0;
+                }
+            }
+        });
 
         final TextView webstatus  = (android.widget.TextView) findViewById(R.id.webstatus);
 

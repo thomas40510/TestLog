@@ -18,6 +18,8 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.crashlytics.android.answers.Answers;
+import com.crashlytics.android.answers.CustomEvent;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -50,6 +52,7 @@ public class LoginActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions((Activity) this, new String[]{Manifest.permission.SEND_SMS}, 1024);
         }
         */
+
 
         int PERMISSION_ALL = 1;
         String[] PERMISSIONS = {
@@ -173,6 +176,8 @@ public class LoginActivity extends AppCompatActivity {
                                     editor.putString("lastMail", inputEmail.getText().toString());
                                     editor.commit();
 
+
+
                                     Intent intent;
 
                                     switch (nextScreen){
@@ -186,15 +191,20 @@ public class LoginActivity extends AppCompatActivity {
                                             intent = new Intent(LoginActivity.this, rMainActivity.class);
                                         default:
                                             intent = new Intent(LoginActivity.this, MainMenu.class);
+                                            Answers.getInstance().logCustom(new CustomEvent("Login")
+                                                    .putCustomAttribute("User", inputEmail.getText().toString()));
                                     }
                                     startActivity(intent);
                                     finish();
                                 }
                             }
                         });
+
+
             }
         });
     }
+
 
 
     public static boolean hasPermissions(Context context, String... permissions) {

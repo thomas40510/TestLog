@@ -104,8 +104,7 @@ public class NewPony extends AppCompatActivity {
 
             Toast.makeText(this, "équidé ajouté !", Toast.LENGTH_SHORT).show();
 
-            Answers.getInstance().logCustom(new CustomEvent("Added"));
-            Answers.getInstance().logCustom(new CustomEvent("Added")
+            Answers.getInstance().logCustom(new CustomEvent("Added pony")
                     .putCustomAttribute("Name", name.getText().toString()));
 
             finish();

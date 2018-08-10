@@ -48,6 +48,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:11.6.0'
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.google.firebase:firebase-messaging:11.6.0'
+    implementation 'com.google.firebase:firebase-config:11.6.0'
     androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })

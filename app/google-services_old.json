@@ -8,18 +8,26 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:952906426220:android:601a1eede6fb7714",
+        "mobilesdk_app_id": "1:952906426220:android:bf0109ffe3834944",
         "android_client_info": {
-          "package_name": "com.apogee.dev.testlog"
+          "package_name": "com.dev.cyka.saisiecavalerie"
         }
       },
       "oauth_client": [
         {
-          "client_id": "952906426220-gumfc118ftbmm9vomv42v98rajnji6be.apps.googleusercontent.com",
+          "client_id": "952906426220-aovv3ktntu0kn2cv4rrmvv7npvkfavc8.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.apogee.dev.testlog",
-            "certificate_hash": "21c703d991c496d09a1213bb62d06782f06cc81e"
+            "package_name": "com.dev.cyka.saisiecavalerie",
+            "certificate_hash": "3dc9d97b7701bb4ac2163f12899c14d6484bbcaf"
+          }
+        },
+        {
+          "client_id": "952906426220-aehsig70ccnqq75f03q3224c9ki4ua8u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dev.cyka.saisiecavalerie",
+            "certificate_hash": "3e44f4e4b0d0097cc731727d62dbc8263e50c819"
           }
         },
         {
@@ -54,7 +62,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:952906426220:android:3bb73f87faa9550e",
         "android_client_info": {
-          "package_name": "com.example.administrateur.testlog"
+          "package_name": "com.apogee.dev.testlog"
         }
       },
       "oauth_client": [
@@ -62,7 +70,7 @@
           "client_id": "952906426220-m8jjtmv2n9e4iglsa1hu78jds6mjhq78.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.administrateur.testlog",
+            "package_name": "com.apogee.dev.testlog",
             "certificate_hash": "21c703d991c496d09a1213bb62d06782f06cc81e"
           }
         },
@@ -70,7 +78,7 @@
           "client_id": "952906426220-u7plnuojre8tlh7p1p8a6viv7kn8ae9j.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.administrateur.testlog",
+            "package_name": "com.apogee.dev.testlog",
             "certificate_hash": "3e44f4e4b0d0097cc731727d62dbc8263e50c819"
           }
         },

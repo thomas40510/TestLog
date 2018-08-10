@@ -172,8 +172,7 @@ public class PonyProfile extends AppCompatActivity {
 
             Toast.makeText(this, "Équidé Supprimé", Toast.LENGTH_SHORT).show();
 
-            Answers.getInstance().logCustom(new CustomEvent("Removed"));
-            Answers.getInstance().logCustom(new CustomEvent("Removed")
+            Answers.getInstance().logCustom(new CustomEvent("Removed pony")
                     .putCustomAttribute("Name", nameStr));
         }
         else{

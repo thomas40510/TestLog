@@ -14,6 +14,8 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import com.crashlytics.android.answers.Answers;
+import com.crashlytics.android.answers.CustomEvent;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -118,6 +120,9 @@ public class CreateProfile extends AppCompatActivity {
             mref.child("tel").child("nbr").setValue(phonenbr.getText().toString());
             mref.child("tel").child("who").setValue(whoStr);
             mref.child("mail").setValue(mailStr);
+
+            Answers.getInstance().logCustom(new CustomEvent("Added user")
+                    .putCustomAttribute("Name", name.getText().toString()));
 
             Toast.makeText(this, "Utilisateur Créé", Toast.LENGTH_SHORT).show();
             finish();

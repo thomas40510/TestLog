@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2018 Thomas Prévost / CE Sauveterre. Distribué sous license libre.
+ */
+
 package com.apogee.dev.testlog;
 
 import android.content.Context;
@@ -6,9 +10,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.StrictMode;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -16,25 +22,55 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
 
 
 public class MainMenu extends AppCompatActivity {
 
     int i = 0;
+    private FirebaseRemoteConfig mFirebaseRemoteConfig;
+
+    //Remote Config keys
+    private static final String UPDATE_LINK = "update_link";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
 
-        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+
+        //get Remote Config instance
+        mFirebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
+
+        // Create Remote Config Setting to enable developer mode.
+        // Fetching configs from the server is normally limited to 5 requests per hour.
+        // Enabling developer mode allows many more requests to be made per hour, so developers
+        // can fadeoff different config values during development.
+        // [START enable_dev_mode]
+        FirebaseRemoteConfigSettings configSettings = new FirebaseRemoteConfigSettings.Builder()
+                .setDeveloperModeEnabled(true)
+                .build();
+        mFirebaseRemoteConfig.setConfigSettings(configSettings);
+        // [END enable_dev_mode]
+
+        //set RemoteConfig defaults
+        mFirebaseRemoteConfig.setDefaults(R.xml.remote_config_defaults);
+
+        fetchRemote();
+
+        //display user's name
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference().child("users");
 
         SharedPreferences preferences = getSharedPreferences(shPrefs.sharedPrefs, MODE_PRIVATE);
@@ -97,6 +133,68 @@ public class MainMenu extends AppCompatActivity {
         }, delay);
 
     }
+
+    public void fetchRemote(){
+        long cacheExpiration = 0; // 1/2 hour in seconds.
+        // If in developer mode cacheExpiration is set to 0 so each fetch will retrieve values from
+        // the server.
+        if (mFirebaseRemoteConfig.getInfo().getConfigSettings().isDeveloperModeEnabled()) {
+            cacheExpiration = 0;
+        }
+
+        // [START fetch_config_with_callback]
+        // cacheExpirationSeconds is set to cacheExpiration here, indicating that any previously
+        // fetched and cached config would be considered expired because it would have been fetched
+        // more than cacheExpiration seconds ago. Thus the next fetch would go to the server unless
+        // throttling is in progress. The default expiration duration is 43200 (12 hours).
+        mFirebaseRemoteConfig.fetch(cacheExpiration)
+                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+
+                            Toast.makeText(MainMenu.this, "Fetch Succeeded",
+                                    Toast.LENGTH_SHORT).show();
+
+                            // Once the config is successfully fetched it must be activated before newly fetched
+                            // values are returned.
+                            mFirebaseRemoteConfig.activateFetched();
+                        } else {
+                            Toast.makeText(MainMenu.this, "Fetch Failed",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                        displayUpdateDialog();
+                    }
+                });
+        // [END fetch_config_with_callback]
+    }
+
+    public void displayUpdateDialog(){
+        String updateLink = mFirebaseRemoteConfig.getString(UPDATE_LINK);
+        if (!updateLink.equals("none")){
+            final Uri updateUri = Uri.parse(updateLink);
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Attention")
+                    .setMessage("Une mise à jour est disponible pour l'application. Merci de l'installer en cliquant sur le bouton ci-dessous. \n" +
+                            "Son installation n'est pas obligatoire immédiatement, mais elle est grandement recommandée.")
+                    .setPositiveButton("Installer", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Intent openUpdate = new Intent(Intent.ACTION_VIEW, updateUri);
+                            startActivity(openUpdate);
+                        }
+                    })
+                    .setNegativeButton("Plus tard", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                        }
+                    });
+            builder.show();
+        }
+    }
+
 
     /**
      * Actions for toolbar menu

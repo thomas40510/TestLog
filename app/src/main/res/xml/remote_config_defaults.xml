@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~ Copyright (c) 2018 Thomas Prévost / CE Sauveterre. Distribué sous license libre.
+  -->
+
+<!-- START xml_defaults -->
+<defaultsMap>
+    <entry>
+        <key>update_link</key>
+        <value>none</value>
+    </entry>
+</defaultsMap>
+    <!-- END xml_defaults -->

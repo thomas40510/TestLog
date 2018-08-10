@@ -1,6 +1,8 @@
 package com.apogee.dev.testlog;
 
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -38,6 +40,14 @@ public class aboutScreen extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
+                    }
+                })
+                .setNeutralButton("Changelog", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Uri uri = Uri.parse("https://drive.google.com/open?id=1wG7EKj-y-SM4UOJslXn0nhSktAtaOG_Bs5kYFm18y7I");
+                        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                        startActivity(intent);
                     }
                 });
         builder.show();

@@ -135,7 +135,7 @@ public class MainMenu extends AppCompatActivity {
     }
 
     public void fetchRemote(){
-        long cacheExpiration = 0; // 1/2 hour in seconds.
+        long cacheExpiration = 0;
         // If in developer mode cacheExpiration is set to 0 so each fetch will retrieve values from
         // the server.
         if (mFirebaseRemoteConfig.getInfo().getConfigSettings().isDeveloperModeEnabled()) {
@@ -152,9 +152,6 @@ public class MainMenu extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-
-                            Toast.makeText(MainMenu.this, "Fetch Succeeded",
-                                    Toast.LENGTH_SHORT).show();
 
                             // Once the config is successfully fetched it must be activated before newly fetched
                             // values are returned.

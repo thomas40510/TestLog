@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:hint="Nom"
+        android:hint="Nom*"
         android:inputType="textNoSuggestions"
         android:singleLine="true"
         android:textAlignment="center"
@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textView19"
-        android:text="Sexe : " />
+        android:text="Sexe* : " />
     <Spinner
         android:id="@+id/Sspinner"
         android:layout_width="wrap_content"
@@ -44,7 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textView16"
-        android:text="Birthdate : " />
+        android:text="Birthdate* : " />
 
     <EditText
         android:id="@+id/bDate"
@@ -65,14 +65,15 @@
         android:layout_alignBaseline="@+id/proprio"
         android:layout_alignBottom="@+id/proprio"
         android:layout_alignParentStart="true"
-        android:text="Proprio : " />
+        android:text="Proprio* : " />
 
     <EditText
         android:id="@+id/proprio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/bDate"
-        android:layout_toEndOf="@+id/textView9"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="165dp"
+        android:layout_toEndOf="@+id/textView4"
         android:hint="Prénom NOM"
         android:inputType="textNoSuggestions"
         android:textSize="14sp" />
@@ -91,40 +92,21 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/lastnico"
-        android:layout_alignBottom="@+id/lastnico"
         android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
         android:text="Dernier maréchal :" />
 
     <EditText
         android:id="@+id/lastnico"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/limhr"
-        android:layout_toEndOf="@+id/textView4"
+        android:layout_alignStart="@+id/Sspinner"
+        android:layout_centerVertical="true"
         android:hint="dd/mm/aaaa"
         android:inputType="textNoSuggestions|date"
         android:textSize="14sp" />
 
     <!--maxHours-->
-    <TextView
-        android:id="@+id/textView9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/limhr"
-        android:layout_alignBottom="@+id/limhr"
-        android:layout_alignParentStart="true"
-        android:text="Max hr/sem : " />
-
-    <EditText
-        android:id="@+id/limhr"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/proprio"
-        android:layout_toEndOf="@+id/textView9"
-        android:hint="entier naturel"
-        android:inputType="textNoSuggestions|number"
-        android:textSize="14sp" />
 
     <!--emptyText (formatting)-->
     <TextView
@@ -189,7 +171,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignTop="@+id/Tspinner"
-        android:text="Catégorie : " />
+        android:text="Catégorie* : " />
     <Spinner
         android:id="@+id/Tspinner"
         android:layout_width="wrap_content"
@@ -320,10 +302,6 @@
         </TableLayout>
 
     </RelativeLayout>
-
-
-
-
 
 
 </RelativeLayout>

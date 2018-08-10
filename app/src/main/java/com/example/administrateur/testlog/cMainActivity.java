@@ -71,7 +71,7 @@ public class cMainActivity extends AppCompatActivity {
         DatabaseReference ref = database.getReference().child("cavalerie");
 
         for (String s : DBFetch.clist){
-            ref.child(s).child("isAssigned").setValue(false);
+            ref.child(s).child("limhr").setValue(null);
         }
         */
         Toast.makeText(this, "J'avais dit de ne pas appuyer !", Toast.LENGTH_SHORT).show();

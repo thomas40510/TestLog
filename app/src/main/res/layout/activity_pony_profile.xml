@@ -43,14 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textView21"
-        android:text="birthdate : " />
-    <TextView
-        android:id="@+id/bDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView21"
-        android:layout_toEndOf="@+id/textView4"
-        android:text="TextView" />
+        android:text="Date de naissance : " />
 
     <!--proprio-->
     <TextView
@@ -60,13 +53,13 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textView2"
         android:text="Proprio : " />
+
     <TextView
         android:id="@+id/proprio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView3"
-        android:layout_alignBottom="@+id/textView3"
-        android:layout_alignStart="@+id/bDate"
+        android:layout_below="@+id/textView2"
+        android:layout_toEndOf="@+id/textView3"
         android:text="TextView" />
 
     <!--maxHours-->
@@ -76,14 +69,17 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textView3"
-        android:text="max hr / sem : " />
+        android:text="max hr / sem : "
+        android:visibility="gone" />
+
     <TextView
         android:id="@+id/limhr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/proprio"
         android:layout_toEndOf="@+id/textView4"
-        android:text="TextView" />
+        android:text="TextView"
+        android:visibility="gone" />
 
     <!--lastNico-->
     <TextView
@@ -232,5 +228,13 @@
             </TableRow>
         </TableLayout>
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/bDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/textView2"
+        android:layout_toEndOf="@+id/textView2"
+        android:text="TextView" />
 
 </RelativeLayout>

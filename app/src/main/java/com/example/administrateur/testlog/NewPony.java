@@ -40,7 +40,6 @@ public class NewPony extends AppCompatActivity {
                 getResources().getStringArray(R.array.typelist)));
 
         bDate = (EditText) findViewById(R.id.bDate);
-        limhr = (EditText) findViewById(R.id.limhr);
         proprio = (EditText) findViewById(R.id.proprio);
         lastnico = (EditText) findViewById(R.id.lastnico);
         name = (EditText) findViewById(R.id.name);
@@ -89,7 +88,6 @@ public class NewPony extends AppCompatActivity {
             mref.child("sex").setValue(sexe.getSelectedItem().toString());
             mref.child("type").setValue(type.getSelectedItem().toString());
             mref.child("bdate").setValue(bDate.getText().toString());
-            mref.child("limhr").setValue(limhr.getText().toString());
 
             if (isClub.isChecked()) {
                 mref.child("proprio").setValue("club");

@@ -28,7 +28,6 @@ public class ceditProfile extends AppCompatActivity {
         isClub = (CheckBox) findViewById(R.id.checkClub);
 
         bDate = (EditText) findViewById(R.id.bDate);
-        limhr = (EditText) findViewById(R.id.limhr);
         proprio =(EditText) findViewById(R.id.proprio);
         lastnico = (EditText) findViewById(R.id.lastnico);
 
@@ -67,7 +66,6 @@ public class ceditProfile extends AppCompatActivity {
         // Sets textboxes' text as it appears in DB
 
         bDate.setText(PonyProfile.bDateStr);
-        limhr.setText(PonyProfile.limhrStr);
         proprio.setText(null);
         if (PonyProfile.proprioStr.equals("club")){
             isClub.setChecked(true);
@@ -93,7 +91,6 @@ public class ceditProfile extends AppCompatActivity {
         DatabaseReference reference = database.getReference("cavalerie");
         DatabaseReference mref = reference.child(PonyProfile.nameStr);
         mref.child("bdate").setValue(bDate.getText().toString());
-        mref.child("limhr").setValue(limhr.getText().toString());
 
         if (isClub.isChecked()){
             mref.child("proprio").setValue("club");

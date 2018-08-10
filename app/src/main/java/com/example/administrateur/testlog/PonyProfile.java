@@ -47,7 +47,6 @@ public class PonyProfile extends AppCompatActivity {
         rationMt = (TextView) findViewById(R.id.rationMt);
         rationMd = (TextView) findViewById(R.id.rationMd);
         rationN = (TextView) findViewById(R.id.rationS);
-        limhr = (TextView) findViewById(R.id.limhr);
         type = (TextView) findViewById(R.id.type);
 
         Bundle extras = getIntent().getExtras();
@@ -68,7 +67,6 @@ public class PonyProfile extends AppCompatActivity {
                 sexeStr = dataSnapshot.child("sex").getValue(String.class);
                 typeStr = dataSnapshot.child("type").getValue(String.class);
                 nicoStr = dataSnapshot.child("lastNico").getValue(String.class);
-                limhrStr = dataSnapshot.child("limhr").getValue(String.class);
 
                 rationStr[0] = dataSnapshot.child("ration").child("mt").getValue(String.class);
                 rationStr[1] = dataSnapshot.child("ration").child("md").getValue(String.class);
@@ -80,7 +78,6 @@ public class PonyProfile extends AppCompatActivity {
                 sexe.setText("["+sexeStr+"]");
                 type.setText(typeStr);
                 lastNico.setText(nicoStr);
-                limhr.setText(limhrStr);
 
                 rationMt.setText(rationStr[0]);
                 rationMd.setText(rationStr[1]);
@@ -142,7 +139,6 @@ public class PonyProfile extends AppCompatActivity {
         intent.putExtra("bdate", bDateStr)
                 .putExtra("proprio", proprioStr)
                 .putExtra("sex", sexeStr)
-                .putExtra("limhr", limhrStr)
                 .putExtra("lastnico", nicoStr)
                 .putExtra("ration", rationStr);
         startActivity(intent);

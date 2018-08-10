@@ -43,13 +43,13 @@
         android:layout_below="@+id/sexe"
 
         android:text="Birthdate : " />
+
     <EditText
         android:id="@+id/bDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/textView2"
-        android:layout_alignBottom="@+id/textView2"
-        android:layout_alignStart="@+id/proprio"
+        android:layout_toEndOf="@+id/textView2"
         android:inputType="textNoSuggestions|number"
         android:text="TextView"
         android:textSize="14sp" />
@@ -63,21 +63,23 @@
         android:layout_alignBottom="@+id/proprio"
         android:layout_alignParentStart="true"
         android:text="Proprio : " />
+
     <EditText
         android:id="@+id/proprio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/bDate"
-        android:layout_toEndOf="@+id/textView9"
+        android:layout_toEndOf="@+id/textView2"
         android:inputType="textNoSuggestions"
         android:text="TextView"
         android:textSize="14sp" />
+
     <CheckBox
         android:id="@+id/checkClub"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/limhr"
-        android:layout_toEndOf="@+id/proprio"
+        android:layout_alignEnd="@+id/name"
+        android:layout_below="@+id/bDate"
         android:text="club" />
 
     <!--maréchal-->
@@ -85,38 +87,21 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/lastnico"
-        android:layout_alignBottom="@+id/lastnico"
         android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
         android:text="Dernier maréchal :" />
+
     <EditText
         android:id="@+id/lastnico"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/limhr"
+        android:layout_centerVertical="true"
         android:layout_toEndOf="@+id/textView4"
+        android:hint="dd/mm/aaaa"
         android:inputType="textNoSuggestions|date"
-        android:text="TextView"
         android:textSize="14sp" />
 
     <!--maxHours-->
-    <TextView
-        android:id="@+id/textView9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/limhr"
-        android:layout_alignBottom="@+id/limhr"
-        android:layout_alignParentStart="true"
-        android:text="Max hr/sem : " />
-    <EditText
-        android:id="@+id/limhr"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/proprio"
-        android:layout_toEndOf="@+id/textView9"
-        android:inputType="textNoSuggestions|number"
-        android:text="TextView"
-        android:textSize="14sp" />
 
 
     <!--emptyText (formatting)-->

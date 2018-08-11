@@ -45,7 +45,7 @@ public class aboutScreen extends AppCompatActivity {
                 .setNeutralButton("Changelog", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Uri uri = Uri.parse("https://drive.google.com/open?id=1wG7EKj-y-SM4UOJslXn0nhSktAtaOG_Bs5kYFm18y7I");
+                        Uri uri = Uri.parse("https://github.com/thomas40510/TestLog/blob/master/docs/changelog.md");
                         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                         startActivity(intent);
                     }

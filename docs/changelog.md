@@ -1,4 +1,4 @@
 ## Changelog
 
-#### //Version 1.0 (plannifiée)//
+#### //Version 1.0 (01/09/2018)//
 - Initial release

@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -24,6 +26,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -53,7 +57,7 @@ public class LoginActivity extends AppCompatActivity {
         }
         */
 
-
+        
         int PERMISSION_ALL = 1;
         String[] PERMISSIONS = {
                 Manifest.permission.READ_EXTERNAL_STORAGE,

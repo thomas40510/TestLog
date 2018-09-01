@@ -1,10 +1,16 @@
 package com.apogee.dev.testlog;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -26,6 +32,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import static com.itextpdf.text.PageSize.A4;
@@ -39,66 +46,67 @@ public class generatePdf extends AppCompatActivity {
     // Method for creating a pdf file from text, saving it then opening it for display
     public void createPdf(String text, String titleText, String fName, Context context) {
 
+
         /*
         Begin document generation
          */
-        Document doc = new Document();
-        String fileName = fName;
+            Document doc = new Document();
+            String fileName = fName;
 
-        try {
-            String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Dir/generated";
+            try {
+                String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Dir/generated";
 
-            File dir = new File(path);
-            if (!dir.exists()) {
-                Boolean bool = dir.mkdirs();
+                File dir = new File(path);
+                if (!dir.exists()) {
+                    Boolean bool = dir.mkdirs();
+                }
+
+                File file = new File(dir, fileName);
+                file.createNewFile();
+                FileOutputStream fOut = new FileOutputStream(file);
+                PdfWriter.getInstance(doc, fOut);
+
+                //open the document
+                doc.open();
+                doc.setPageSize(A4);
+
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd@HH:mm:ss", Locale.FRANCE);
+                String currentDateandTime = sdf.format(new Date());
+
+
+                Paragraph p1 = new Paragraph(text, FontFactory.getFont(FontFactory.COURIER));
+                p1.setAlignment(Paragraph.ALIGN_LEFT);
+
+                Paragraph title = new Paragraph(titleText, FontFactory.getFont(FontFactory.COURIER, 16f));
+                //Font titleFont = new Font(Font.FontFamily.COURIER, 16f);
+                //title.setFont(titleFont);
+                title.setAlignment(Paragraph.ALIGN_CENTER);
+
+                Paragraph genTime = new Paragraph("(generated " + currentDateandTime + ")\n\n\n", FontFactory.getFont(FontFactory.COURIER, 10f));
+                genTime.setAlignment(Paragraph.ALIGN_RIGHT);
+
+
+                //add paragraph to document
+                doc.add(title);
+                doc.add(genTime);
+                doc.add(p1);
+
+                doc.addAuthor("TestLog auto-gen for CE de Sauveterre");
+
+            } catch (DocumentException de) {
+                Log.e("PDFCreator", "DocumentException:" + de);
+            } catch (IOException e) {
+                Log.e("PDFCreator", "ioException:" + e);
+            }
+            finally {
+                doc.close();
+                //Toast.makeText(this, "created", Toast.LENGTH_SHORT).show();
+                Log.e("DBG", "created");
+
             }
 
-            File file = new File(dir, fileName);
-            file.createNewFile();
-            FileOutputStream fOut = new FileOutputStream(file);
-            PdfWriter.getInstance(doc, fOut);
-
-            //open the document
-            doc.open();
-            doc.setPageSize(A4);
-
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd@HH:mm:ss", Locale.FRANCE);
-            String currentDateandTime = sdf.format(new Date());
-
-
-            Paragraph p1 = new Paragraph(text, FontFactory.getFont(FontFactory.COURIER));
-            p1.setAlignment(Paragraph.ALIGN_LEFT);
-
-            Paragraph title = new Paragraph(titleText, FontFactory.getFont(FontFactory.COURIER, 16f));
-            //Font titleFont = new Font(Font.FontFamily.COURIER, 16f);
-            //title.setFont(titleFont);
-            title.setAlignment(Paragraph.ALIGN_CENTER);
-
-            Paragraph genTime = new Paragraph("(generated " + currentDateandTime + ")\n\n\n", FontFactory.getFont(FontFactory.COURIER,10f));
-            genTime.setAlignment(Paragraph.ALIGN_RIGHT);
-
-
-            //add paragraph to document
-            doc.add(title);
-            doc.add(genTime);
-            doc.add(p1);
-
-            doc.addAuthor("TestLog auto-gen for CE de Sauveterre");
-
-        } catch (DocumentException de) {
-            Log.e("PDFCreator", "DocumentException:" + de);
-        } catch (IOException e) {
-            Log.e("PDFCreator", "ioException:" + e);
+            viewPdf(fileName, "Dir/generated", context);
         }
-        finally {
-            doc.close();
-            //Toast.makeText(this, "created", Toast.LENGTH_SHORT).show();
-            Log.e("DBG", "created");
-
-        }
-
-        viewPdf(fileName, "Dir/generated", context);
-    }
 
     public void createTablePdf(String[][] rowContent, String titleText, String fName, Context context){
         Document doc = new Document();
@@ -190,7 +198,7 @@ public class generatePdf extends AppCompatActivity {
     private void viewPdf(String file, String directory, Context context) {
 
         File pdfFile = new File(Environment.getExternalStorageDirectory()+ "/" + directory + "/" + file);
-        Uri path = FileProvider.getUriForFile(context, "com.example.administrateur.testlog.fileprovider",pdfFile);
+        Uri path = FileProvider.getUriForFile(context, "com.apogee.dev.testlog.fileprovider",pdfFile);
 
 
         // Setting the intent for pdf reader
@@ -198,7 +206,8 @@ public class generatePdf extends AppCompatActivity {
         pdfIntent.setDataAndType(path, "application/pdf");
         pdfIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         pdfIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-
+        pdfIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+        pdfIntent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
         try {
             context.startActivity(pdfIntent);
 

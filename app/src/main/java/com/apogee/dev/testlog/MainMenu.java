@@ -241,6 +241,37 @@ public class MainMenu extends AppCompatActivity {
         Intent intent = new Intent(this, eMainActivity.class);
         startActivity(intent);
     }
+    public void gotoFFE(View view){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Accès aux sites FFE")
+                .setMessage("Où allons-nous ?")
+                .setPositiveButton("FFE Club SIF", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        accesFFE("club");
+                    }
+                })
+                .setNegativeButton("FFE compet", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        accesFFE("compet");
+                    }
+                })
+                .setNeutralButton("Retour", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+        builder.show();
+    }
+    public void accesFFE(String which){
+        Uri uri;
+        uri = Uri.parse((which.equals("club"))? "https://www.telemat.org/FFE/sif/" : "https://ffecompet.ffe.com/");
+
+        Intent openUpdate = new Intent(Intent.ACTION_VIEW, uri);
+        startActivity(openUpdate);
+    }
     public void gotoAuth (){
         Intent intent = new Intent(this, LoginActivity.class);
         FirebaseAuth auth = FirebaseAuth.getInstance();

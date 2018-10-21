@@ -16,14 +16,14 @@ repositories {
 
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion 25
 
 
 
     defaultConfig {
         applicationId "com.dev.cyka.saisiecavalerie"
         minSdkVersion 23
-        targetSdkVersion 26
+        targetSdkVersion 25
         versionCode 1
         versionName "sc_Alpha2"
 

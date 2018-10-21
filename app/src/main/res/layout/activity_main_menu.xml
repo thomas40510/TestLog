@@ -113,4 +113,14 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textView53" />
 
+    <Button
+        android:id="@+id/button17"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/button18"
+        android:drawableLeft="@drawable/ic_action_logo_federal_blanc_transparent_imagelarge"
+        android:onClick="gotoFFE"
+        android:text="Sites FFE" />
+
 </RelativeLayout>

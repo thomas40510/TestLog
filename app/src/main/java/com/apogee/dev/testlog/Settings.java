@@ -179,7 +179,7 @@ public class Settings extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 if (mean.equals("mail")) {
-                    sendAutoMail("Message from user", "---Begin user message--- \n" + editText.getText().toString() + "\n ---End user message---");
+                    sendAutoMail("Message from user", "---Begin user message--- \n\n" +">> "+ editText.getText().toString() + "\n\n ---End user message---");
                 } else {
                     sendSMS(editText.getText().toString());
                 }

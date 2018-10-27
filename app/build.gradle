@@ -22,10 +22,10 @@ android {
     //buildToolsVersion "26.0.2"
     defaultConfig {
         applicationId 'com.apogee.dev.testlog'
-        minSdkVersion 25
+        minSdkVersion 24
         targetSdkVersion 25
-        versionCode 100
-        versionName "v1.0"
+        versionCode 101
+        versionName "Dev"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         resValue("string", "BUILD_DATE", "01/09/2018")
 

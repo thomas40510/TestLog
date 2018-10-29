@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.SmsManager;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
@@ -99,14 +100,13 @@ public class Settings extends AppCompatActivity {
                         String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Dir/generated";
 
                         File dir = new File(path);
-
+                        Log.e("DBG", ""+dir);
                         if (dir.isDirectory()){
                             String[] children = dir.list();
-                            for (int s = 0; i<children.length; i++){
+                            for (int s = 0; s<children.length; s++) {
                                 new File(dir, children[s]).delete();
                             }
                         }
-
                         Toast.makeText(getApplicationContext(), "Les données locales ont été supprimées", Toast.LENGTH_SHORT).show();
 
                         gotoAuth();

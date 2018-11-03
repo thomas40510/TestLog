@@ -8,6 +8,9 @@ import android.net.NetworkCapabilities;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.crashlytics.android.Crashlytics;
 
@@ -39,6 +42,34 @@ public class Launcher extends AppCompatActivity {
             finish();
         }
 
+    }
+
+    /**
+     * Actions for toolbar menu
+     */
+    @Override
+    //load menu file//
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.emergency_menu, menu); //your file name
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    //set on-click actions//
+    public boolean onOptionsItemSelected(final MenuItem item) {
+        Boolean isContact = true;
+        switch (item.getItemId()) {
+            case R.id.emer_gps:
+                isContact = false;
+            case R.id.emer_contacts:
+                //do nothing
+            default :
+                Intent intent = new Intent(this, emergency.class);
+                intent.putExtra("isContact", isContact);
+                startActivity(intent);
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     public boolean isInternetWorking() {

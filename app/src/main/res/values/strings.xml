@@ -57,6 +57,20 @@
     <string name="écuries_shortcut_long_message">Accès à la gestion des écuries</string>
     <string name="écuries_shortcut_disabled_message">Écuries (indisponible)</string>
 
+    <string name="emergency_numbers">
+        Bureau : 02 51 90 76 96 \n\n
+        Clémence : 06 18 35 22 34 \n\n
+        Cassandre : 00 00 00 00 00 \n\n
+        Stéphane : 00 00 00 00 00 \n\n
+        Nico : 00 00 00 00 00 \n\n
+        \n\n
+        Arundel pizz : 00 00 00 00 00 \n\n
+    </string>
+    <string name="emergency_gps">
+        Patte d\'oie : .. \n\n
+        etc..
+    </string>
+
 
     <string-array name="cardRefs">
         <item>c10</item>

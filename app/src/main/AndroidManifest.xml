@@ -23,7 +23,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
             android:name=".MainActivity"
             android:label="Cavaliers">
@@ -74,8 +73,7 @@
                 android:name="android.app.shortcuts"
                 android:resource="@xml/shortcuts" />
         </activity>
-        <activity
-            android:name=".ponySelect"/>
+        <activity android:name=".ponySelect" />
         <activity
             android:name=".ceditProfile"
             android:label="Cavalerie" />
@@ -147,8 +145,10 @@
         <activity
             android:name=".eMainActivity"
             android:label="Écuries" />
-        <activity android:name=".stabInfo"
-            android:label="Écuries"/>
+        <activity
+            android:name=".stabInfo"
+            android:label="Écuries" />
+        <activity android:name=".emergency"></activity>
     </application>
 
 </manifest>

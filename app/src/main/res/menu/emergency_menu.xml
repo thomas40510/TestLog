@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2018 Thomas Prévost / CE Sauveterre. Distribué sous license libre.
+  -->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/emer-contacts"
+        android:title="Contacts d'urgence" />
+    <item
+        android:id="@+id/emer-gps"
+        android:title="Coordonnées GPS" />
+</menu>

@@ -24,7 +24,7 @@ public class emergency extends AppCompatActivity {
             e.printStackTrace();
             finish();
         }
-
+        ((TextView) findViewById(R.id.title)).setText((isContact) ? "Numéros d'urgence" : "Lieux d'intérêt - coordonnées GPS");
         ((TextView) findViewById(R.id.details)).setText(getResources().getString((isContact) ? R.string.emergency_numbers : R.string.emergency_gps));
     }
 }

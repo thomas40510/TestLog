@@ -11,11 +11,21 @@
     android:layout_margin="@dimen/activity_vertical_margin">
 
     <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="TextView"
+        android:textAllCaps="true"
+        android:textStyle="bold" />
+
+    <TextView
         android:id="@+id/details"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="476dp"
+        android:layout_below="@+id/title"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
         android:linksClickable="true"
         android:text="TextView"
         android:textIsSelectable="true" />

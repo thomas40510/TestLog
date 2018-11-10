@@ -29,4 +29,7 @@
     <color name="lbl_name">#333333</color>
     <color name="btn_logut_bg">#ff6861</color>
 
+    <color name="adok">#789f00</color>
+    <color name="adexpired">#ff473f</color>
+
 </resources>

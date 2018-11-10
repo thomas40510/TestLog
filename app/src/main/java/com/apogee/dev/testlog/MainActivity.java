@@ -97,9 +97,10 @@ public class MainActivity extends AppCompatActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference("cavaliers");
         for (String s : DBFetch.userlist){
-            ref.child(s).child("isAssigned").setValue(false);
+            ref.child(s).child("adlic").setValue("1804");
         }
         */
+
 
     }
 
@@ -165,6 +166,7 @@ public class MainActivity extends AppCompatActivity {
             findViewById(resID).setClickable(true);
         }
     }
+
 
 
 }

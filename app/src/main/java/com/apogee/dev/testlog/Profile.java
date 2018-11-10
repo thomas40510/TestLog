@@ -33,6 +33,7 @@ public class Profile extends AppCompatActivity {
     public  TextView remaining;
     public TextView licence;
     public TextView tel, mail,textHisto;
+    public TextView adyear, licyear;
     public static String nameStr,bDateStr,addressStr,cityStr,flechStr,forfaitStr,remainStr,licStr,telStr,mailStr,telWhoStr;
     public static String numberStr,histoStr;
 
@@ -49,6 +50,9 @@ public class Profile extends AppCompatActivity {
         licence = (TextView) findViewById(R.id.licence);
         tel = (TextView) findViewById(R.id.tel);
         mail = (TextView) findViewById(R.id.mail);
+
+        adyear = (TextView)findViewById(R.id.adyear);
+        licyear = (TextView) findViewById(R.id.licyear);
 
         Bundle extras = getIntent().getExtras();
         nameStr = extras.getString("name");
@@ -74,6 +78,8 @@ public class Profile extends AppCompatActivity {
                 telWhoStr = dataSnapshot.child("tel").child("who").getValue(String.class);
                 mailStr = dataSnapshot.child("mail").getValue(String.class);
 
+                String adlic = dataSnapshot.child("adlic").getValue(String.class);
+
                 bDate.setText(bDateStr);
                 address.setText(addressStr+", "+cityStr);
                 flechage.setText(flechStr);
@@ -92,6 +98,17 @@ public class Profile extends AppCompatActivity {
                 tel.setText(telStr);
 
                 mail.setText(mailStr);
+
+                try {
+                    adyear.setTextColor(getResources().getColor(("2018 2019".contains(adlic)) ? R.color.adok : R.color.adexpired));
+                    licyear.setTextColor(getResources().getColor(("2018 2019".contains(adlic)) ? R.color.adok : R.color.adexpired));
+
+                    adyear.setText(adlic);
+                    licyear.setText(adlic);
+
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
             }
 
             @Override

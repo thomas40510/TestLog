@@ -40,6 +40,7 @@ public class MainMenu extends AppCompatActivity {
 
     int i = 0;
     private FirebaseRemoteConfig mFirebaseRemoteConfig;
+    public static String loggedUserName;
 
     //Remote Config keys
     private static final String UPDATE_LINK = "update_link";
@@ -79,7 +80,8 @@ public class MainMenu extends AppCompatActivity {
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                ((TextView)findViewById(R.id.userName)).setText(dataSnapshot.child(userMail.replace("@", "_at_").replace(".", "_dot_")).getValue().toString());
+                loggedUserName = dataSnapshot.child(userMail.replace("@", "_at_").replace(".", "_dot_")).getValue().toString();
+                ((TextView)findViewById(R.id.userName)).setText(loggedUserName);
             }
 
             @Override

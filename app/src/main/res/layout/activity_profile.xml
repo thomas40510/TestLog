@@ -163,7 +163,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView23"
         android:layout_toEndOf="@+id/textView24"
-        android:text="TextView" />
+        android:text="TextView"
+        android:textIsSelectable="true" />
 
     <TextView
         android:id="@+id/mail"
@@ -171,7 +172,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView24"
         android:layout_toEndOf="@+id/textView24"
-        android:text="TextView" />
+        android:text="TextView"
+        android:textIsSelectable="true" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -213,7 +215,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:text="00"
-        android:textColor="@android:color/holo_green_light" />
+        android:textColor="@color/adok" />
 
     <TextView
         android:id="@+id/licyear"
@@ -222,7 +224,7 @@
         android:layout_below="@+id/adyear"
         android:layout_alignParentEnd="true"
         android:text="00"
-        android:textColor="@android:color/holo_red_light" />
+        android:textColor="@color/adexpired" />
 
     <TextView
         android:id="@+id/textView62"

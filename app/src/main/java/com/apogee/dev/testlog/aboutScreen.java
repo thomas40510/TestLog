@@ -28,6 +28,7 @@ public class aboutScreen extends AppCompatActivity {
     }
 
     public void showInfos(){
+        //TODO : implement 'bluestacks mode' for pdf generation
         String infos = "Version : "+ BuildConfig.VERSION_NAME + "\n"
                 + "Version code : "+BuildConfig.VERSION_CODE + "\n"
                 + "Build date : "+ getString(R.string.BUILD_DATE)+ "\n"

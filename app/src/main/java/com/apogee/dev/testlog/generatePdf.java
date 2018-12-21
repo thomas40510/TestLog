@@ -1,16 +1,10 @@
 package com.apogee.dev.testlog;
 
-import android.Manifest;
-import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Environment;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -32,7 +26,6 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
 import static com.itextpdf.text.PageSize.A4;
@@ -40,6 +33,8 @@ import static com.itextpdf.text.PageSize.A4;
 /**
  * Created by creation on 04/01/2018.
  */
+
+//TODO : implement firebase cloud storage fonction for Bluestacks mode
 
 public class generatePdf extends AppCompatActivity {
 

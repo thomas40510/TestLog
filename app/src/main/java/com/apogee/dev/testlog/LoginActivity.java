@@ -5,14 +5,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -26,8 +27,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-
-import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -222,6 +221,32 @@ public class LoginActivity extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * Actions for toolbar menu
+     */
+    @Override
+    //load menu file//
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.emergency_menu, menu); //your file name
+        return super.onCreateOptionsMenu(menu);
+    }
 
+    @Override
+    //set on-click actions//
+    public boolean onOptionsItemSelected(final MenuItem item) {
+        Boolean isContact = true;
+        switch (item.getItemId()) {
+            case R.id.emer_gps:
+                isContact = false;
+            case R.id.emer_contacts:
+                //do nothing
+            default :
+                Intent intent = new Intent(this, emergency.class);
+                intent.putExtra("isContact", isContact);
+                startActivity(intent);
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
 }

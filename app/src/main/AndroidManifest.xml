@@ -23,7 +23,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
             android:name=".MainActivity"
             android:label="Cavaliers">
@@ -74,8 +73,7 @@
                 android:name="android.app.shortcuts"
                 android:resource="@xml/shortcuts" />
         </activity>
-        <activity
-            android:name=".ponySelect"/>
+        <activity android:name=".ponySelect" />
         <activity
             android:name=".ceditProfile"
             android:label="Cavalerie" />
@@ -97,7 +95,11 @@
             android:name="io.fabric.ApiKey"
             android:value="a4cef1009bf2fffd5e20116c62be7af1bcac4b05" />
 
-        <activity android:name=".MainMenu" />
+        <activity android:name=".MainMenu" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+            </intent-filter>
+        </activity>
 
         <provider
             android:name=".GenericFileProvider"
@@ -147,8 +149,10 @@
         <activity
             android:name=".eMainActivity"
             android:label="Écuries" />
-        <activity android:name=".stabInfo"
-            android:label="Écuries"/>
+        <activity
+            android:name=".stabInfo"
+            android:label="Écuries" />
+        <activity android:name=".emergency"></activity>
     </application>
 
 </manifest>

@@ -25,6 +25,8 @@ import com.google.firebase.database.ValueEventListener;
 
 public class Profile extends AppCompatActivity {
 
+    private static final String currentYear = "2019";
+
     public View view, view2;
     public TextView bDate;
     public TextView address;
@@ -33,13 +35,18 @@ public class Profile extends AppCompatActivity {
     public  TextView remaining;
     public TextView licence;
     public TextView tel, mail,textHisto;
+    public TextView adyear, licyear;
     public static String nameStr,bDateStr,addressStr,cityStr,flechStr,forfaitStr,remainStr,licStr,telStr,mailStr,telWhoStr;
-    public static String numberStr,histoStr;
+    public static String numberStr,histoStr,adlic;
+
+    private Menu profileMenu ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        final String prevYear = (Integer.toString(Integer.parseInt(currentYear) - 1));
 
         bDate = (TextView) findViewById(R.id.bDate);
         address = (TextView) findViewById(R.id.address);
@@ -49,6 +56,9 @@ public class Profile extends AppCompatActivity {
         licence = (TextView) findViewById(R.id.licence);
         tel = (TextView) findViewById(R.id.tel);
         mail = (TextView) findViewById(R.id.mail);
+
+        adyear = (TextView)findViewById(R.id.adyear);
+        licyear = (TextView) findViewById(R.id.licyear);
 
         Bundle extras = getIntent().getExtras();
         nameStr = extras.getString("name");
@@ -74,6 +84,8 @@ public class Profile extends AppCompatActivity {
                 telWhoStr = dataSnapshot.child("tel").child("who").getValue(String.class);
                 mailStr = dataSnapshot.child("mail").getValue(String.class);
 
+                adlic = dataSnapshot.child("adlic").getValue(String.class);
+
                 bDate.setText(bDateStr);
                 address.setText(addressStr+", "+cityStr);
                 flechage.setText(flechStr);
@@ -92,6 +104,18 @@ public class Profile extends AppCompatActivity {
                 tel.setText(telStr);
 
                 mail.setText(mailStr);
+
+                try {
+                    String range = prevYear + " " + currentYear;
+                    adyear.setTextColor(getResources().getColor((range.contains(adlic)) ? R.color.adok : R.color.adexpired));
+                    licyear.setTextColor(getResources().getColor((range.contains(adlic)) ? R.color.adok : R.color.adexpired));
+
+                    adyear.setText(adlic);
+                    licyear.setText(adlic);
+
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
             }
 
             @Override
@@ -112,17 +136,34 @@ public class Profile extends AppCompatActivity {
             }
         });
 
+
     }
 
     /**
      * Actions for toolbar menu
      */
+
     @Override
     //load menu file//
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.profile_menu, menu); //your file name
+
+        profileMenu = menu;
+
+        try {
+            profileMenu.getItem(R.id.renewAdlic).setEnabled(false);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu){
+        menu.findItem(R.id.renewAdlic).setEnabled(!adlic.equals(currentYear));
+        return true;
     }
 
     @Override
@@ -135,6 +176,9 @@ public class Profile extends AppCompatActivity {
                 return true;
             case R.id.printHisto:
                 printHisto();
+                return true;
+            case R.id.renewAdlic:
+                renewAdLic();
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -174,6 +218,32 @@ public class Profile extends AppCompatActivity {
     public void printHisto(){
         generatePdf gen = new generatePdf();
         gen.createPdf(histoStr, nameStr+" - Historique des opérations", (nameStr.replace(" ","")).toLowerCase()+"-histo-" + System.currentTimeMillis() + ".pdf", getApplicationContext());
+    }
+
+    public void renewAdLic(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Confirmation")
+                .setMessage("Confirmez-vous le renouvellement de l'adhésion et de la licence pour ce cavalier ?")
+                .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        FirebaseDatabase database = FirebaseDatabase.getInstance();
+                        DatabaseReference ref = database.getReference("cavaliers");
+                        ref.child(nameStr).child("adlic").setValue(currentYear);
+
+                        Answers.getInstance().logCustom(new CustomEvent("Adhésion / licence")
+                                .putCustomAttribute("Name", nameStr).putCustomAttribute("by", MainMenu.loggedUserName));
+
+                        Toast.makeText(getApplicationContext(), "adhésion / licence renouvelées !", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+        builder.show();
     }
 
     public void editProfile (View view){

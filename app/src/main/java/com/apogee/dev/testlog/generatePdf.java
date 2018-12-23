@@ -38,6 +38,7 @@ import static com.itextpdf.text.PageSize.A4;
 
 public class generatePdf extends AppCompatActivity {
 
+    private String path;
     // Method for creating a pdf file from text, saving it then opening it for display
     public void createPdf(String text, String titleText, String fName, Context context) {
 
@@ -49,7 +50,8 @@ public class generatePdf extends AppCompatActivity {
             String fileName = fName;
 
             try {
-                String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Dir/generated";
+                //String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Dir/generated";
+                path = context.getFilesDir() + "/Dir/generated";
 
                 File dir = new File(path);
                 if (!dir.exists()) {
@@ -192,13 +194,14 @@ public class generatePdf extends AppCompatActivity {
     // Method for opening a pdf file
     private void viewPdf(String file, String directory, Context context) {
 
-        File pdfFile = new File(Environment.getExternalStorageDirectory()+ "/" + directory + "/" + file);
-        Uri path = FileProvider.getUriForFile(context, "com.apogee.dev.testlog.fileprovider",pdfFile);
+        //File pdfFile = new File(Environment.getExternalStorageDirectory()+ "/" + directory + "/" + file);
+        File pdfFile = new File(path+ "/" + file);
+        Uri pathuri = FileProvider.getUriForFile(context, "com.apogee.dev.testlog.fileprovider",pdfFile);
 
 
         // Setting the intent for pdf reader
         Intent pdfIntent = new Intent(Intent.ACTION_VIEW);
-        pdfIntent.setDataAndType(path, "application/pdf");
+        pdfIntent.setDataAndType(pathuri, "application/pdf");
         pdfIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         pdfIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         pdfIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);

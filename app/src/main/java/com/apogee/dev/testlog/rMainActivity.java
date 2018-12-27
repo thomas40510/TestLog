@@ -43,6 +43,12 @@ public class rMainActivity extends AppCompatActivity {
                 gotoRep("samedi");
             }
         });
+        ((Button) findViewById(R.id.buttonSemaine)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                gotoRep("semaine");
+            }
+        });
 
         new DBFetch().fetchDB(false, false);
     }

@@ -4,7 +4,6 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Environment;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -112,7 +111,7 @@ public class generatePdf extends AppCompatActivity {
         try{
             Font bf12 = new Font(Font.FontFamily.COURIER, 12);
 
-            String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Dir/generated";
+            path = context.getFilesDir() + "/Dir/generated";
 
             File dir = new File(path);
             if (!dir.exists()) {

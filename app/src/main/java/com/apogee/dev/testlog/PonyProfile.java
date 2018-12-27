@@ -40,6 +40,7 @@ public class PonyProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pony_profile);
 
+        //TODO : ajouter ostéo + dentiste
         bDate = (TextView) findViewById(R.id.bDate);
         proprio = (TextView) findViewById(R.id.proprio);
         sexe = (TextView) findViewById(R.id.sexe);

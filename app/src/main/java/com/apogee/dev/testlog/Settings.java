@@ -9,7 +9,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.SmsManager;
 import android.util.Log;
@@ -97,7 +96,7 @@ public class Settings extends AppCompatActivity {
                         editor.clear();
                         editor.commit();
 
-                        String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Dir/generated";
+                        String path = getApplication().getFilesDir() + "/Dir/generated";
 
                         File dir = new File(path);
                         Log.e("DBG", ""+dir);

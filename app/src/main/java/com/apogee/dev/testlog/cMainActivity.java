@@ -20,6 +20,8 @@ public class cMainActivity extends AppCompatActivity {
 
     public static SharedPreferences prefs;
 
+    //TODO : registre entrées / sorties
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

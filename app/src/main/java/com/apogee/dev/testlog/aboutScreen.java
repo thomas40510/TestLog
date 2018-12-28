@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2018 Thomas Prévost / CE Sauveterre. Distribué sous license libre.
+ */
+
 package com.apogee.dev.testlog;
 
 import android.content.DialogInterface;
@@ -33,8 +37,6 @@ public class aboutScreen extends AppCompatActivity {
     Boolean BSmode;
 
     public void showInfos(){
-        //TODO : implement 'bluestacks mode' for pdf generation
-
         SharedPreferences pref = getSharedPreferences(shPrefs.sharedPrefs, MODE_PRIVATE);
         BSmode = pref.getBoolean("BSmode", false);
 

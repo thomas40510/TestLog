@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2018 Thomas Prévost / CE Sauveterre. Distribué sous license libre.
+ */
+
 package com.apogee.dev.testlog;
 
 import android.content.ActivityNotFoundException;
@@ -33,7 +37,6 @@ import static com.itextpdf.text.PageSize.A4;
  * Created by creation on 04/01/2018.
  */
 
-//TODO : implement firebase cloud storage fonction for Bluestacks mode
 
 public class generatePdf extends AppCompatActivity {
 

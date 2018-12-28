@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2018 Thomas Prévost / CE Sauveterre. Distribué sous license libre.
+ */
+
 buildscript {
     repositories {
         maven { url 'https://maven.fabric.io/public' }
@@ -24,10 +28,10 @@ android {
         applicationId 'com.apogee.dev.testlog'
         minSdkVersion 24
         targetSdkVersion 26
-        versionCode 1011
-        versionName "Dev"
+        versionCode 1020
+        versionName "1.2.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        resValue("string", "BUILD_DATE", "29/10/2018")
+        resValue("string", "BUILD_DATE", "28/12/2018")
 
     }
     buildTypes {

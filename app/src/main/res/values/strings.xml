@@ -1,3 +1,7 @@
+<!--
+  ~ Copyright (c) 2018 Thomas Prévost / CE Sauveterre. Distribué sous license libre.
+  -->
+
 <resources>
     <string name="app_name">CE Sauveterre</string>
     <string name="title_activity_login">Sign in</string>

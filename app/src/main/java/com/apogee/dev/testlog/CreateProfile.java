@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2018 Thomas Prévost / CE Sauveterre. Distribué sous license libre.
+ */
+
 package com.apogee.dev.testlog;
 
 import android.content.Context;
@@ -26,7 +30,7 @@ public class CreateProfile extends AppCompatActivity {
     String whoStr, mailStr;
     AutoCompleteTextView forfait;
 
-    //TODO : ajouter n° licence ds création profile
+    //TODO : ajouter n° licence dans création profile
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

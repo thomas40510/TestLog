@@ -11,4 +11,4 @@ Actuellement en développement.
 [Voir le changelog](docs/changelog.md)
 
 
-##### © 2018 Thomas Prévost / CE Sauveterre
+##### © 2019 Thomas Prévost / CE de Sauveterre

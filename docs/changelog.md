@@ -1,5 +1,8 @@
 ## Changelog
 
+#### //Version 1.2.1 (01/01/2019)//
+- Suppression du paramètre 'bluestacks mode' ajouté dans la version 1.2.0
+
 #### //Version 1.2.0 (28/12/2018)//
 - Corrections de bugs
 - Les fichiers sont désormais générés sur le cache

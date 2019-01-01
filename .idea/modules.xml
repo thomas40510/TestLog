@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Dev-TestLog.iml" filepath="$PROJECT_DIR$/Dev-TestLog.iml" />
       <module fileurl="file://$PROJECT_DIR$/TestLog.iml" filepath="$PROJECT_DIR$/TestLog.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/saisiecavalerie/saisiecavalerie.iml" filepath="$PROJECT_DIR$/saisiecavalerie/saisiecavalerie.iml" />

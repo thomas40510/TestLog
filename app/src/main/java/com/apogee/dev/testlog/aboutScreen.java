@@ -6,15 +6,12 @@ package com.apogee.dev.testlog;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class aboutScreen extends AppCompatActivity {
 
@@ -34,17 +31,13 @@ public class aboutScreen extends AppCompatActivity {
         });
     }
 
-    Boolean BSmode;
 
     public void showInfos(){
-        SharedPreferences pref = getSharedPreferences(shPrefs.sharedPrefs, MODE_PRIVATE);
-        BSmode = pref.getBoolean("BSmode", false);
 
         String infos = "Version : "+ BuildConfig.VERSION_NAME + "\n"
                 + "Version code : "+BuildConfig.VERSION_CODE + "\n"
                 + "Build date : "+ getString(R.string.BUILD_DATE)+ "\n"
-                + "Package : "+BuildConfig.APPLICATION_ID + "\n"
-                +"Bluestacks : "+BSmode;
+                + "Package : "+BuildConfig.APPLICATION_ID;
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Plus d'infos...")
@@ -62,18 +55,6 @@ public class aboutScreen extends AppCompatActivity {
                         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                         startActivity(intent);
                     }
-                })
-                .setNegativeButton("set BS", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        if (MainMenu.loggedUserName.equals("Admin")) {
-                            setBluestacks();
-
-                        }
-                        else {
-                            Toast.makeText(getApplicationContext(),"Droits insuffisants",Toast.LENGTH_SHORT).show();
-                        }
-                    }
                 });
         builder.show();
     }
@@ -82,36 +63,4 @@ public class aboutScreen extends AppCompatActivity {
         finish();
     }
 
-    public void setBluestacks(){
-        AlertDialog.Builder bsbuilder = new AlertDialog.Builder(this);
-        bsbuilder.setTitle("set Bluestacks status")
-                .setMessage("BSmode = "+BSmode)
-                .setPositiveButton("Activer", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        changeBS(true);
-                    }
-                })
-                .setNegativeButton("Désactiver", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        changeBS(false);
-                    }
-                })
-                .setNeutralButton("Retour", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                    }
-                });
-        bsbuilder.show();
-    }
-    public void changeBS(Boolean bsmode){
-        SharedPreferences.Editor e = getSharedPreferences(shPrefs.sharedPrefs, MODE_PRIVATE).edit();
-        e.putBoolean("BSmode", bsmode);
-        e.commit();
-
-        Log.e("DBG", ""+bsmode);
-        Toast.makeText(getApplicationContext(), "Done", Toast.LENGTH_SHORT).show();
-    }
 }

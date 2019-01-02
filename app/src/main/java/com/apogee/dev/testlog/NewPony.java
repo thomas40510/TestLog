@@ -24,7 +24,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class NewPony extends AppCompatActivity {
 
-    public EditText bDate, limhr, proprio, lastnico, name;
+    public EditText bDate, limhr, proprio, lastnico, name, lastost, lastdent;
     public EditText rationMt, rationMd, rationS;
     public CheckBox isClub;
     public Spinner sexe, type;
@@ -45,8 +45,11 @@ public class NewPony extends AppCompatActivity {
 
         bDate = (EditText) findViewById(R.id.bDate);
         proprio = (EditText) findViewById(R.id.proprio);
-        lastnico = (EditText) findViewById(R.id.lastnico);
         name = (EditText) findViewById(R.id.name);
+
+        lastnico = (EditText) findViewById(R.id.lastnico);
+        lastost = (EditText) findViewById(R.id.lastost);
+        lastdent = (EditText) findViewById(R.id.lastdent);
 
         rationMt = (EditText) findViewById(R.id.rationMt);
         rationMd = (EditText) findViewById(R.id.rationMd);
@@ -68,7 +71,7 @@ public class NewPony extends AppCompatActivity {
                 return false;
             }
         };
-        lastnico.setNextFocusDownId(R.id.rationMt);
+        lastost.setNextFocusDownId(R.id.rationMt);
         rationMt.setNextFocusDownId(R.id.rationMd);
         rationMd.setNextFocusDownId(R.id.rationS);
         rationS.setOnKeyListener(listener);
@@ -98,8 +101,11 @@ public class NewPony extends AppCompatActivity {
             } else {
                 mref.child("proprio").setValue(proprio.getText().toString());
             }
-            mref.child("lastNico").setValue(lastnico.getText().toString());
             mref.child("isAssigned").setValue(false);
+
+            mref.child("lastNico").setValue(lastnico.getText().toString());
+            mref.child("lastOst").setValue(lastost.getText().toString());
+            mref.child("lastDent").setValue(lastdent.getText().toString());
 
             DatabaseReference mref1 = mref.child("ration");
             mref1.child("mt").setValue(rationMt.getText().toString());

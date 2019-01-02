@@ -79,7 +79,7 @@
         </activity>
         <activity android:name=".ponySelect" />
         <activity
-            android:name=".ceditProfile"
+            android:name=".PonyEditProfile"
             android:label="Cavalerie" />
         <activity
             android:name=".cMainActivity"

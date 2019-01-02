@@ -18,22 +18,25 @@ import android.widget.Toast;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class ceditProfile extends AppCompatActivity {
+public class PonyEditProfile extends AppCompatActivity {
 
-    public EditText bDate, limhr, proprio, lastnico;
+    public EditText bDate, limhr, proprio, lastnico, lastdent, lastost;
     public EditText rationMt, rationMd, rationS;
     public CheckBox isClub;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cedit_profile);
+        setContentView(R.layout.activity_pony_editprofile);
 
         isClub = (CheckBox) findViewById(R.id.checkClub);
 
         bDate = (EditText) findViewById(R.id.bDate);
         proprio =(EditText) findViewById(R.id.proprio);
+
         lastnico = (EditText) findViewById(R.id.lastnico);
+        lastdent = (EditText) findViewById(R.id.lastdent);
+        lastost = (EditText) findViewById(R.id.lastost);
 
         rationMt = (EditText) findViewById(R.id.rationMt);
         rationMd = (EditText) findViewById(R.id.rationMd);
@@ -55,7 +58,7 @@ public class ceditProfile extends AppCompatActivity {
                 return false;
             }
         };
-        lastnico.setNextFocusDownId(R.id.rationMt);
+        lastdent.setNextFocusDownId(R.id.rationMt);
         rationMt.setNextFocusDownId(R.id.rationMd);
         rationMd.setNextFocusDownId(R.id.rationS);
         rationS.setOnKeyListener(listener);
@@ -79,6 +82,8 @@ public class ceditProfile extends AppCompatActivity {
         }
 
         lastnico.setText(PonyProfile.nicoStr);
+        lastdent.setText(PonyProfile.dentStr);
+        lastost.setText(PonyProfile.ostStr);
 
         rationMt.setText(PonyProfile.rationStr[0]);
         rationMd.setText(PonyProfile.rationStr[1]);
@@ -103,6 +108,8 @@ public class ceditProfile extends AppCompatActivity {
             mref.child("proprio").setValue(proprio.getText().toString());
         }
         mref.child("lastNico").setValue(lastnico.getText().toString());
+        mref.child("lastDent").setValue(lastdent.getText().toString());
+        mref.child("lastOst").setValue(lastost.getText().toString());
 
         DatabaseReference mref1 = mref.child("ration");
         mref1.child("mt").setValue(rationMt.getText().toString());

@@ -85,22 +85,13 @@
         android:text="TextView"
         android:visibility="gone" />
 
-    <!--lastNico-->
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/lastost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
-        android:text="Dernier maréchal : " />
-    <TextView
-        android:id="@+id/lastnico"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView"
-        android:layout_alignBottom="@+id/textView"
-        android:layout_toEndOf="@+id/textView"
-        android:text="TextView" />
+        android:text="Dernier ostéo : " />
 
     <!--formatting-->
     <TextView
@@ -114,7 +105,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView" />
+        android:layout_below="@+id/lastost" />
     <TextView
         android:id="@+id/textView21"
         android:layout_width="wrap_content"
@@ -240,5 +231,21 @@
         android:layout_alignTop="@+id/textView2"
         android:layout_toEndOf="@+id/textView2"
         android:text="TextView" />
+
+    <TextView
+        android:id="@+id/lastdent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/lastost"
+        android:layout_toEndOf="@+id/textView4"
+        android:text="Dernier dentiste :" />
+
+    <TextView
+        android:id="@+id/lastnico"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/lastdent"
+        android:layout_toEndOf="@+id/textView4"
+        android:text="Dernier maréchal :" />
 
 </RelativeLayout>

@@ -34,9 +34,9 @@ public class PonyProfile extends AppCompatActivity {
     public TextView rationMt;
     public TextView rationMd;
     public TextView rationN;
-    public TextView limhr;
+    public TextView lastDent, lastOst;
 
-    public static String nameStr,bDateStr,proprioStr,sexeStr, nicoStr, limhrStr, typeStr;
+    public static String nameStr,bDateStr,proprioStr,sexeStr, nicoStr, typeStr, dentStr, ostStr;
     public static String[] rationStr = {"N/A", "N/A", "N/A"};
 
     @Override
@@ -53,6 +53,8 @@ public class PonyProfile extends AppCompatActivity {
         rationMd = (TextView) findViewById(R.id.rationMd);
         rationN = (TextView) findViewById(R.id.rationS);
         type = (TextView) findViewById(R.id.type);
+        lastDent  =(TextView) findViewById(R.id.lastdent);
+        lastOst  = (TextView) findViewById(R.id.lastost);
 
         Bundle extras = getIntent().getExtras();
         nameStr = extras.getString("name");
@@ -60,7 +62,7 @@ public class PonyProfile extends AppCompatActivity {
         TextView name = (TextView)findViewById(R.id.name);
         name.setText(nameStr);
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myref = database.getReference("cavalerie");
         DatabaseReference nameRef = myref.child(nameStr);
 
@@ -72,6 +74,8 @@ public class PonyProfile extends AppCompatActivity {
                 sexeStr = dataSnapshot.child("sex").getValue(String.class);
                 typeStr = dataSnapshot.child("type").getValue(String.class);
                 nicoStr = dataSnapshot.child("lastNico").getValue(String.class);
+                dentStr = dataSnapshot.child("lastDent").getValue(String.class);
+                ostStr = dataSnapshot.child("lastOst").getValue(String.class);
 
                 rationStr[0] = dataSnapshot.child("ration").child("mt").getValue(String.class);
                 rationStr[1] = dataSnapshot.child("ration").child("md").getValue(String.class);
@@ -82,7 +86,10 @@ public class PonyProfile extends AppCompatActivity {
                 proprio.setText(proprioStr);
                 sexe.setText("["+sexeStr+"]");
                 type.setText(typeStr);
-                lastNico.setText(nicoStr);
+
+                lastNico.setText("Dernier maréchal : "+nicoStr);
+                lastDent.setText("Dernier dentiste : "+dentStr);
+                lastOst.setText("Dernier ostéo : "+ostStr);
 
                 rationMt.setText(rationStr[0]);
                 rationMd.setText(rationStr[1]);
@@ -140,7 +147,7 @@ public class PonyProfile extends AppCompatActivity {
 
 
     public void editProfile (View view){
-        Intent intent = new Intent(this, ceditProfile.class);
+        Intent intent = new Intent(this, PonyEditProfile.class);
         intent.putExtra("bdate", bDateStr)
                 .putExtra("proprio", proprioStr)
                 .putExtra("sex", sexeStr)

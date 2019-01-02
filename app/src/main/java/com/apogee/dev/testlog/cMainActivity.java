@@ -71,15 +71,18 @@ public class cMainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void dontpress (View view){
+    public void editDB (View view){
+
         /*
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference().child("cavalerie");
 
         for (String s : DBFetch.clist){
-            ref.child(s).child("limhr").setValue(null);
+            ref.child(s).child("lastOst").setValue("");
+            ref.child(s).child("lastDent").setValue("");
         }
         */
+
         Toast.makeText(this, "J'avais dit de ne pas appuyer !", Toast.LENGTH_SHORT).show();
     }
 

@@ -147,7 +147,13 @@ public class LoginActivity extends AppCompatActivity {
                 inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
                         InputMethodManager.HIDE_NOT_ALWAYS);
 
+                if (inputEmail.getText().toString().equals("admin")){
+                    inputEmail.setText("admin@testlog.com");
+                    //email = "admin@testlog.com";
+                }
                 String email = inputEmail.getText().toString();
+
+
                 final String password = inputPassword.getText().toString();
 
                 if (TextUtils.isEmpty(email)) {
@@ -196,6 +202,7 @@ public class LoginActivity extends AppCompatActivity {
                                             break;
                                         case "reprises":
                                             intent = new Intent(LoginActivity.this, rMainActivity.class);
+                                            break;
                                         default:
                                             intent = new Intent(LoginActivity.this, MainMenu.class);
                                             Answers.getInstance().logCustom(new CustomEvent("Login")

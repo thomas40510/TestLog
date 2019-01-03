@@ -70,7 +70,6 @@ public class stabInfo extends AppCompatActivity {
                 gotoSelect("remove");
                 return false;
             case R.id.print:
-                //TODO : générer feuille de rations pour l'écurie concernée
                 new MyAsyncTask().execute();
                 return false;
             default:
@@ -127,7 +126,6 @@ public class stabInfo extends AppCompatActivity {
     }
 
     public void gotoSelect(String s){
-        //TODO : create activity to select horses, and redirect to it
         Intent intent = new Intent(this, ponySelect.class);
         intent.putExtra("whatNext", s);
         intent.putExtra("where", whereRef);

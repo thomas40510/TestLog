@@ -29,9 +29,9 @@ android {
         minSdkVersion 24
         targetSdkVersion 26
         versionCode 1022
-        versionName "Dev"
+        versionName "1.2.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        resValue("string", "BUILD_DATE", "01/01/2019")
+        resValue("string", "BUILD_DATE", "03/01/2019")
 
     }
     buildTypes {

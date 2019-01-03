@@ -25,12 +25,11 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class CreateProfile extends AppCompatActivity {
 
-    EditText name, flechage, bDate, address, city, remain,phonenbr,mail;
+    EditText name, flechage, bDate, address, city, remain,phonenbr,mail, licnbr;
     RadioButton radiofather, radiomother;
     String whoStr, mailStr;
     AutoCompleteTextView forfait;
 
-    //TODO : ajouter n° licence dans création profile
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +45,7 @@ public class CreateProfile extends AppCompatActivity {
         remain = (EditText) findViewById(R.id.remaining);
         phonenbr = (EditText) findViewById(R.id.phonenbr);
         mail = (EditText) findViewById(R.id.mail);
+        licnbr = (EditText) findViewById(R.id.licnbr);
 
         radiofather = (RadioButton) findViewById(R.id.radioFather);
         radiomother = (RadioButton) findViewById(R.id.radioMother);
@@ -67,7 +67,7 @@ public class CreateProfile extends AppCompatActivity {
             }
         };
 
-        mail.setOnKeyListener(listener);
+        licnbr.setOnKeyListener(listener);
         flechage.setNextFocusDownId(R.id.name);
         name.setNextFocusDownId(R.id.bDate);
         bDate.setNextFocusDownId(R.id.address);
@@ -76,6 +76,7 @@ public class CreateProfile extends AppCompatActivity {
         forfait.setNextFocusDownId(R.id.remaining);
         remain.setNextFocusDownId(R.id.phonenbr);
         phonenbr.setNextFocusDownId(R.id.mail);
+        mail.setNextFocusDownId(R.id.licnbr);
 
         if(radiomother.isChecked() || radiofather.isChecked()){
             if(radiomother.isChecked()){
@@ -124,6 +125,7 @@ public class CreateProfile extends AppCompatActivity {
             mref.child("tel").child("nbr").setValue(phonenbr.getText().toString());
             mref.child("tel").child("who").setValue(whoStr);
             mref.child("mail").setValue(mailStr);
+            mref.child("licNbr").setValue(licnbr.getText().toString());
 
             Answers.getInstance().logCustom(new CustomEvent("Added user")
                     .putCustomAttribute("Name", name.getText().toString()));

@@ -29,7 +29,7 @@
                 android:singleLine="true"
                 android:textAlignment="center"
                 android:textAllCaps="false"
-                android:textSize="50sp" />
+                android:textSize="30sp" />
 
             <TextView
                 android:id="@+id/textView8"
@@ -64,7 +64,7 @@
                 android:inputType="textNoSuggestions"
                 android:singleLine="true"
                 android:textAlignment="center"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
 
             <EditText
@@ -161,6 +161,17 @@
                 android:layout_alignBottom="@+id/textView3"
                 android:layout_alignStart="@+id/bDate"
                 android:hint="adresse"
+                android:inputType="textNoSuggestions"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/licnbr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/mail"
+                android:layout_toEndOf="@+id/textView2"
+                android:ems="10"
+                android:hint="N° de licence"
                 android:inputType="textNoSuggestions"
                 android:textSize="14sp" />
 
@@ -278,6 +289,15 @@
                     android:text="Mère"
                     android:textSize="10sp" />
             </RadioGroup>
+
+            <TextView
+                android:id="@+id/textView61"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/licnbr"
+                android:layout_marginStart="-1dp"
+                android:layout_toEndOf="@+id/textView6"
+                android:text="Licence : " />
 
         </RelativeLayout>
     </ScrollView>

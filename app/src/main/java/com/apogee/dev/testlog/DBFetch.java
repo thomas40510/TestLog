@@ -36,8 +36,6 @@ public class DBFetch extends Activity {
         } else {
             prefs = rMainActivity.prefs;
         }
-
-
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myref = database.getReference("cavaliers");
         myref.addValueEventListener(new ValueEventListener() {

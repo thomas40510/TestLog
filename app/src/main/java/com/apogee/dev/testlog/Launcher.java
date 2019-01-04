@@ -84,6 +84,8 @@ public class Launcher extends AppCompatActivity {
             connection.setConnectTimeout(1000);
             connection.connect();
             success = connection.getResponseCode() == 200;
+            connection.disconnect();
+
         } catch (IOException e) {
             e.printStackTrace();
         }

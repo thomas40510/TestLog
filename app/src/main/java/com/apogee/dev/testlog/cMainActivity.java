@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.os.Looper;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -100,7 +99,7 @@ public class cMainActivity extends AppCompatActivity {
             }
             //updateValue();
             new DBFetch().cfetchDB(true);
-            Log.e("DBG", "reached");
+            //Log.e("DBG", "reached");
             SystemClock.sleep(1000);
             //showRenew();
             return null;

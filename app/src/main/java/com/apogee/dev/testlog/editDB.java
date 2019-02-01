@@ -40,8 +40,8 @@ public class editDB extends AppCompatActivity {
                         String lNbr = snapshot.getValue().toString();
                         licList.add(lNbr);
                     }
-                    Log.e("DBG editDB@ln58", licList.toString());
-                    Log.e("DBG editDB @ln59", "" + userlist.size() + " / " + licList.size());
+                    ////Log.e("DBG editDB@ln58", licList.toString());
+                    ////Log.e("DBG editDB @ln59", "" + userlist.size() + " / " + licList.size());
 
 
                 }
@@ -82,7 +82,7 @@ public class editDB extends AppCompatActivity {
                 }
 
             });
-            Log.e("INFO", dateArray.toString()+dateArray.size());
+            ////Log.e("INFO", dateArray.toString()+dateArray.size());
         }
         for (int i=0; i<dateArray.size(); i++){
             FirebaseDatabase database = FirebaseDatabase.getInstance();

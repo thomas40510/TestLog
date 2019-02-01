@@ -23,6 +23,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import io.fabric.sdk.android.Fabric;
+import io.smooch.core.Settings;
+import io.smooch.core.Smooch;
+import io.smooch.core.SmoochCallback;
 
 public class Launcher extends AppCompatActivity {
 
@@ -37,6 +40,17 @@ public class Launcher extends AppCompatActivity {
         */
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
+
+        Smooch.init(this.getApplication(), new Settings("58de9e832081126a004078b2"), new SmoochCallback() {
+            @Override
+            public void run(Response response) {
+                if (response.getError() == null) {
+                    // Your code after init is complete
+                } else {
+                    // Something went wrong during initialization
+                }
+            }
+        });
 
         if (!hasInternetConnection(this) || !isInternetWorking()) {
             setContentView(R.layout.activity_launcher);

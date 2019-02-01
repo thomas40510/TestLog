@@ -81,7 +81,7 @@ public class userList extends AppCompatActivity {
                     String user = postsnapshot.getKey();
                     arrayList.add(user);
                 }
-                Log.d("INFO", arrayList.toString());
+                //Log.d("INFO", arrayList.toString());
                 adapter.notifyDataSetChanged();
                 //updateText(1);
                 */

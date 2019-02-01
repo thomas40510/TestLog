@@ -10,7 +10,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -93,14 +92,14 @@ public class generatePdf extends AppCompatActivity {
                 doc.addAuthor("TestLog auto-gen for CE de Sauveterre");
 
             } catch (DocumentException de) {
-                Log.e("PDFCreator", "DocumentException:" + de);
+                ////Log.e("PDFCreator", "DocumentException:" + de);
             } catch (IOException e) {
-                Log.e("PDFCreator", "ioException:" + e);
+                ////Log.e("PDFCreator", "ioException:" + e);
             }
             finally {
                 doc.close();
                 //Toast.makeText(this, "created", Toast.LENGTH_SHORT).show();
-                Log.e("DBG", "created");
+                ////Log.e("DBG", "created");
 
             }
 
@@ -152,7 +151,7 @@ public class generatePdf extends AppCompatActivity {
         }
         finally {
             doc.close();
-            Log.e("DBG", "Created");
+            ////Log.e("DBG", "Created");
         }
         viewPdf(fileName, "Dir/generated", context);
     }
@@ -213,7 +212,7 @@ public class generatePdf extends AppCompatActivity {
 
         } catch (ActivityNotFoundException e) {
             //Toast.makeText(this, "Can't read pdf file", Toast.LENGTH_SHORT).show();
-            Log.e("DBG", "error reading pdf");
+            ////Log.e("DBG", "error reading pdf");
         }
     }
 }

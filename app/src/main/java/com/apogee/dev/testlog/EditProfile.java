@@ -6,7 +6,6 @@ package com.apogee.dev.testlog;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -60,11 +59,11 @@ public class EditProfile extends AppCompatActivity {
         switch (Profile.telWhoStr){
             case "Père":
                 radioGroup.check(R.id.radioFather);
-                Log.e("DBG", "father");
+                //Log.e("DBG", "father");
                 break;
             case "Mère":
                 radioGroup.check(R.id.radioMother);
-                Log.e("DBG", "mother");
+                //Log.e("DBG", "mother");
                 break;
         }
     }

@@ -64,8 +64,7 @@ public class LoginActivity extends AppCompatActivity {
         int PERMISSION_ALL = 1;
         String[] PERMISSIONS = {
                 Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.SEND_SMS
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
         };
 
         if(!hasPermissions(this, PERMISSIONS)){

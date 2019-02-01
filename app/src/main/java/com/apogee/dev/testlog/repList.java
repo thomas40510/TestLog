@@ -3,7 +3,6 @@ package com.apogee.dev.testlog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -62,7 +61,7 @@ public class repList extends AppCompatActivity {
                     });
                     repButton.setWidth(LinearLayout.LayoutParams.WRAP_CONTENT);
                     layout.addView(repButton);
-                    Log.e("DBG", "reached !");
+                    //Log.e("DBG", "reached !");
                 }
             }
 

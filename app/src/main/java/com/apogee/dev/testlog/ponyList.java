@@ -68,7 +68,7 @@ public class ponyList extends AppCompatActivity {
                     arrayList.add(user);
                 }
 
-                Log.d("INFO", arrayList.toString());
+                //Log.d("INFO", arrayList.toString());
                 adapter.notifyDataSetChanged();
                 //updateText(1);
                 */

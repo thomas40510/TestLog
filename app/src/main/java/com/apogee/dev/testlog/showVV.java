@@ -6,7 +6,6 @@ package com.apogee.dev.testlog;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -38,7 +37,7 @@ public class showVV extends AppCompatActivity {
         nameStr = extras.getString("name");
         type = extras.getString("type");
 
-        Log.e("DBG @ln31", type + "-" + nameStr);
+        ////Log.e("DBG @ln31", type + "-" + nameStr);
 
         TextView titleTxt = (TextView) findViewById(R.id.titleTxt);
 
@@ -65,10 +64,10 @@ public class showVV extends AppCompatActivity {
                     dateList.add(date);
 
                     String name = postsnapshot.getValue().toString();
-                    Log.e("DBG", name);
+                    ////Log.e("DBG", name);
                     nameList.add(name);
                 }
-                Log.d("INFO", dateList.toString() + dateList.size());
+                //Log.d("INFO", dateList.toString() + dateList.size());
                 showList();
 
             }
@@ -115,7 +114,7 @@ public class showVV extends AppCompatActivity {
         for (int i = dateList.size()-1; i>-1; i--) {
             completeList = completeList.concat(dateList.get(i) + " : " + nameList.get(i) + "\n\n");
         }
-        Log.e("DBG", completeList);
+        ////Log.e("DBG", completeList);
         listView.setText(completeList);
     }
 }

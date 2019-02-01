@@ -11,7 +11,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.SmsManager;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
@@ -22,6 +21,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.io.File;
+
+import io.smooch.ui.ConversationActivity;
 
 
 
@@ -99,7 +100,7 @@ public class Settings extends AppCompatActivity {
                         String path = getApplication().getFilesDir() + "/Dir/generated";
 
                         File dir = new File(path);
-                        Log.e("DBG", ""+dir);
+                        ////Log.e("DBG", ""+dir);
                         if (dir.isDirectory()){
                             String[] children = dir.list();
                             for (int s = 0; s<children.length; s++) {
@@ -140,10 +141,11 @@ public class Settings extends AppCompatActivity {
                         sendMsg("mail");
                     }
                 })
-                .setNegativeButton("Par SMS", new DialogInterface.OnClickListener() {
+                .setNegativeButton("Par message direct", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        sendMsg("SMS");
+                        //sendMsg("SMS");
+                        ConversationActivity.show(getApplicationContext());
                     }
                 })
                 .setNeutralButton("Annuler", new DialogInterface.OnClickListener() {

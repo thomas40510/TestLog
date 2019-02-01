@@ -2,7 +2,6 @@ package com.apogee.dev.testlog;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
-import android.util.Log;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -43,8 +42,8 @@ public class DBFetch extends Activity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 userlist.clear();
                 String[] savedArray = loadArray("array");
-                Log.e("DBG", "loadArray.size "+savedArray.length);
-                Log.e("DBG", "childrenCount"+dataSnapshot.getChildrenCount());
+                //Log.e("DBG", "loadArray.size "+savedArray.length);
+                //Log.e("DBG", "childrenCount"+dataSnapshot.getChildrenCount());
                 if (savedArray.length != dataSnapshot.getChildrenCount()){
                 for (DataSnapshot postsnapshot : dataSnapshot.getChildren()) {
                     String user = postsnapshot.getKey();
@@ -55,7 +54,7 @@ public class DBFetch extends Activity {
                 else {
                     Collections.addAll(userlist, savedArray);
                 }
-                Log.d("INFO", userlist.toString()+userlist.size());
+                //Log.d("INFO", userlist.toString()+userlist.size());
 
                 /*
                 Pour afficher à chaque update de la DB
@@ -96,7 +95,7 @@ public class DBFetch extends Activity {
                                 toRenewStr = toRenewStr.concat(s + " (" + remains + ")" + "\n");
                             }
                     }
-                    Log.e("DBG", "showing renew");
+                    //Log.e("DBG", "showing renew");
                     MainActivity showNew = new MainActivity();
                     showNew.showRenew();
                     toRenewStr = "";
@@ -117,21 +116,21 @@ public class DBFetch extends Activity {
     public String[] loadArray(String arrayName) {
 
         int size = prefs.getInt("usrList_size", 0);
-        Log.e("DBG", "size "+size);
+        //Log.e("DBG", "size "+size);
         String array[] = new String[size];
         for (int i = 0; i < size; i++) {
             array[i] = prefs.getString("usr" + "_" + i, null);
-            //Log.i("DBG fetchDB @ ln66", array[i]);
+            ////Log.i("DBG fetchDB @ ln66", array[i]);
         }
         return array;
     }
 
     public void listSave(List<String> list){
     SharedPreferences.Editor editor = prefs.edit();
-    Log.e("DBG", "list size "+list.size());
+    //Log.e("DBG", "list size "+list.size());
     for (int i = 0; i<list.size(); i++){
         editor.putString("usr"+"_"+i, list.get(i));
-        Log.e("DBG fetchDB @ ln75", list.get(i));
+        //Log.e("DBG fetchDB @ ln75", list.get(i));
     }
     editor.putInt("usrList_size", list.size());
     editor.commit();
@@ -159,8 +158,8 @@ public class DBFetch extends Activity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 clist.clear();
                 String[] savedArray = cloadArray("array");
-                Log.e("DBG", "loadArray.size "+savedArray.length);
-                Log.e("DBG", "childrenCount"+dataSnapshot.getChildrenCount());
+                //Log.e("DBG", "loadArray.size "+savedArray.length);
+                //Log.e("DBG", "childrenCount"+dataSnapshot.getChildrenCount());
                 if (savedArray.length != dataSnapshot.getChildrenCount()){
                     for (DataSnapshot postsnapshot : dataSnapshot.getChildren()) {
                         String user = postsnapshot.getKey();
@@ -171,7 +170,7 @@ public class DBFetch extends Activity {
                 else {
                     Collections.addAll(clist, savedArray);
                 }
-                Log.d("INFO", clist.toString()+ clist.size());
+                //Log.d("INFO", clist.toString()+ clist.size());
                 clistPrt.addAll(clist);
                 clistPrt.remove("Tempting");
 
@@ -187,21 +186,21 @@ public class DBFetch extends Activity {
 
     public String[] cloadArray(String arrayName) {
         int size = cprefs.getInt("usrList_size", 0);
-        Log.e("DBG", "size " + size);
+        //Log.e("DBG", "size " + size);
         String array[] = new String[size];
         for (int i = 0; i < size; i++) {
             array[i] = cprefs.getString("pony" + "_" + i, null);
-            //Log.i("DBG fetchDB @ ln66", array[i]);
+            ////Log.i("DBG fetchDB @ ln66", array[i]);
         }
         return array;
     }
 
     public void clistSave(List<String> list){
         SharedPreferences.Editor editor = cprefs.edit();
-        Log.e("DBG", "list size "+list.size());
+        //Log.e("DBG", "list size "+list.size());
         for (int i = 0; i<list.size(); i++){
             editor.putString("pony"+"_"+i, list.get(i));
-            Log.e("DBG fetchDB @ ln75", list.get(i));
+            //Log.e("DBG fetchDB @ ln75", list.get(i));
         }
         editor.putInt("usrList_size", list.size());
         editor.commit();

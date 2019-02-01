@@ -15,7 +15,6 @@ import android.os.StrictMode;
 import android.os.SystemClock;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -74,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void showRenew(){
-        Log.e("DBG main@ln80", ""+DBFetch.userlist.size());
+        ////Log.e("DBG main@ln80", ""+DBFetch.userlist.size());
         toRenewStr = DBFetch.toRenewStr;
 
         if (!toRenewStr.equals("")) {
@@ -137,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
             }
             //updateValue();
             new DBFetch().fetchDB(false, true);
-            Log.e("DBG", "reached");
+            ////Log.e("DBG", "reached");
             SystemClock.sleep(1000);
             //showRenew();
             return null;

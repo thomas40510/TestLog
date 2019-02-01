@@ -9,7 +9,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -104,10 +103,10 @@ public class userSelect extends AppCompatActivity {
                         arrayList.addAll(DBFetch.userlist);
                         break;
                 }
-                Log.d("INFO", arrayList.toString());
-                Log.e("DEBUG", "" + arrayList.size());
+                //Log.d("INFO", arrayList.toString());
+                ////Log.e("DEBUG", "" + arrayList.size());
 
-                Log.e("DBG", "reached !");
+                ////Log.e("DBG", "reached !");
                 infodata = new ArrayList<InfoRowData>();
                 for (int i = 0; i < arrayList.size(); i++) {
                     infodata.add(new InfoRowData(false, i));
@@ -127,7 +126,7 @@ public class userSelect extends AppCompatActivity {
             }
         });
 
-        Log.e("DBG", "reached !");
+        ////Log.e("DBG", "reached !");
         infodata = new ArrayList<InfoRowData>();
         for (int i = 0; i < arrayList.size(); i++) {
             infodata.add(new InfoRowData(false, i));
@@ -260,7 +259,7 @@ public class userSelect extends AppCompatActivity {
                     }
                 });
                 //ref.setValue(rmain);
-                Log.e("DBG", "" + rmain);
+                ////Log.e("DBG", "" + rmain);
                 break;
 
             default:
@@ -326,7 +325,7 @@ public class userSelect extends AppCompatActivity {
                 } else {
                     enterCard();
                 }
-                Log.e("date", date);
+                ////Log.e("date", date);
             }
         });
         builder.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
@@ -374,7 +373,7 @@ public class userSelect extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String histo;
                 for (String s : selected) {
-                    Log.e("DBG @ln281", dataSnapshot.child(s).child("remainH").getValue().toString());
+                    ////Log.e("DBG @ln281", dataSnapshot.child(s).child("remainH").getValue().toString());
                     rmain = Integer.parseInt(dataSnapshot.child(s).child("remainH").getValue().toString());
                     try {
                         histo = dataSnapshot.child(s).child("histoCarte").child(date).getValue().toString();
@@ -402,7 +401,7 @@ public class userSelect extends AppCompatActivity {
             }
         });
         //ref.setValue(rmain);
-        Log.e("DBG", "" + rmain);
+        ////Log.e("DBG", "" + rmain);
     }
 
     public void enterCard(){
@@ -475,7 +474,7 @@ public class userSelect extends AppCompatActivity {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         String histo;
                         for (String s : selected) {
-                            Log.e("DBG @ln281", dataSnapshot.child(s).child("remainH").getValue().toString());
+                            ////Log.e("DBG @ln281", dataSnapshot.child(s).child("remainH").getValue().toString());
                             rmain = Integer.parseInt(dataSnapshot.child(s).child("remainH").getValue().toString());
                             try {
                                 histo = dataSnapshot.child(s).child("histoCarte").child(date).getValue().toString();

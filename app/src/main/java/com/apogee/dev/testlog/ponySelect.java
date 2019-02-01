@@ -10,7 +10,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -112,10 +111,10 @@ public class ponySelect extends AppCompatActivity {
                     default:
                         arrayList.addAll(DBFetch.clist);
                 }
-                Log.d("INFO", arrayList.toString());
-                Log.e("DEBUG", "" + arrayList.size());
+                //Log.d("INFO", arrayList.toString());
+                ////Log.e("DEBUG", "" + arrayList.size());
 
-                Log.e("DBG", "reached !");
+                //Log.e("DBG", "reached !");
                 infodata = new ArrayList<InfoRowData>();
                 for (int i = 0; i < arrayList.size(); i++) {
                     infodata.add(new InfoRowData(false, i));
@@ -135,7 +134,7 @@ public class ponySelect extends AppCompatActivity {
             }
         });
 
-        Log.e("DBG", "reached !");
+        //Log.e("DBG", "reached !");
         infodata = new ArrayList<InfoRowData>();
         for (int i = 0; i < arrayList.size(); i++) {
             infodata.add(new InfoRowData(false, i));
@@ -269,7 +268,7 @@ public class ponySelect extends AppCompatActivity {
                 }
                 });
                  //ref.setValue(rmain);
-                 Log.e("DBG", "" + rmain);
+                 //Log.e("DBG", "" + rmain);
                  break;
                  */
                 default:
@@ -352,7 +351,7 @@ public class ponySelect extends AppCompatActivity {
                 //dateStr = dateStr.concat(picker.getYear() + "/").concat(months[picker.getMonth()] + "/").concat(picker.getDayOfMonth() + "");
                 dateStr = dateStr.concat(picker.getYear()+"-"+picker.getMonth()+"-"+picker.getDayOfMonth());
                 writeValues(vNameStr, dateStr);
-                Log.e("date", dateStr);
+                //Log.e("date", dateStr);
             }
         });
         builder.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {

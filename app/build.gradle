@@ -29,7 +29,7 @@ android {
         minSdkVersion 24
         targetSdkVersion 28
         versionCode 1040
-        versionName "1.4.0"
+        versionName "Dev"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         resValue("string", "BUILD_DATE", "01/02/2019")
 

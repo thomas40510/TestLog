@@ -222,6 +222,14 @@ public class MainMenu extends AppCompatActivity {
             case R.id.logout:
                 gotoAuth();
                 return false;
+            case R.id.createcc:
+                Intent intent = new Intent(this, CreateCc.class);
+                startActivity(intent);
+                return true;
+            case R.id.usecc:
+                Intent intent2 = new Intent(this, UseCc.class);
+                startActivity(intent2);
+                return false;
             default :
                 return super.onOptionsItemSelected(item);
         }

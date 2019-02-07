@@ -1,16 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ Copyright (c) 2018 Thomas Prévost / CE Sauveterre. Distribué sous license libre.
-  -->
-
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.apogee.dev.testlog">
 
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
-    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
@@ -25,6 +19,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".UseCc" />
+        <activity android:name=".CreateCc" />
         <activity
             android:name=".MainActivity"
             android:label="Cavaliers">
@@ -97,9 +93,9 @@
             android:name="io.fabric.ApiKey"
             android:value="a4cef1009bf2fffd5e20116c62be7af1bcac4b05" />
 
-        <activity android:name=".MainMenu" >
+        <activity android:name=".MainMenu">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
+                <action android:name="android.intent.action.VIEW" />
             </intent-filter>
         </activity>
 
@@ -139,7 +135,6 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
         <!--
      Set custom default icon. This is used when no icon is set for incoming notification messages.
      See README(https://goo.gl/l4GJaQ) for more.
@@ -154,7 +149,7 @@
         <activity
             android:name=".stabInfo"
             android:label="Écuries" />
-        <activity android:name=".emergency"></activity>
+        <activity android:name=".emergency" />
     </application>
 
 </manifest>

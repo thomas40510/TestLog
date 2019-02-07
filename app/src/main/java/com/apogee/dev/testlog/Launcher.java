@@ -59,6 +59,10 @@ public class Launcher extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
+        //TODO : implement a more efficient method to check connection, and remove following lines...
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+        finish();
 
     }
 

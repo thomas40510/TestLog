@@ -3,10 +3,55 @@
   ~ Copyright (c) 2019 Thomas Prévost / CE Sauveterre. Distribué sous license libre.
   -->
 
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CreateCc">
+    tools:context=".CreateCc"
+    android:layout_margin="@dimen/activity_vertical_margin">
 
-</android.support.constraint.ConstraintLayout>
+    <EditText
+        android:id="@+id/presta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toStartOf="@+id/editText3"
+        android:ems="10"
+        android:hint="Prestation"
+        android:inputType="textNoSuggestions|textAutoComplete" />
+
+    <TextView
+        android:id="@+id/textView65"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/presta"
+        android:text="TextView" />
+
+    <EditText
+        android:id="@+id/editText3"
+        android:layout_width="122dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="0dp"
+        android:ems="10"
+        android:hint="Valeur"
+        android:inputType="numberDecimal" />
+
+    <EditText
+        android:id="@+id/editText4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editText3"
+        android:layout_alignStart="@+id/editText3"
+        android:layout_alignParentEnd="true"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name" />
+
+    <Button
+        android:id="@+id/button8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="Confirmer la saisie" />
+
+</RelativeLayout>

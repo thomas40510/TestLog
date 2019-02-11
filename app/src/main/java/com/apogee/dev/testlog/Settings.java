@@ -212,7 +212,7 @@ public class Settings extends AppCompatActivity {
 
     public void sendAutoMail(String subject, String message){
         try{
-            sendMail sendMail = new sendMail(Settings.this,"thomasprevost85@gmail.com", subject, message+"\n\n ***************************************** \n " +
+            sendMail sendMail = new sendMail(Settings.this,new String[]{"thomasprevost85@gmail.com"}, subject, message+"\n\n ***************************************** \n " +
                     "Message sender : "+userMail+ "\n FCM : "+fcm);
             sendMail.execute();
         }catch (Exception e){

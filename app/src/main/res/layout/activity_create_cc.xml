@@ -10,48 +10,139 @@
     tools:context=".CreateCc"
     android:layout_margin="@dimen/activity_vertical_margin">
 
-    <EditText
-        android:id="@+id/presta"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_toStartOf="@+id/editText3"
-        android:ems="10"
-        android:hint="Prestation"
-        android:inputType="textNoSuggestions|textAutoComplete" />
-
-    <TextView
-        android:id="@+id/textView65"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/presta"
-        android:text="TextView" />
-
-    <EditText
-        android:id="@+id/editText3"
-        android:layout_width="122dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="0dp"
-        android:ems="10"
-        android:hint="Valeur"
-        android:inputType="numberDecimal" />
-
-    <EditText
-        android:id="@+id/editText4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/editText3"
-        android:layout_alignStart="@+id/editText3"
-        android:layout_alignParentEnd="true"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name" />
-
     <Button
         android:id="@+id/button8"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:onClick="confirm"
         android:text="Confirmer la saisie" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/button8"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical"
+        android:showDividers="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/presta"
+                android:layout_width="342dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Prestation"
+                android:inputType="textAutoComplete" />
+
+            <EditText
+                android:id="@+id/valeur"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Valeur"
+                android:inputType="numberDecimal" />
+
+            <Spinner
+                android:id="@+id/paymethod"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:entries="@array/paymentMethods"
+                android:spinnerMode="dropdown" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_weight="0"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/datepicker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Début de validité dd/mm/aaaa"
+                android:inputType="date" />
+
+            <Button
+                android:id="@+id/button21"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:onClick="setToday"
+                android:text="Aujourd'hui" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="15dp"
+            android:layout_weight="0"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView72"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Procédure à suivre :"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView79"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/textView73"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="1) Écrire sur la carte la prestation et la validité (début = date actuelle, fin = début+6mois) ;" />
+
+            <TextView
+                android:id="@+id/textView74"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="2) Reporter ces infos ici, en plus du montant et du moyen de paiement ;" />
+
+            <TextView
+                android:id="@+id/textView75"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text='3) Cliquer sur "confirmer la saisie" ;' />
+
+            <TextView
+                android:id="@+id/textView76"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="4) Une confirmation apparaîtra. Reporter le numéro de carte sur la carte cadeau." />
+
+            <TextView
+                android:id="@+id/textView78"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/textView77"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="NB : un mail de confirmation, contenant toutes les infos, sera envoyé sur l'adresse utilisée pour se connecter." />
+        </LinearLayout>
+
+    </LinearLayout>
 
 </RelativeLayout>

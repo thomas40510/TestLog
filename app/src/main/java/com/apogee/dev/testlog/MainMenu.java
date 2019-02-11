@@ -41,6 +41,7 @@ public class MainMenu extends AppCompatActivity {
     int i = 0;
     private FirebaseRemoteConfig mFirebaseRemoteConfig;
     public static String loggedUserName;
+    public static String userMail;
 
     //Remote Config keys
     private static final String UPDATE_LINK = "update_link";
@@ -75,7 +76,7 @@ public class MainMenu extends AppCompatActivity {
         DatabaseReference ref = database.getReference().child("users");
 
         SharedPreferences preferences = getSharedPreferences(shPrefs.sharedPrefs, MODE_PRIVATE);
-        final String userMail = preferences.getString("lastMail", null);
+        userMail = preferences.getString("lastMail", null);
 
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

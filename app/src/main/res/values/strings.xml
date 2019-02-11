@@ -107,4 +107,12 @@
         <item>P</item>
     </string-array>
 
+    <string-array name="paymentMethods">
+        <item>esp.</item>
+        <item>ch.</item>
+        <item>ANCV</item>
+        <item>web</item>
+        <item>autre</item>
+    </string-array>
+
 </resources>

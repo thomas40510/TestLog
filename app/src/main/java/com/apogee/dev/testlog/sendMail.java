@@ -35,7 +35,7 @@ public class sendMail extends AsyncTask<Void,Void,Void> {
     private final static String password = "randomLongpassword";
 
     //Information to send email
-    private String email;
+    private String[] email;
     private String subject;
     private String message;
 
@@ -43,7 +43,7 @@ public class sendMail extends AsyncTask<Void,Void,Void> {
     private ProgressDialog progressDialog;
 
     //Class Constructor
-    public sendMail(Context context, String email, String subject, String message){
+    public sendMail(Context context, String[] email, String subject, String message){
         //Initializing variables
         this.context = context;
         this.email = email;
@@ -96,7 +96,9 @@ public class sendMail extends AsyncTask<Void,Void,Void> {
             //Setting sender address
             mm.setFrom(new InternetAddress(eMail));
             //Adding receiver
-            mm.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
+            for (String recipient : email) {
+                mm.addRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
+            }
             //Adding subject
             mm.setSubject(subject);
             //Adding message

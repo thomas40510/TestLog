@@ -1,5 +1,7 @@
 ## Changelog
 
+### Changelog not maintained. See commit and gPlay update notes for an overview of changes.
+
 #### //Version 1.2.1 (01/01/2019)//
 - Suppression du paramètre 'bluestacks mode' ajouté dans la version 1.2.0
 

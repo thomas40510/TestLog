@@ -27,10 +27,10 @@ android {
         applicationId 'com.apogee.dev.testlog'
         minSdkVersion 24
         targetSdkVersion 28
-        versionCode 1050
-        versionName "1.5.0"
+        versionCode 1051
+        versionName "1.5.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        resValue("string", "BUILD_DATE", "11/02/2019")
+        resValue("string", "BUILD_DATE", "14/02/2019")
     }
     buildTypes {
         release {

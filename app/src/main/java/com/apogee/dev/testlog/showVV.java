@@ -105,7 +105,7 @@ public class showVV extends AppCompatActivity {
     }
     public void print(){
         generatePdf gen = new generatePdf();
-        gen.createPdf(completeList, nameStr+" - Derniers "+typeStr, nameStr+" - "+type+System.currentTimeMillis()+".pdf", getApplicationContext());
+        gen.createPdf(completeList, nameStr+" - Derniers "+typeStr, nameStr+" - "+type+System.currentTimeMillis()+".pdf", showVV.this);
     }
 
     public void showList() {

@@ -309,6 +309,6 @@ public class MainMenu extends AppCompatActivity {
     }
     public void genPdf(View view){
         generatePdf gen = new generatePdf();
-        gen.createTablePdf(null, "TestTable", "test"+System.currentTimeMillis()+".pdf", getApplicationContext());
+        gen.createTablePdf(null, "TestTable", "test"+System.currentTimeMillis()+".pdf", MainMenu.this);
     }
 }

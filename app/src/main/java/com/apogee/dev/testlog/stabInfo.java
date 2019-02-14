@@ -136,7 +136,7 @@ public class stabInfo extends AppCompatActivity {
 
     public void printRations(){
         generatePdf gen = new generatePdf();
-        gen.createTablePdf(rations, pdfTitle, "rations-"+where+"-" + System.currentTimeMillis() + ".pdf", getApplicationContext());
+        gen.createTablePdf(rations, pdfTitle, "rations-"+where+"-" + System.currentTimeMillis() + ".pdf", stabInfo.this);
     }
 
     public String[][] getRations() {

@@ -250,7 +250,7 @@ public class userSelect extends AppCompatActivity {
                             toPrintStr = toPrintStr.concat(s + "  :   " + rStr + "\n");
                         }
                         generatePdf gen = new generatePdf();
-                        gen.createPdf(toPrintStr, "Relevé des séances restantes", "cards-" + System.currentTimeMillis() + ".pdf", getApplicationContext());
+                        gen.createPdf(toPrintStr, "Relevé des séances restantes", "cards-" + System.currentTimeMillis() + ".pdf", userSelect.this);
                     }
 
                     @Override

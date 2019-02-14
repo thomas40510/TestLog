@@ -220,7 +220,7 @@ public class Profile extends AppCompatActivity {
 
     public void printHisto(){
         generatePdf gen = new generatePdf();
-        gen.createPdf(histoStr, nameStr+" - Historique des opérations", (nameStr.replace(" ","")).toLowerCase()+"-histo-" + System.currentTimeMillis() + ".pdf", getApplicationContext());
+        gen.createPdf(histoStr, nameStr+" - Historique des opérations", (nameStr.replace(" ","")).toLowerCase()+"-histo-" + System.currentTimeMillis() + ".pdf", Profile.this);
     }
 
     public void renewAdLic(){

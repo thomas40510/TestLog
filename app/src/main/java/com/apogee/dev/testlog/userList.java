@@ -150,7 +150,7 @@ public class userList extends AppCompatActivity {
             test = test.concat(DBFetch.userlist.get(i) + "\n");
         }
         generatePdf gen = new generatePdf();
-        gen.createPdf(test, "Cavaliers", "userList-" + System.currentTimeMillis() + ".pdf", getApplicationContext());
+        gen.createPdf(test, "Cavaliers", "userList-" + System.currentTimeMillis() + ".pdf", userList.this);
         //gen.createPdf(test, "Cavaliers", "file.pdf", this);
 
         //createPdf(test, "cavaliers");

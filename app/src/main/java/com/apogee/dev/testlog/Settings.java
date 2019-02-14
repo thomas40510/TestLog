@@ -145,7 +145,7 @@ public class Settings extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         //sendMsg("SMS");
-                        ConversationActivity.show(getApplicationContext());
+                        ConversationActivity.show(Settings.this);
                     }
                 })
                 .setNeutralButton("Annuler", new DialogInterface.OnClickListener() {

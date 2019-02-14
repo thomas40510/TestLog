@@ -96,13 +96,16 @@ public class MainActivity extends AppCompatActivity {
     public void display (View view){
         Toast.makeText(this, "J'avais dit de ne pas cliquer !!", Toast.LENGTH_SHORT).show();
 
+
         /*
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference("cavaliers");
         for (String s : DBFetch.userlist){
-            ref.child(s).child("adlic").setValue("1804");
+            ref.child(s).child("histoCarte").setValue(null);
+            ref.child(s).child("remainH").setValue("42");
         }
-        */
+       */
+
 
 
     }

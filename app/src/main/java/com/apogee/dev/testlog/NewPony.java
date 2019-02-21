@@ -45,7 +45,7 @@ public class NewPony extends AppCompatActivity {
 
         bDate = (EditText) findViewById(R.id.bDate);
         proprio = (EditText) findViewById(R.id.proprio);
-        name = (EditText) findViewById(R.id.name);
+        name = (EditText) findViewById(R.id.nom);
 
         lastnico = (EditText) findViewById(R.id.lastnico);
         lastost = (EditText) findViewById(R.id.lastost);

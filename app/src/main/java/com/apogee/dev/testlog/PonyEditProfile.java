@@ -66,7 +66,7 @@ public class PonyEditProfile extends AppCompatActivity {
 
         // Sets un-changing infos
 
-        ((TextView)findViewById(R.id.name)).setText(PonyProfile.nameStr);
+        ((TextView)findViewById(R.id.nom)).setText(PonyProfile.nameStr);
         ((TextView)findViewById(R.id.sexe)).setText(PonyProfile.sexeStr);
         ((TextView)findViewById(R.id.type)).setText(PonyProfile.typeStr);
 

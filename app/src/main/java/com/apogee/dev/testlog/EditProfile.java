@@ -41,7 +41,7 @@ public class EditProfile extends AppCompatActivity {
 
         // Sets un-changing infos
 
-        ((TextView)findViewById(R.id.name)).setText(Profile.nameStr);
+        ((TextView)findViewById(R.id.nom)).setText(Profile.nameStr);
         ((TextView)findViewById(R.id.flechage)).setText(Profile.flechStr);
         ((TextView)findViewById(R.id.licence)).setText(Profile.licStr);
 

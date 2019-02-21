@@ -66,7 +66,7 @@ public class Profile extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         nameStr = extras.getString("name");
 
-        TextView name = (TextView)findViewById(R.id.name);
+        TextView name = (TextView)findViewById(R.id.nom);
         name.setText(nameStr);
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();

@@ -12,11 +12,43 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="600dp">
+
+            <LinearLayout
+                android:id="@+id/namelayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignTop="@+id/textView8"
+
+                android:layout_alignParentStart="true"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/nom"
+                    android:layout_width="197dp"
+                    android:layout_height="match_parent"
+                    android:hint="Nom"
+                    android:inputType="textNoSuggestions"
+                    android:singleLine="true"
+                    android:textAlignment="center"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/prénom"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="Prénom"
+                    android:inputType="textPersonName"
+                    android:textAlignment="center"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
             <EditText
                 android:id="@+id/flechage"
@@ -42,9 +74,10 @@
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/namelayout"
                 android:layout_alignParentStart="true"
-                android:layout_below="@+id/name"
-                android:layout_marginTop="23dp"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="20dp"
                 android:text="birthdate* : " />
 
             <TextView
@@ -53,19 +86,6 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/forfait"
                 android:layout_toStartOf="@+id/forfait" />
-
-            <EditText
-                android:id="@+id/name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/textView8"
-                android:layout_centerHorizontal="true"
-                android:hint="NOM Prénom*"
-                android:inputType="textNoSuggestions"
-                android:singleLine="true"
-                android:textAlignment="center"
-                android:textSize="14sp"
-                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/phonenbr"
@@ -89,8 +109,8 @@
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
                 android:layout_below="@+id/textView5"
+                android:layout_alignParentStart="true"
                 android:text="Adresse* : " />
 
             <EditText
@@ -98,8 +118,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@+id/textView"
-                android:layout_alignBottom="@+id/textView"
                 android:layout_alignStart="@+id/forfait"
+                android:layout_alignBottom="@+id/textView"
                 android:hint="heures restantes"
                 android:inputType="textNoSuggestions|number"
                 android:textSize="14sp" />
@@ -108,8 +128,8 @@
                 android:id="@+id/textView9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
                 android:layout_below="@+id/textView6"
+                android:layout_alignParentStart="true"
                 android:text="Ville / CP* : " />
 
             <TextView
@@ -123,22 +143,22 @@
                 android:id="@+id/textView29"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/textView" />
+                android:layout_below="@+id/textView"
+                android:layout_alignParentStart="true" />
 
             <TextView
                 android:id="@+id/textView5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignEnd="@+id/textView3"
-                android:layout_below="@+id/textView2" />
+                android:layout_below="@+id/textView2"
+                android:layout_alignEnd="@+id/textView3" />
 
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
                 android:layout_below="@+id/textView11"
+                android:layout_alignParentStart="true"
                 android:text="Reste* : " />
 
             <AutoCompleteTextView
@@ -146,8 +166,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@+id/textView4"
-                android:layout_alignBottom="@+id/textView4"
                 android:layout_alignStart="@+id/city"
+                android:layout_alignBottom="@+id/textView4"
                 android:layout_toStartOf="@+id/textView8"
                 android:hint="c10/c30/FT/FC"
                 android:inputType="textNoSuggestions"
@@ -158,8 +178,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@+id/textView3"
-                android:layout_alignBottom="@+id/textView3"
                 android:layout_alignStart="@+id/bDate"
+                android:layout_alignBottom="@+id/textView3"
                 android:hint="adresse"
                 android:inputType="textNoSuggestions"
                 android:textSize="14sp" />
@@ -179,28 +199,29 @@
                 android:id="@+id/textView11"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/textView4" />
+                android:layout_below="@+id/textView4"
+                android:layout_alignParentStart="true" />
 
             <TextView
                 android:id="@+id/textView30"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/textView29" />
+                android:layout_below="@+id/textView29"
+                android:layout_alignParentStart="true" />
 
             <TextView
                 android:id="@+id/textView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
                 android:layout_below="@+id/textView10"
+                android:layout_alignParentStart="true"
                 android:text="Forfait : " />
 
             <EditText
                 android:id="@+id/bDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/namelayout"
                 android:layout_alignBaseline="@+id/textView2"
                 android:layout_toEndOf="@+id/textView2"
                 android:hint="dd/mm/aaaa"
@@ -221,23 +242,23 @@
                 android:id="@+id/textView33"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
                 android:layout_below="@+id/textView30"
+                android:layout_alignParentStart="true"
                 android:text="Tel : " />
 
             <TextView
                 android:id="@+id/textView34"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/textView33" />
+                android:layout_below="@+id/textView33"
+                android:layout_alignParentStart="true" />
 
             <TextView
                 android:id="@+id/textView35"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/textView34" />
+                android:layout_below="@+id/textView34"
+                android:layout_alignParentStart="true" />
 
             <EditText
                 android:id="@+id/mail"
@@ -262,8 +283,10 @@
                 android:id="@+id/button7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
                 android:layout_alignParentStart="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="0dp"
+                android:layout_marginBottom="62dp"
                 android:onClick="save"
                 android:text="Confirmer" />
 
@@ -271,7 +294,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/remaining"
-                android:layout_toEndOf="@+id/name">
+                android:layout_toEndOf="@+id/phonenbr">
 
                 <RadioButton
                     android:id="@+id/radioFather"
@@ -295,7 +318,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@+id/licnbr"
-                android:layout_marginStart="-1dp"
                 android:layout_toEndOf="@+id/textView6"
                 android:text="Licence : " />
 

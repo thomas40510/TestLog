@@ -25,10 +25,11 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class CreateProfile extends AppCompatActivity {
 
-    EditText name, flechage, bDate, address, city, remain,phonenbr,mail, licnbr;
+    EditText lname, name, flechage, bDate, address, city, remain,phonenbr,mail, licnbr;
     RadioButton radiofather, radiomother;
     String whoStr, mailStr;
     AutoCompleteTextView forfait;
+    String Nom;
 
 
     @Override
@@ -36,7 +37,8 @@ public class CreateProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_profile);
 
-        name = (EditText) findViewById(R.id.name);
+        lname = (EditText) findViewById(R.id.nom);
+        name = (EditText) findViewById(R.id.prénom);
         flechage = (EditText) findViewById(R.id.flechage);
         bDate = (EditText) findViewById(R.id.bDate);
         address = (EditText) findViewById(R.id.address);
@@ -68,7 +70,8 @@ public class CreateProfile extends AppCompatActivity {
         };
 
         licnbr.setOnKeyListener(listener);
-        flechage.setNextFocusDownId(R.id.name);
+        flechage.setNextFocusDownId(R.id.nom);
+        lname.setNextFocusDownId(R.id.prénom);
         name.setNextFocusDownId(R.id.bDate);
         bDate.setNextFocusDownId(R.id.address);
         address.setNextFocusDownId(R.id.city);
@@ -106,44 +109,70 @@ public class CreateProfile extends AppCompatActivity {
      * Handle DB-sided update of infos
      */
 
-    public void save (View view){
+    public void save (View view) {
 
+        try{
+            String lnom = lname.getText().toString().toUpperCase();
+            String nom = name.getText().toString();
+            if (nom.equals("") || lnom.equals("")){
+                throw (new NullPointerException());
+            }
+            Nom = lnom.replace(" ","") + " "+nom.replace(" ", "");
+        } catch (Exception e){
+            Toast.makeText(this, "Erreur. Merci de vérifier que le nom a été rentré correctement.", Toast.LENGTH_SHORT).show();
+        }
         if (verifDate(bDate.getText().toString())) {
 
+            try {
 
-            FirebaseDatabase database = FirebaseDatabase.getInstance();
-            DatabaseReference reference = database.getReference("cavaliers");
-            DatabaseReference mref = reference.child(name.getText().toString());
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference reference = database.getReference("cavaliers");
+                DatabaseReference mref = reference.child(Nom);
 
 
-            mref.child("fléchage").setValue(flechage.getText().toString());
-            mref.child("Birthdate").setValue(bDate.getText().toString());
-            mref.child("Forfait").setValue(forfait.getText().toString());
-            mref.child("adresse").setValue(address.getText().toString());
-            mref.child("ville").setValue(city.getText().toString());
-            mref.child("remainH").setValue(remain.getText().toString());
-            mref.child("tel").child("nbr").setValue(phonenbr.getText().toString());
-            mref.child("tel").child("who").setValue(whoStr);
-            mref.child("mail").setValue(mailStr);
-            mref.child("licNbr").setValue(licnbr.getText().toString());
+                mref.child("fléchage").setValue(flechage.getText().toString());
+                mref.child("Birthdate").setValue(bDate.getText().toString());
+                mref.child("Forfait").setValue(forfait.getText().toString());
+                mref.child("adresse").setValue(address.getText().toString());
+                mref.child("ville").setValue(city.getText().toString());
+                mref.child("remainH").setValue(remain.getText().toString());
+                mref.child("tel").child("nbr").setValue(phonenbr.getText().toString());
+                mref.child("tel").child("who").setValue(whoStr);
+                mref.child("mail").setValue(mailStr);
+                mref.child("licNbr").setValue(licnbr.getText().toString());
+                mref.child("adlic").setValue("1804");
 
-            Answers.getInstance().logCustom(new CustomEvent("Added user")
-                    .putCustomAttribute("Name", name.getText().toString()));
+                Answers.getInstance().logCustom(new CustomEvent("Added user")
+                        .putCustomAttribute("Name", name.getText().toString()));
 
-            Toast.makeText(this, "Utilisateur Créé", Toast.LENGTH_SHORT).show();
-            finish();
-        } else {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("Erreur")
-                    .setMessage("La date entrée est incorrecte. Merci de vérifier les valeurs et le format (dd/mm/aaaa")
-                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
+                Toast.makeText(this, "Utilisateur créé. Pensez à renouveler son adhésion si besoin.", Toast.LENGTH_LONG).show();
+                finish();
+            } catch (Exception e){
+                e.printStackTrace();
+                AlertDialog.Builder b = new AlertDialog.Builder(CreateProfile.this);
+                b.setTitle("Erreur")
+                        .setMessage("Il y a eu une erreur. Vérifiez que les champs sont remplis, et que votre appareil est connecté à internet puis réessayez.")
+                        .setPositiveButton("Compris", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                                DatabaseReference reference = database.getReference("cavaliers");
+                                reference.child(name.getText().toString()).setValue(null);
+                            }
+                        });
+            }
+            } else{
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("Erreur")
+                        .setMessage("La date entrée est incorrecte. Merci de vérifier les valeurs et le format (dd/mm/aaaa")
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
 
-                        }
-                    });
-            builder.show();
-        }
+                            }
+                        });
+                builder.show();
+            }
     }
 
     public boolean verifDate(String date){

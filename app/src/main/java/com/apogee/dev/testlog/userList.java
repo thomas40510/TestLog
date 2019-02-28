@@ -6,6 +6,7 @@ package com.apogee.dev.testlog;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -106,6 +107,15 @@ public class userList extends AppCompatActivity {
                     intent.putExtra("name", arrayList.get(position));
                     startActivity(intent);
 
+                }
+            });
+
+            FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.floatingActionButton);
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(userList.this, CreateProfile.class);
+                    startActivity(intent);
                 }
             });
         }

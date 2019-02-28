@@ -19,8 +19,9 @@ import android.view.MenuItem;
 import com.crashlytics.android.Crashlytics;
 
 import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import java.net.InetSocketAddress;
+import java.net.Socket;
+import java.net.SocketAddress;
 
 import io.fabric.sdk.android.Fabric;
 import io.smooch.core.Settings;
@@ -95,6 +96,7 @@ public class Launcher extends AppCompatActivity {
     }
 
     public boolean isInternetWorking() {
+        /*
         boolean success = false;
         try {
             URL url = new URL("https://google.com");
@@ -108,6 +110,18 @@ public class Launcher extends AppCompatActivity {
             e.printStackTrace();
         }
         return success;
+        */
+        // TCP/HTTP/DNS (depending on the port, 53=DNS, 80=HTTP, etc.)
+        try {
+            int timeoutMs = 1500;
+            Socket sock = new Socket();
+            SocketAddress sockaddr = new InetSocketAddress("8.8.8.8", 53);
+
+            sock.connect(sockaddr, timeoutMs);
+            sock.close();
+
+            return true;
+        } catch (IOException e) { return false; }
     }
 
     public static boolean hasInternetConnection(final Context context) {

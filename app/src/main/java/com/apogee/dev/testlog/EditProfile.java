@@ -4,10 +4,14 @@
 
 package com.apogee.dev.testlog;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -21,7 +25,8 @@ public class EditProfile extends AppCompatActivity {
     EditText bDate, address, city, forfait, remain;
     EditText phone, mail;
     RadioGroup radioGroup;
-    RadioButton radioFather, radioMother;
+    RadioButton radioFather, radioMother, radioOther;
+    String othername = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +42,44 @@ public class EditProfile extends AppCompatActivity {
         mail = (EditText) findViewById(R.id.mail);
 
         radioGroup = (RadioGroup) findViewById(R.id.radiogroup);
+        radioOther = (RadioButton) findViewById(R.id.radioOther);
+
+        radioOther.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder b = new AlertDialog.Builder(EditProfile.this);
+                b.setTitle("Vous avez choisi \"autre\"")
+                        .setMessage("Merci de spécifier à qui appartient ce numéro de téléphone.");
+                final EditText editText = new EditText(EditProfile.this);
+                editText.setSingleLine(true);
+                editText.setGravity(Gravity.LEFT | Gravity.TOP);
+                editText.setHorizontalScrollBarEnabled(false);
+
+                LinearLayout layout = new LinearLayout(EditProfile.this);
+                layout.setOrientation(LinearLayout.VERTICAL);
+                layout.addView(editText);
+
+                b.setView(layout);
+                b.setPositiveButton("Confirmer", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        try{
+                            othername = editText.getText().toString();
+                            radioOther.setText(othername);
+                        } catch (Exception e){
+                            Toast.makeText(EditProfile.this, "Erreur. Merci de renseigner le champ.", Toast.LENGTH_SHORT).show();
+                        }
+                        if (othername.equals("")){
+                            Toast.makeText(EditProfile.this, "Merci de renseigner le champ.", Toast.LENGTH_SHORT).show();
+                            radioGroup.check(R.id.radioFather);
+                            radioOther.setText("Autre");
+                        }
+                    }
+                });
+
+                b.show();
+            }
+        });
 
 
         // Sets un-changing infos
@@ -65,6 +108,11 @@ public class EditProfile extends AppCompatActivity {
                 radioGroup.check(R.id.radioMother);
                 //Log.e("DBG", "mother");
                 break;
+            case "mainWho":
+                break;
+            default:
+                radioGroup.check(R.id.radioOther);
+                radioOther.setText(Profile.telWhoStr);
         }
     }
 
@@ -104,12 +152,16 @@ public class EditProfile extends AppCompatActivity {
                 case R.id.radioMother:
                     who = "Mère";
                     break;
+                case R.id.radioOther:
+                    who = othername;
+                    break;
+
             }
             mref.child("tel").child("who").setValue(who);
         }
 
-
         Toast.makeText(this, "Profil modifié !", Toast.LENGTH_SHORT).show();
         finish();
     }
+
 }

@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -139,6 +140,14 @@ public class Profile extends AppCompatActivity {
             }
         });
 
+        FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                editProfile();
+            }
+        });
+
 
     }
 
@@ -249,7 +258,7 @@ public class Profile extends AppCompatActivity {
         builder.show();
     }
 
-    public void editProfile (View view){
+    public void editProfile (){
         Intent intent = new Intent(this, EditProfile.class);
         intent.putExtra("bdate", bDateStr)
                 .putExtra("address", addressStr)

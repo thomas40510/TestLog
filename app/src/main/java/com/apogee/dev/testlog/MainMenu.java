@@ -13,7 +13,6 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -115,11 +114,12 @@ public class MainMenu extends AppCompatActivity {
             }
         });
 
-        final TextView webstatus  = (android.widget.TextView) findViewById(R.id.webstatus);
+        final TextView webstatus  = (TextView) findViewById(R.id.webstatus);
 
         final Handler handler = new Handler();
         final int delay = 5000; //milliseconds
 
+        /*
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         handler.postDelayed(new Runnable(){
@@ -134,6 +134,9 @@ public class MainMenu extends AppCompatActivity {
                 handler.postDelayed(this, delay);
             }
         }, delay);
+        */
+        boolean internetstatus = new Launcher().isInternetWorking();
+        webstatus.setText(internetstatus ? "fine ;-)" : "not working !");
 
     }
 

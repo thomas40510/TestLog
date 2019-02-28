@@ -104,16 +104,6 @@
         android:layout_alignStart="@+id/forfait"
         android:text="TextView" />
 
-    <Button
-        android:id="@+id/button6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:onClick="editProfile"
-        android:text="Modifier" />
-
     <TextView
         android:id="@+id/licence"
         android:layout_width="wrap_content"
@@ -181,7 +171,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_below="@+id/textView37"
         android:layout_alignParentStart="true">
 
@@ -245,5 +235,17 @@
         android:layout_alignBottom="@+id/licyear"
         android:layout_toStartOf="@+id/adyear"
         android:text="Lic " />
+
+    <com.apogee.dev.testlog.MovableFloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:clickable="true"
+        android:focusable="true"
+        app:backgroundTint="@color/colorPrimary"
+        app:fabSize="auto"
+        app:srcCompat="@drawable/baseline_edit_white_48" />
 
 </RelativeLayout>

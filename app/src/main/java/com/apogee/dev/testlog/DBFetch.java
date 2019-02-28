@@ -25,7 +25,7 @@ public class DBFetch extends Activity {
     private List<String> fetchedList = new ArrayList<>();
     private SharedPreferences prefs;
 
-    private int i;
+    private int i = 0;
 
     public void fetchDB (final boolean dorenew, boolean fromMain){
         toRenewStr = "";
@@ -84,7 +84,7 @@ public class DBFetch extends Activity {
 
         FirebaseDatabase dbase = FirebaseDatabase.getInstance();
         DatabaseReference mref = dbase.getReference("cavaliers");
-        if (i<2) {
+        if (i==1) {
             mref.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
@@ -99,7 +99,6 @@ public class DBFetch extends Activity {
                     MainActivity showNew = new MainActivity();
                     showNew.showRenew();
                     toRenewStr = "";
-                    i = 0;
 
                 }
 

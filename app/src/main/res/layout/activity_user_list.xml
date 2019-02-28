@@ -3,12 +3,26 @@
   ~ Copyright (c) 2018 Thomas Prévost / CE Sauveterre. Distribué sous license libre.
   -->
 
-<RelativeLayout xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.apogee.dev.testlog.userList"
     android:layout_margin="@dimen/activity_vertical_margin">
+
+    <com.apogee.dev.testlog.MovableFloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:clickable="true"
+        android:focusable="true"
+        app:backgroundTint="@color/colorPrimary"
+        app:elevation="5dp"
+        app:fabSize="auto"
+        app:srcCompat="@drawable/baseline_person_add_white_48" />
 
     <ListView
         android:id="@+id/listView"

@@ -349,7 +349,7 @@ public class ponySelect extends AppCompatActivity {
                 String vNameStr = vName.getText().toString();
                 String dateStr = "";
                 //dateStr = dateStr.concat(picker.getYear() + "/").concat(months[picker.getMonth()] + "/").concat(picker.getDayOfMonth() + "");
-                dateStr = dateStr.concat(picker.getYear()+"-"+picker.getMonth()+"-"+picker.getDayOfMonth());
+                dateStr = dateStr.concat(picker.getYear()+"-"+(picker.getMonth()+1)+"-"+picker.getDayOfMonth());
                 writeValues(vNameStr, dateStr);
                 //Log.e("date", dateStr);
             }

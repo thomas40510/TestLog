@@ -4,6 +4,8 @@
 
 package com.apogee.dev.testlog;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -12,6 +14,7 @@ import android.os.Looper;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.NumberPicker;
 import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
@@ -63,6 +66,65 @@ public class cMainActivity extends AppCompatActivity {
         intent.putExtra("whatNext", "vaccin")
                 .putExtra("where", "");
         startActivity(intent);
+    }
+    public void vacbymonth(View view){
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Entrez le mois")
+                .setMessage("Choisissez le mois à afficher :");
+
+        final NumberPicker numberPicker = new NumberPicker(cMainActivity.this);
+        numberPicker.setMinValue(1);
+        numberPicker.setMaxValue(12);
+        builder.setView(numberPicker);
+
+        builder.setPositiveButton("Confirmer", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                int month = numberPicker.getValue();
+                Intent intent = new Intent(cMainActivity.this, showVV.class);
+                intent.putExtra("name", "none");
+                intent.putExtra("type", "vac");
+                intent.putExtra("month", Integer.toString(month));
+                startActivity(intent);
+            }
+        });
+        builder.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        builder.show();
+    }
+    public void vermbymonth(View view){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Entrez le mois")
+                .setMessage("Choisissez le mois à afficher :");
+
+        final NumberPicker numberPicker = new NumberPicker(cMainActivity.this);
+        numberPicker.setMinValue(1);
+        numberPicker.setMaxValue(12);
+        builder.setView(numberPicker);
+
+        builder.setPositiveButton("Confirmer", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                int month = numberPicker.getValue();
+                Intent intent = new Intent(cMainActivity.this, showVV.class);
+                intent.putExtra("name", "none");
+                intent.putExtra("type", "verm");
+                intent.putExtra("month", Integer.toString(month));
+                startActivity(intent);
+            }
+        });
+        builder.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        builder.show();
     }
 
     public void gotoMenu(View view){
@@ -118,7 +180,7 @@ public class cMainActivity extends AppCompatActivity {
     }
 
     public void hideButtons(){
-        for (int i=401;i<405; i++){
+        for (int i=401;i<407; i++){
             String buttonId = "button" + i;
             int resID = getResources().getIdentifier(buttonId, "id", getPackageName());
             findViewById(resID).setAlpha(0.5f);
@@ -126,7 +188,7 @@ public class cMainActivity extends AppCompatActivity {
         }
     }
     public void showButtons(){
-        for (int i=401;i<405; i++){
+        for (int i=401;i<407; i++){
             String buttonId = "button" + i;
             int resID = getResources().getIdentifier(buttonId, "id", getPackageName());
             findViewById(resID).setAlpha(1f);

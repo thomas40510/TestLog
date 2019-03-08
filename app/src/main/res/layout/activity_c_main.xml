@@ -31,25 +31,6 @@
         android:text="Saisir un nouvel équidé" />
 
     <Button
-        android:id="@+id/button403"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/button402"
-        android:onClick="newVerm"
-        android:text="Nouvelle vermifugation" />
-
-    <Button
-        android:id="@+id/button404"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/button403"
-        android:onClick="addvac"
-        android:text="Nouvelle vaccination" />
-
-    <Button
         android:id="@+id/button13"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -65,5 +46,59 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         tools:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/layoutVacVerm"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/button13"
+        android:layout_below="@+id/button402"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button403"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="addvac"
+                android:text="Nouveau vaccin" />
+
+            <Button
+                android:id="@+id/button404"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="vacbymonth"
+                android:text="Vaccins par mois" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button405"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="newVerm"
+                android:text="Nouveau vermifuge" />
+
+            <Button
+                android:id="@+id/button406"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="vermbymonth"
+                android:text="Vermifuges par mois" />
+        </LinearLayout>
+
+    </LinearLayout>
 
 </RelativeLayout>

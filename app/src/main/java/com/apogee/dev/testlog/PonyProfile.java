@@ -126,6 +126,7 @@ public class PonyProfile extends AppCompatActivity {
                 Intent intent = new Intent(this, showVV.class);
                 intent.putExtra("type", "verm");
                 intent.putExtra("name", nameStr);
+                intent.putExtra("month", "none");
                 startActivity(intent);
                 return true;
 
@@ -133,6 +134,7 @@ public class PonyProfile extends AppCompatActivity {
                 Intent intent1 = new Intent(this, showVV.class);
                 intent1.putExtra("type", "vac");
                 intent1.putExtra("name", nameStr);
+                intent1.putExtra("month", "none");
                 startActivity(intent1);
                 return true;
 

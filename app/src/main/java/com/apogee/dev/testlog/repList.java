@@ -40,6 +40,8 @@ public class repList extends AppCompatActivity {
         dayRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                repList.clear();
+                layout.removeAllViews();
                 for (DataSnapshot postsnapshot : dataSnapshot.getChildren()){
                     repList.add(postsnapshot.getKey());
                 }

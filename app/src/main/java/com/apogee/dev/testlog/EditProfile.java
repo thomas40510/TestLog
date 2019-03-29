@@ -10,6 +10,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -17,8 +18,14 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class EditProfile extends AppCompatActivity {
 
@@ -27,6 +34,7 @@ public class EditProfile extends AppCompatActivity {
     RadioGroup radioGroup;
     RadioButton radioFather, radioMother, radioOther;
     String othername = "";
+    String histo, date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +89,12 @@ public class EditProfile extends AppCompatActivity {
             }
         });
 
+        findViewById(R.id.todayimg).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectDate();
+            }
+        });
 
         // Sets un-changing infos
 
@@ -116,6 +130,40 @@ public class EditProfile extends AppCompatActivity {
         }
     }
 
+    public void selectDate(){
+        final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
+        builder.setTitle("Saisie d'une date");
+        builder.setMessage("Entrez la date de début du forfait. Peu importe le jour, seuls le mois et l'année sont gardés.");
+
+
+        final DatePicker picker = new DatePicker(this);
+        picker.setCalendarViewShown(false);
+
+        LinearLayout layout = new LinearLayout(this);
+        layout.setOrientation(LinearLayout.VERTICAL);
+        layout.addView(picker);
+
+        builder.setView(layout);
+
+        builder.setPositiveButton("Confirmer", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                int m = picker.getMonth()+1;
+                String month = ""+picker.getYear()+"-"+(Integer.toString(m).length() == 1 ? 0+Integer.toString(m) : Integer.toString(m));
+                remain.setText(month);
+                ////Log.e("date", date);
+            }
+        });
+        builder.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        builder.show();
+
+    }
+
 
     /**
      * Handle DB-sided update of infos
@@ -124,7 +172,7 @@ public class EditProfile extends AppCompatActivity {
     public void save (View view){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference("cavaliers");
-        DatabaseReference mref = reference.child(Profile.nameStr);
+        final DatabaseReference mref = reference.child(Profile.nameStr);
         mref.child("Birthdate").setValue(bDate.getText().toString());
         mref.child("Forfait").setValue(forfait.getText().toString());
         mref.child("adresse").setValue(address.getText().toString());
@@ -159,6 +207,40 @@ public class EditProfile extends AppCompatActivity {
             }
             mref.child("tel").child("who").setValue(who);
         }
+
+        final SimpleDateFormat format = new SimpleDateFormat("yyyy-M-dd");
+
+        Date today = new Date();
+        date = format.format(today);
+
+        mref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String histo;
+
+                try {
+                    histo = dataSnapshot.child("histoCarte").child(date).getValue(String.class);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    histo = null;
+                }
+                if (histo != null) {
+                    int childrenCount = 0;
+                    for (DataSnapshot postsnapshot : dataSnapshot.child("histoCarte").getChildren()) {
+                        if (postsnapshot.getKey().contains(date)) {
+                            childrenCount++;
+                        }
+                    }
+                    date = date + "(" + (childrenCount + 1) + ")";
+                }
+                mref.child("histoCarte").child(date).setValue("["+MainMenu.loggedUserName+"] Profil modifié");
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         Toast.makeText(this, "Profil modifié !", Toast.LENGTH_SHORT).show();
         finish();

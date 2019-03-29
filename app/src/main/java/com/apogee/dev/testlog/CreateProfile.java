@@ -4,17 +4,19 @@
 
 package com.apogee.dev.testlog;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
@@ -102,6 +104,51 @@ public class CreateProfile extends AppCompatActivity {
         forfait.setAdapter(adapter);
         forfait.setThreshold(1);
 
+        findViewById(R.id.calimg).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectDate();
+            }
+        });
+
+
+    }
+
+    public void selectDate(){
+        final AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
+        builder.setTitle("Saisie d'une date");
+        builder.setMessage("Entrez la date de début du forfait. Peu importe le jour, seuls le mois et l'année sont gardés.");
+
+
+        final DatePicker picker = new DatePicker(this);
+        picker.setCalendarViewShown(false);
+
+        LinearLayout layout = new LinearLayout(this);
+        layout.setOrientation(LinearLayout.VERTICAL);
+        layout.addView(picker);
+
+        builder.setView(layout);
+
+        builder.setPositiveButton("Confirmer", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                int m = picker.getMonth()+1;
+                String month = ""+picker.getYear()+"-"+(Integer.toString(m).length() == 1 ? 0+Integer.toString(m) : Integer.toString(m));
+                remain.setText(month);
+                remain.setClickable(false);
+                remain.setFocusable(false);
+
+                forfait.setText("FT");
+                ////Log.e("date", date);
+            }
+        });
+        builder.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        builder.show();
 
     }
 
@@ -132,7 +179,7 @@ public class CreateProfile extends AppCompatActivity {
 
                 mref.child("fléchage").setValue(flechage.getText().toString());
                 mref.child("Birthdate").setValue(bDate.getText().toString());
-                mref.child("Forfait").setValue(forfait.getText().toString());
+                mref.child("Forfait").setValue(forfait.getText().toString().toUpperCase());
                 mref.child("adresse").setValue(address.getText().toString());
                 mref.child("ville").setValue(city.getText().toString());
                 mref.child("remainH").setValue(remain.getText().toString());
@@ -141,6 +188,7 @@ public class CreateProfile extends AppCompatActivity {
                 mref.child("mail").setValue(mailStr);
                 mref.child("licNbr").setValue(licnbr.getText().toString());
                 mref.child("adlic").setValue("1804");
+                mref.child("isAssigned").setValue(false);
 
                 Answers.getInstance().logCustom(new CustomEvent("Added user")
                         .putCustomAttribute("Name", name.getText().toString()));

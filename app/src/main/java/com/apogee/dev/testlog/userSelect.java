@@ -31,6 +31,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class userSelect extends AppCompatActivity {
@@ -39,10 +40,11 @@ public class userSelect extends AppCompatActivity {
     public List<String> arrayList;
     private List<InfoRowData> infodata;
     private List<String> selected;
-    private List<Integer> rmainList;
+    private List<String> rmainList;
     private int rmain;
     private String toPrintStr;
-    public String date;
+    public String date, month;
+    public String msg;
 
     private String whatsNext;
 
@@ -74,7 +76,7 @@ public class userSelect extends AppCompatActivity {
         rmainList = new ArrayList<>();
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myref = database.getReference("cavaliers");
+        final DatabaseReference myref = database.getReference("cavaliers");
         myref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -89,7 +91,13 @@ public class userSelect extends AppCompatActivity {
                     case "addUser":
                         arrayList.clear();
                         for (String s : DBFetch.userlist){
-                            if (!dataSnapshot.child(s).child("isAssigned").getValue(Boolean.class)){
+                            try {
+                                if (!dataSnapshot.child(s).child("isAssigned").getValue(Boolean.class)) {
+                                    arrayList.add(s);
+                                }
+                            } catch (Exception e){
+                                //Log.e("DBG", s);
+                                myref.child(s).child("isAssigned").setValue(false);
                                 arrayList.add(s);
                             }
                         }
@@ -320,6 +328,8 @@ public class userSelect extends AppCompatActivity {
                 date = "";
                 //dateStr = dateStr.concat(picker.getYear() + "/").concat(months[picker.getMonth()] + "/").concat(picker.getDayOfMonth() + "");
                 date = date.concat(picker.getYear()+"-"+(picker.getMonth()+1)+"-"+picker.getDayOfMonth());
+                int m = picker.getMonth()+1;
+                month = ""+picker.getYear()+"-"+(Integer.toString(m).length() == 1 ? 0+Integer.toString(m) : Integer.toString(m));
                 if (whatsNext.contains("decrement")) {
                     decrement();
                 } else {
@@ -374,25 +384,33 @@ public class userSelect extends AppCompatActivity {
                 String histo;
                 for (String s : selected) {
                     ////Log.e("DBG @ln281", dataSnapshot.child(s).child("remainH").getValue().toString());
-                    rmain = Integer.parseInt(dataSnapshot.child(s).child("remainH").getValue().toString());
+                    String rmainStr = dataSnapshot.child(s).child("remainH").getValue(String.class);
+                    if (Arrays.asList(new String[] {"FT","FC"}).contains(dataSnapshot.child(s).child("Forfait").getValue(String.class))){
+                        msg = "["+MainMenu.loggedUserName+"] 1 séance prise sur le forfait";
+                        rmainList.add(rmainStr);
+
+                    } else {
+                        rmain = Integer.parseInt(rmainStr);
+                        msg = "["+MainMenu.loggedUserName+"] 1 heure prise sur la carte";
+                        rmainList.add(Integer.toString(rmain - 1));
+                    }
                     try {
                         histo = dataSnapshot.child(s).child("histoCarte").child(date).getValue().toString();
-                    } catch (Exception e){
+                    } catch (Exception e) {
                         e.printStackTrace();
                         histo = null;
                     }
-                    if(histo!=null){
+                    if (histo != null) {
                         int childrenCount = 0;
-                        for (DataSnapshot postsnapshot : dataSnapshot.child(s).child("histoCarte").getChildren()){
-                            if (postsnapshot.getKey().contains(date)){
+                        for (DataSnapshot postsnapshot : dataSnapshot.child(s).child("histoCarte").getChildren()) {
+                            if (postsnapshot.getKey().contains(date)) {
                                 childrenCount++;
                             }
                         }
-                        date = date+"("+(childrenCount+1)+")";
+                        date = date + "(" + (childrenCount + 1) + ")";
                     }
-                    rmainList.add(rmain - 1);
                 }
-                writeValues("1 heure prise sur la carte", "none");
+                writeValues(msg, "none");
             }
 
             @Override
@@ -473,6 +491,7 @@ public class userSelect extends AppCompatActivity {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         String histo;
+                        String msg = "["+MainMenu.loggedUserName+"] "+toAdd+" heures ajoutées sur la carte";
                         for (String s : selected) {
                             ////Log.e("DBG @ln281", dataSnapshot.child(s).child("remainH").getValue().toString());
                             rmain = Integer.parseInt(dataSnapshot.child(s).child("remainH").getValue().toString());
@@ -491,9 +510,14 @@ public class userSelect extends AppCompatActivity {
                                 }
                                 date = date+"("+(childrenCount+1)+")";
                             }
-                            rmainList.add(rmain + toAdd);
+                            if (Arrays.asList(new String[] {"FT","FC"}).contains(cardType)){
+                                rmainList.add(month);
+                                msg = "["+MainMenu.loggedUserName+"] "+cardType+" ajouté / renouvelé";
+                            } else {
+                                rmainList.add(Integer.toString(rmain+toAdd));
+                            }
                         }
-                        writeValues(toAdd+" heures ajoutées sur la carte", cardType);
+                        writeValues(msg, cardType);
                     }
 
                     @Override
@@ -519,8 +543,8 @@ public class userSelect extends AppCompatActivity {
         FirebaseDatabase dbase = FirebaseDatabase.getInstance();
         DatabaseReference mref = dbase.getReference("cavaliers");
         for (int i = 0; i<selected.size();i++){
-            mref.child(selected.get(i)).child("remainH").setValue(rmainList.get(i).toString());
 
+            mref.child(selected.get(i)).child("remainH").setValue(rmainList.get(i));
             mref.child(selected.get(i)).child("histoCarte").child(date).setValue(histoMsg);
 
             if(!cardType.equals("none")){

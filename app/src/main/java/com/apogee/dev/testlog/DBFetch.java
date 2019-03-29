@@ -3,14 +3,19 @@ package com.apogee.dev.testlog;
 import android.app.Activity;
 import android.content.SharedPreferences;
 
+import com.crashlytics.android.Crashlytics;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 
@@ -82,6 +87,8 @@ public class DBFetch extends Activity {
 
     public void fetchRenew(){
 
+        final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
         FirebaseDatabase dbase = FirebaseDatabase.getInstance();
         DatabaseReference mref = dbase.getReference("cavaliers");
         if (i==1) {
@@ -90,10 +97,33 @@ public class DBFetch extends Activity {
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     for (String s : userlist) {
                         DataSnapshot snapshot = dataSnapshot.child(s).child("remainH");
+                        String remainStr = snapshot.getValue(String.class);
+                        if (Arrays.asList(new String[] {"FT","FC"}).contains(dataSnapshot.child(s).child("Forfait").getValue(String.class))){
+                            try {
+                                Date renewDate = format.parse(remainStr+"-01");
+                                System.out.println("HEY !! "+renewDate);
+                                Calendar cal = Calendar.getInstance();
+                                Date today = new Date();
+                                cal.setTime(renewDate);
+                                cal.set(Calendar.MONTH, cal.get(Calendar.MONTH)+3);
+                                Date expDate = cal.getTime();
+
+                                if (expDate.before(today)){
+                                    //Toast.makeText(DBFetch.this, "it worked !! "+s, Toast.LENGTH_SHORT).show();
+                                    toRenewStr = toRenewStr.concat(s + " (" + format.format(expDate) + ")" + "\n");
+                                }
+                            } catch (Exception e){
+                                e.printStackTrace();
+                                Crashlytics.logException(e);
+                                toRenewStr = toRenStr.concat(s+" ERROR");
+
+                            }
+                        } else {
                             int remains = Integer.parseInt(snapshot.getValue().toString());
                             if (remains <= 0) {
                                 toRenewStr = toRenewStr.concat(s + " (" + remains + ")" + "\n");
                             }
+                        }
                     }
                     //Log.e("DBG", "showing renew");
                     MainActivity showNew = new MainActivity();

@@ -27,6 +27,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 public class Profile extends AppCompatActivity {
 
     private static final String currentYear = "2019";
@@ -42,6 +46,8 @@ public class Profile extends AppCompatActivity {
     public TextView adyear, licyear;
     public static String nameStr,bDateStr,addressStr,cityStr,flechStr,forfaitStr,remainStr,licStr,telStr,mailStr,telWhoStr;
     public static String numberStr,histoStr,adlic;
+    private List<String> histoLst = new ArrayList<>();
+
 
     private Menu profileMenu ;
 
@@ -197,6 +203,7 @@ public class Profile extends AppCompatActivity {
     }
 
     public void getHisto(final Boolean show){
+        histoLst.clear();
         //Log.e("DBG", "reached !");
         textHisto = (TextView) findViewById(R.id.textHisto);
         histoStr = "";
@@ -208,11 +215,17 @@ public class Profile extends AppCompatActivity {
         histoRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                histoLst.clear();
+                histoStr="";
                 for (DataSnapshot postsnapshot : dataSnapshot.getChildren()) {
-                    String action = postsnapshot.getKey()+" : "+dataSnapshot.child(postsnapshot.getKey()).getValue().toString();
-
-                    histoStr = histoStr.concat(action+"\n");
+                    String action = postsnapshot.getKey()+" : "+dataSnapshot.child(postsnapshot.getKey()).getValue(String.class);
+                    histoLst.add(action);
                     //Log.e("DBG", action+" / "+histoStr);
+                    //Log.e("DBG", ""+histoLst);
+                }
+                Collections.reverse(histoLst);
+                for (String s:histoLst){
+                    histoStr = histoStr.concat(s+"\n");
                 }
                 if(show) {
                     textHisto.setText(histoStr);

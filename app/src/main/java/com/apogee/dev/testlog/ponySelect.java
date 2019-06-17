@@ -10,7 +10,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -427,7 +426,7 @@ public class ponySelect extends AppCompatActivity {
                     dateStr = dateStr.concat(picker.getYear()+"-"+(picker.getMonth()+1)+"-"+picker.getDayOfMonth());
                     for (String s : selected){
                         ref.child(s).child(typeRef).setValue(dateStr);
-                        Log.e("DBG", s + typeRef + dateStr);
+                        //Log.e("DBG", s + typeRef + dateStr);
                     }
                     Toast.makeText(ponySelect.this, "changements enregistrés !", Toast.LENGTH_SHORT).show();
                     selected.clear();

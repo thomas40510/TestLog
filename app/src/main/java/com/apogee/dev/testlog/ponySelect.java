@@ -10,6 +10,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -45,9 +46,11 @@ public class ponySelect extends AppCompatActivity {
     private String toPrintStr;
     public String[] months = {"Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet","Août", "Septembre", "Octobre", "Novembre", "Décembre"};
 
+    public String typeRef;
     public String whatNext;
-    public boolean isVV;
+    public boolean isVV, isMOD;
     public String where;
+    public String histoMsg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +62,24 @@ public class ponySelect extends AppCompatActivity {
         where = extras.getString("where");
 
         switch (whatNext){
+            case "ostéo":
+                setTitle("Saisie ostéo");
+                histoMsg = "A vu l'ostéo";
+                typeRef = "lastOst";
+                isMOD = true;
+                break;
+            case "dentiste":
+                setTitle("Saisie dentiste");
+                histoMsg = "A vu le dentiste";
+                typeRef = "lastDent";
+                isMOD = true;
+                break;
+            case "nico":
+                setTitle("Saisie maréchal");
+                histoMsg = "A vu le maréchal";
+                typeRef = "lastNico";
+                isMOD = true;
+                break;
             case "vermifuge":
                 setTitle("Nouveau vermifuge");
                 isVV = true;
@@ -296,8 +317,7 @@ public class ponySelect extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         if (isVV) {
                             vDetails();
-                        }
-                        else {
+                        } else {
                             saveInfo();
                         }
 
@@ -384,24 +404,62 @@ public class ponySelect extends AppCompatActivity {
 
     public void saveInfo(){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference().child("cavalerie");
-        DatabaseReference sRef = database.getReference().child("écuries");
-        if (whatNext.equals("add")){
-            stabInfo.cavalList.addAll(selected);
-            sRef.child(where).setValue(stabInfo.cavalList);
+        final DatabaseReference ref = database.getReference().child("cavalerie");
+        if (isMOD){
+            final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Entrez la date");
 
+
+            final DatePicker picker = new DatePicker(this);
+            picker.setCalendarViewShown(false);
+
+            LinearLayout layout = new LinearLayout(this);
+            layout.setOrientation(LinearLayout.VERTICAL);
+            layout.addView(picker);
+
+            builder.setView(layout);
+
+            builder.setPositiveButton("Confirmer", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    String dateStr = "";
+                    //dateStr = dateStr.concat(picker.getYear() + "/").concat(months[picker.getMonth()] + "/").concat(picker.getDayOfMonth() + "");
+                    dateStr = dateStr.concat(picker.getYear()+"-"+(picker.getMonth()+1)+"-"+picker.getDayOfMonth());
+                    for (String s : selected){
+                        ref.child(s).child(typeRef).setValue(dateStr);
+                        Log.e("DBG", s + typeRef + dateStr);
+                    }
+                    Toast.makeText(ponySelect.this, "changements enregistrés !", Toast.LENGTH_SHORT).show();
+                    selected.clear();
+                    finish();
+                    //Log.e("date", dateStr);
+                }
+            });
+            builder.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+
+                }
+            });
+            builder.show();
         } else {
-            for (String s : selected){
-                arrayList.remove(s);
-            }
-            sRef.child(where).setValue(arrayList);
-        }
-        for (String c : selected){
-            ref.child(c).child("isAssigned").setValue(whatNext.equals("add"));
-        }
+            DatabaseReference sRef = database.getReference().child("écuries");
+            if (whatNext.equals("add")) {
+                stabInfo.cavalList.addAll(selected);
+                sRef.child(where).setValue(stabInfo.cavalList);
 
-        Toast.makeText(this, "changements enregistrés !", Toast.LENGTH_SHORT).show();
-        selected.clear();
-        finish();
+            } else {
+                for (String s : selected) {
+                    arrayList.remove(s);
+                }
+                sRef.child(where).setValue(arrayList);
+            }
+            for (String c : selected) {
+                ref.child(c).child("isAssigned").setValue(whatNext.equals("add"));
+            }
+            Toast.makeText(this, "changements enregistrés !", Toast.LENGTH_SHORT).show();
+            selected.clear();
+            finish();
+        }
     }
 }

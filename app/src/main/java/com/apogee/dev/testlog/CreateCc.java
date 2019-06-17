@@ -150,40 +150,47 @@ public class CreateCc extends AppCompatActivity {
         }
         @Override
         protected void onPostExecute(Void result) {
-            FirebaseDatabase database = FirebaseDatabase.getInstance();
-            DatabaseReference newref = database.getReference().child("cartes cadeau").child(Integer.toString(cardnumber));
-            newref.child("paiement").setValue(payStr);
-            newref.child("prix").setValue(valStr);
-            newref.child("quand").setValue(dateStr);
-            newref.child("qui").setValue(MainMenu.loggedUserName);
-            newref.child("quoi").setValue(prestaStr);
-            newref.child("state").setValue("valide");
-            newref.child("used").setValue("/");
-            newref.child("val").setValue(sdf.format(cal.getTime()));
+
+            if(cardnumber<2019){
+                Log.e("DBG", "reroll "+cardnumber);
+                new asyncTask().execute();
+            } else {
+
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference newref = database.getReference().child("cartes cadeau").child(Integer.toString(cardnumber));
+                newref.child("paiement").setValue(payStr);
+                newref.child("prix").setValue(valStr);
+                newref.child("quand").setValue(dateStr);
+                newref.child("qui").setValue(MainMenu.loggedUserName);
+                newref.child("quoi").setValue(prestaStr);
+                newref.child("state").setValue("valide");
+                newref.child("used").setValue("/");
+                newref.child("val").setValue(sdf.format(cal.getTime()));
 
 
-            String message = "=============================================\n"+
-                    "==== Carte cadeau - confirmation de l'enregistrement ====\n" +
-                    "=============================================\n\n" +
-                    "Carte numéro : "+cardnumber+"\n" +
-                    "Valable pour : "+prestaStr+"\n" +
-                    "D'une valeur de : "+valStr+" € (payé en "+payStr+") \n" +
-                    "Enregistrée par : "+MainMenu.loggedUserName+" le "+sdf.format(new Date())+"\n" +
-                    "Valable du "+dateStr+" au "+sdf.format(cal.getTime())+"\n\n"+
-                    "********************************\n" +
-                    "user : "+MainMenu.userMail+"; fcm : "+ FirebaseInstanceId.getInstance().getToken();
+                String message = "=============================================\n" +
+                        "==== Carte cadeau - confirmation de l'enregistrement ====\n" +
+                        "=============================================\n\n" +
+                        "Carte numéro : " + cardnumber + "\n" +
+                        "Valable pour : " + prestaStr + "\n" +
+                        "D'une valeur de : " + valStr + " € (payé en " + payStr + ") \n" +
+                        "Enregistrée par : " + MainMenu.loggedUserName + " le " + sdf.format(new Date()) + "\n" +
+                        "Valable du " + dateStr + " au " + sdf.format(cal.getTime()) + "\n\n" +
+                        "********************************\n" +
+                        "user : " + MainMenu.userMail + "; fcm : " + FirebaseInstanceId.getInstance().getToken();
 
-            try{
-                String[] recipients = {MainMenu.userMail, "thomasprevost85@gmail.com"};
-                sendMail sendMail = new sendMail(CreateCc.this,recipients, "Carte cadeau enregistrée n°"+cardnumber, message);
-                sendMail.execute();
-            }catch (Exception e){
-                e.printStackTrace();
-                Toast.makeText(getApplicationContext(), "Erreur d'envoi...", Toast.LENGTH_SHORT).show();
+                try {
+                    String[] recipients = {MainMenu.userMail, "thomasprevost85@gmail.com"};
+                    sendMail sendMail = new sendMail(CreateCc.this, recipients, "Carte cadeau enregistrée n°" + cardnumber, message);
+                    sendMail.execute();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "Erreur d'envoi...", Toast.LENGTH_SHORT).show();
+                }
+
+                database.getReference().child("cartes cadeau").child("next").setValue(Integer.toString(cardnumber + 1));
+                confirmSaisie();
             }
-
-            database.getReference().child("cartes cadeau").child("next").setValue(Integer.toString(cardnumber+1));
-            confirmSaisie();
         }
     }
 

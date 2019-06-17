@@ -67,6 +67,24 @@ public class cMainActivity extends AppCompatActivity {
                 .putExtra("where", "");
         startActivity(intent);
     }
+    public void addnico(View view){
+        Intent intent = new Intent(this, ponySelect.class);
+        intent.putExtra("whatNext", "nico")
+                .putExtra("where", "");
+        startActivity(intent);
+    }
+    public void addost(View view){
+        Intent intent = new Intent(this, ponySelect.class);
+        intent.putExtra("whatNext", "ostéo")
+                .putExtra("where", "");
+        startActivity(intent);
+    }
+    public void adddent(View view){
+        Intent intent = new Intent(this, ponySelect.class);
+        intent.putExtra("whatNext", "dentiste")
+                .putExtra("where", "");
+        startActivity(intent);
+    }
     public void vacbymonth(View view){
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -180,7 +198,7 @@ public class cMainActivity extends AppCompatActivity {
     }
 
     public void hideButtons(){
-        for (int i=401;i<407; i++){
+        for (int i=401;i<413; i++){
             String buttonId = "button" + i;
             int resID = getResources().getIdentifier(buttonId, "id", getPackageName());
             findViewById(resID).setAlpha(0.5f);
@@ -188,7 +206,7 @@ public class cMainActivity extends AppCompatActivity {
         }
     }
     public void showButtons(){
-        for (int i=401;i<407; i++){
+        for (int i=401;i<413; i++){
             String buttonId = "button" + i;
             int resID = getResources().getIdentifier(buttonId, "id", getPackageName());
             findViewById(resID).setAlpha(1f);

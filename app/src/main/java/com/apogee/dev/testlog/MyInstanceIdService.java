@@ -4,12 +4,11 @@
 
 package com.apogee.dev.testlog;
 
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.FirebaseInstanceIdService;
+import com.google.firebase.messaging.FirebaseMessagingService;
 
-public class MyInstanceIdService extends FirebaseInstanceIdService {
+    public class MyInstanceIdService extends FirebaseMessagingService {
 
-    @Override
+    /*@Override
     public void onTokenRefresh() {
         // Get updated InstanceID token.
         String refreshedToken = FirebaseInstanceId.getInstance().getToken();
@@ -19,5 +18,10 @@ public class MyInstanceIdService extends FirebaseInstanceIdService {
         // manage this apps subscriptions on the server side, send the
         // Instance ID token to your app server.
         //sendRegistrationToServer(refreshedToken);
+    }*/
+
+    @Override
+    public void onNewToken(String token){
+        //sendRegistrationTokenToServer(token);
     }
 }

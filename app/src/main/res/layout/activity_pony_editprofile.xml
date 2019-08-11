@@ -79,11 +79,41 @@
                 android:layout_marginEnd="0dp"
                 android:layout_marginBottom="0dp">
 
+                <LinearLayout
+                    android:id="@+id/linlay"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/table"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <RadioGroup
+                        android:id="@+id/radiogf"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/radiocroc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Granulés" />
+
+                        <RadioButton
+                            android:id="@+id/radiofloc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Floconnés" />
+                    </RadioGroup>
+                </LinearLayout>
+
                 <Button
                     android:id="@+id/button7"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/table"
+                    android:layout_below="@id/linlay"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentBottom="true"
                     android:layout_marginEnd="0dp"
@@ -97,6 +127,7 @@
                     android:layout_height="wrap_content">
 
                     <!-- Row 1 with single column -->
+
                     <TableRow
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
@@ -153,8 +184,8 @@
 
                     <TableRow
                         android:id="@+id/tableRow2"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
 
                         <EditText
                             android:id="@+id/rationMt"
@@ -188,7 +219,16 @@
                             android:textSize="14sp" />
 
                     </TableRow>
+
+                    <TableRow
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal">
+
+                    </TableRow>
+
                 </TableLayout>
+
             </RelativeLayout>
 
             <TextView

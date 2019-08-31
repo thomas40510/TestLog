@@ -33,7 +33,7 @@ import java.util.List;
 
 public class Profile extends AppCompatActivity {
 
-    private static final String currentYear = "2019";
+    private static final String currentYear = "2020";
 
     public View view, view2;
     public TextView bDate;

@@ -32,6 +32,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.Arrays;
+
 public class LoginActivity extends AppCompatActivity {
 
     private EditText inputEmail, inputPassword;
@@ -40,6 +42,9 @@ public class LoginActivity extends AppCompatActivity {
     private Button btnSignup, btnLogin, btnReset;
 
     private String nextScreen;
+
+    private String[] mail = {"admin@testlog.com","thomasprevost85@gmail.com", "selleriec.m@hotmail.fr", "cassandre_m@hotmail.fr", "s_marais@hotmail.fr"};
+    private String[] usr  = {"admin", "toto", "clem", "cass", "steph"};
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -146,11 +151,10 @@ public class LoginActivity extends AppCompatActivity {
                 inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
                         InputMethodManager.HIDE_NOT_ALWAYS);
 
-                if (inputEmail.getText().toString().equals("admin")){
-                    inputEmail.setText("admin@testlog.com");
-                    //email = "admin@testlog.com";
-                }
                 String email = inputEmail.getText().toString();
+                if (Arrays.asList(usr).contains(email)){
+                    inputEmail.setText(mail[Arrays.asList(usr).indexOf(email)]);
+                }
 
 
                 final String password = inputPassword.getText().toString();

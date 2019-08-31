@@ -131,6 +131,8 @@ public class ponyList extends AppCompatActivity {
         for (int i=0; i<DBFetch.clistPrt.size(); i++){
             text = text.concat(DBFetch.clistPrt.get(i) + "\n");
         }
+        text = text.concat("\n"+"============="+"\n");
+        text = text.concat("TOTAL : "+DBFetch.clistPrt.size());
         generatePdf gen = new generatePdf();
         gen.createPdf(text, "Cavalerie", "caval-"+System.currentTimeMillis()+".pdf", ponyList.this);
     }

@@ -159,6 +159,8 @@ public class userList extends AppCompatActivity {
         for (int i = 0; i < DBFetch.userlist.size(); i++) {
             test = test.concat(DBFetch.userlist.get(i) + "\n");
         }
+        test = test.concat("\n"+"============="+"\n");
+        test = test.concat("TOTAL : "+DBFetch.userlist.size());
         generatePdf gen = new generatePdf();
         gen.createPdf(test, "Cavaliers", "userList-" + System.currentTimeMillis() + ".pdf", userList.this);
         //gen.createPdf(test, "Cavaliers", "file.pdf", this);

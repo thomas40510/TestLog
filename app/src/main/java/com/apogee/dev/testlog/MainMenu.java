@@ -20,6 +20,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +38,10 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 
 public class MainMenu extends AppCompatActivity {
 
@@ -44,6 +52,16 @@ public class MainMenu extends AppCompatActivity {
 
     //Remote Config keys
     private static final String UPDATE_LINK = "update_link";
+
+    private ListView list;
+
+    private ArrayAdapter<String> adapter;
+    private List<String> arrayList;
+    private List<String> authorList;
+    private List<String> msgList;
+    private List<String> dateList;
+
+    private FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -138,6 +156,7 @@ public class MainMenu extends AppCompatActivity {
         boolean internetstatus = new Launcher().isInternetWorking();
         webstatus.setText(internetstatus ? "fine ;-)" : "not working !");
 
+        CheckMessages();
     }
 
     public void fetchRemote(){
@@ -313,5 +332,105 @@ public class MainMenu extends AppCompatActivity {
     public void genPdf(View view){
         generatePdf gen = new generatePdf();
         gen.createTablePdf(null, "TestTable", "test"+System.currentTimeMillis()+".pdf", MainMenu.this);
+    }
+
+    public void composeMessage(View view){
+        Toast.makeText(this, "fonctionnalité à venir...", Toast.LENGTH_SHORT).show();
+    }
+    public void CheckMessages(){
+        auth = FirebaseAuth.getInstance();
+
+        list = (ListView) findViewById(R.id.lstview);
+        arrayList = new ArrayList<>();
+        authorList = new ArrayList<>();
+        dateList = new ArrayList<>();
+        msgList = new ArrayList<>();
+
+        if(auth.getCurrentUser() == null){
+            arrayList.add("Please login to get messages");
+            adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, arrayList);
+
+            // Here, you set the data in your ListView
+            list.setAdapter(adapter);
+        } else {
+            getMessages();
+        }
+    }
+
+    public void getMessages(){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference ref = database.getReference("users").child("messages");
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                arrayList.clear();
+                authorList.clear();
+                dateList.clear();
+                msgList.clear();
+
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()){
+                    if (!postSnapshot.getKey().equals("nextID")){
+                        arrayList.add(postSnapshot.getKey());
+                        authorList.add(postSnapshot.child("author").getValue(String.class));
+                        msgList.add(postSnapshot.child("body").getValue(String.class));
+                        dateList.add(postSnapshot.child("date").getValue(String.class));
+                    }
+                }
+                Collections.reverse(arrayList);
+                Collections.reverse(authorList);
+                Collections.reverse(msgList);
+                Collections.reverse(dateList);
+                // Adapter: You need three parameters 'the context, id of the layout (it will be where the data is shown),
+                // and the array that contains the data
+                adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, arrayList);
+
+                // Here, you set the data in your ListView
+                list.setAdapter(new Adapter());
+                Toast.makeText(MainMenu.this, "got "+arrayList.size()+" messages", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public class Adapter extends BaseAdapter {
+
+        @Override
+        public int getCount() {
+            // TODO Auto-generated method stub
+            return arrayList.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            // TODO Auto-generated method stub
+            return null;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            // TODO Auto-generated method stub
+            return 0;
+        }
+
+        @Override
+        public View getView(final int position, View convertView, ViewGroup parent) {
+            // TODO Auto-generated method stub
+            View row = null;
+            row = View.inflate(getApplicationContext(), R.layout.message_row, null);
+            TextView msgAuthor = (TextView) row.findViewById(R.id.msgAuthor);
+            TextView msgText = (TextView) row.findViewById(R.id.msgText);
+            TextView msgDate = (TextView) row.findViewById(R.id.msgDate);
+
+            msgAuthor.setText(authorList.get(position));
+            msgText.setText(msgList.get(position));
+            msgDate.setText(dateList.get(position));
+
+
+            return row;
+        }
     }
 }

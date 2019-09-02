@@ -4,6 +4,7 @@
   -->
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mainlayout"
     android:layout_width="match_parent"
@@ -127,5 +128,44 @@
         android:onClick="gotoFFE"
         android:text="Sites FFE"
         />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/version"
+        android:layout_below="@+id/button17"
+        android:layout_margin="@dimen/activity_vertical_margin"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="0dp">
+
+        <TextView
+            android:id="@+id/textView65"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Messages :" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="0dp"
+            android:onClick="composeMessage"
+            app:srcCompat="@drawable/baseline_add_24" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/imageView2"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="0dp">
+
+            <ListView
+                android:id="@+id/lstview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </RelativeLayout>
+
+    </RelativeLayout>
 
 </RelativeLayout>

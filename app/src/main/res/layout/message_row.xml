@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2019 Thomas Prévost / CE Sauveterre. Distribué sous license libre.
+  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/msgmain"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/msglner"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/msgText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/msgAuthor"
+            android:layout_marginTop="5dp"
+            android:text="Message content on one or multiple lines, depending on the need of author and length of message"
+            android:textStyle="italic" />
+
+        <TextView
+            android:id="@+id/textView70"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/msgText"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="0dp"
+            android:layout_toStartOf="@+id/msgDate"
+            android:text="le : "
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/msgAuthor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Author"
+            android:textAllCaps="false"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/msgDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/msgText"
+            android:layout_alignEnd="@+id/msgText"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="0dp"
+            android:text="01/01/2000"
+            android:textSize="12sp" />
+    </RelativeLayout>
+
+</RelativeLayout>

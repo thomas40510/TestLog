@@ -30,7 +30,7 @@ android {
         versionCode 1071
         versionName "Dev"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        resValue("string", "BUILD_DATE", "17/06/2019")
+        resValue("string", "BUILD_DATE", "02/09/2019")
     }
     buildTypes {
         release {

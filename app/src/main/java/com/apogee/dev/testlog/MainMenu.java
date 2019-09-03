@@ -23,6 +23,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,8 +40,10 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 
@@ -334,9 +338,57 @@ public class MainMenu extends AppCompatActivity {
         gen.createTablePdf(null, "TestTable", "test"+System.currentTimeMillis()+".pdf", MainMenu.this);
     }
 
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
     public void composeMessage(View view){
-        Toast.makeText(this, "fonctionnalité à venir...", Toast.LENGTH_SHORT).show();
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Nouveau message")
+                .setMessage("Entrez votre message à laisser sur le mur :");
+
+        final EditText msgBox = new EditText(this);
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT);
+        msgBox.setHint("Message...");
+        //msgBox.setImeOptions(EditorInfo.IME_ACTION_DONE);
+
+
+        LinearLayout layout = new LinearLayout(this);
+        layout.setOrientation(LinearLayout.VERTICAL);
+        layout.addView(msgBox);
+
+        builder.setView(layout);
+
+        builder.setPositiveButton("Confirmer", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                String msgText = msgBox.getText().toString();
+                String date = sdf.format(new Date());
+                String author = loggedUserName;
+
+                writeInfos(msgText, date, author);
+            }
+        });
+        builder.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        builder.show();
     }
+
+    public void writeInfos(String text, String date, String author){
+        int id = Integer.parseInt(arrayList.get(0));
+        id++;
+        FirebaseDatabase wdb = FirebaseDatabase.getInstance();
+        DatabaseReference wref  = wdb.getReference().child("users").child("messages").child(Integer.toString(id));
+        wref.child("author").setValue(author);
+        wref.child("body").setValue(text);
+        wref.child("date").setValue(date);
+        Toast.makeText(this, "Message posté !", Toast.LENGTH_SHORT).show();
+    }
+
     public void CheckMessages(){
         auth = FirebaseAuth.getInstance();
 
@@ -383,6 +435,8 @@ public class MainMenu extends AppCompatActivity {
                 // Adapter: You need three parameters 'the context, id of the layout (it will be where the data is shown),
                 // and the array that contains the data
                 adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, arrayList);
+
+
 
                 // Here, you set the data in your ListView
                 list.setAdapter(new Adapter());
@@ -432,5 +486,9 @@ public class MainMenu extends AppCompatActivity {
 
             return row;
         }
+    }
+
+    public void delMessage(){
+        //TODO : implement method to delete own messages
     }
 }

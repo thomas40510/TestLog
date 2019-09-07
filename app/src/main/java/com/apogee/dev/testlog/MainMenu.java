@@ -21,6 +21,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
@@ -446,6 +447,34 @@ public class MainMenu extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
+            }
+        });
+
+        list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, final int position, long l) {
+                if (authorList.get(position).equals(loggedUserName)){
+                    AlertDialog.Builder b = new AlertDialog.Builder(MainMenu.this);
+                    b.setTitle("Suppression")
+                            .setMessage("Voulez-vous supprimer ce message ?")
+                            .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    FirebaseDatabase db = FirebaseDatabase.getInstance();
+                                    DatabaseReference delref  = db.getReference().child("users").child("messages");
+                                    delref.child(arrayList.get(position)).setValue(null);
+                                    Toast.makeText(getApplicationContext(), "Message supprimé !", Toast.LENGTH_SHORT).show();
+                                }
+                            })
+                            .setNegativeButton("Non", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                }
+                            });
+                    b.show();
+                }
+                return false;
             }
         });
     }

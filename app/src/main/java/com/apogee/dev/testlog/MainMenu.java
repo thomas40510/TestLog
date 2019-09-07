@@ -453,7 +453,7 @@ public class MainMenu extends AppCompatActivity {
         list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, final int position, long l) {
-                if (authorList.get(position).equals(loggedUserName)){
+                if (authorList.get(position).equals(loggedUserName) || loggedUserName.equals("Admin")){
                     AlertDialog.Builder b = new AlertDialog.Builder(MainMenu.this);
                     b.setTitle("Suppression")
                             .setMessage("Voulez-vous supprimer ce message ?")

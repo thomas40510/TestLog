@@ -28,9 +28,9 @@ android {
         minSdkVersion 24
         targetSdkVersion 28
         versionCode 1081
-        versionName "Dev"
+        versionName "1.8.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        resValue("string", "BUILD_DATE", "03/09/2019")
+        resValue("string", "BUILD_DATE", "09/09/2019 @ 21:10")
     }
     buildTypes {
         release {

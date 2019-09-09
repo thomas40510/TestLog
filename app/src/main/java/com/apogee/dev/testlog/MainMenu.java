@@ -13,9 +13,12 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -460,10 +463,14 @@ public class MainMenu extends AppCompatActivity {
                             .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                    FirebaseDatabase db = FirebaseDatabase.getInstance();
-                                    DatabaseReference delref  = db.getReference().child("users").child("messages");
-                                    delref.child(arrayList.get(position)).setValue(null);
-                                    Toast.makeText(getApplicationContext(), "Message supprimé !", Toast.LENGTH_SHORT).show();
+                                    if (gotCode(authorList.get(position))) {
+                                        FirebaseDatabase db = FirebaseDatabase.getInstance();
+                                        DatabaseReference delref = db.getReference().child("users").child("messages");
+                                        delref.child(arrayList.get(position)).setValue(null);
+                                        Toast.makeText(getApplicationContext(), "Message supprimé !", Toast.LENGTH_LONG).show();
+                                    } else {
+                                        Toast.makeText(MainMenu.this, "La suppression a échoué. Vérifiez vos droits ou le code saisi.", Toast.LENGTH_SHORT).show();
+                                    }
                                 }
                             })
                             .setNegativeButton("Non", new DialogInterface.OnClickListener() {
@@ -477,6 +484,57 @@ public class MainMenu extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    private String codeStr;
+    private boolean gotCode(final String author){
+        if (loggedUserName.equals("Admin") && !author.equals("Admin")) {
+            codeStr = "000";
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainMenu.this);
+
+            final EditText codeBox = new EditText(this);
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.MATCH_PARENT);
+            codeBox.setHint("Code...");
+            codeBox.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD);
+
+            //msgBox.setImeOptions(EditorInfo.IME_ACTION_DONE);
+
+
+            LinearLayout layout = new LinearLayout(this);
+            layout.setOrientation(LinearLayout.VERTICAL);
+            layout.addView(codeBox);
+
+            builder.setView(layout);
+
+            builder.setTitle("Suppression du message")
+                    .setMessage("Admin, veuillez entrer le code de suppression.")
+                    .setPositiveButton("Confirmer", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            codeStr = codeBox.getText().toString();
+                            Looper.getMainLooper().quit();
+                        }
+                    })
+                    .setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                        }
+                    });
+            builder.show();
+
+            try {
+                Looper.loop();
+            } catch (RuntimeException e){e.printStackTrace();};
+
+            Log.e("DBG","code entered "+codeStr);
+            return codeStr.equals("2242");
+
+        } else{
+            return true;
+        }
     }
 
     public class Adapter extends BaseAdapter {
